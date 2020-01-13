@@ -1,4 +1,0 @@
-var searchData=
-[
-  ['_5f_5finit_5f_5f_0',['__init__',['../classclass_ditto_serializer_1_1_ditto_serializer.html#a57b530c54d804a9ae3d57b5273078df4',1,'classDittoSerializer.DittoSerializer.__init__()'],['../classclass_image_acquisition_1_1_image_acquisition.html#a8304a8b66efff105a910cd488f9ea3d8',1,'classImageAcquisition.ImageAcquisition.__init__()'],['../classclass_image_classification_1_1_image_classification.html#a76093cc22ae0f2ffb016f568ab88736b',1,'classImageClassification.ImageClassification.__init__()'],['../classclass_m_q_t_t_1_1_m_q_t_t.html#a287cef6ef27a9b028c3eaadf270d2b28',1,'classMQTT.MQTT.__init__()'],['../classclass_o_d_b_c_1_1_o_d_b_c.html#a904c75466d49ac2162234ecb8680c400',1,'classODBC.ODBC.__init__()'],['../class_generic_sensor_1_1_generic_sensor.html#a74294d6d4b88c48586fc5a960b8c3857',1,'GenericSensor.GenericSensor.__init__()']]]
-];
