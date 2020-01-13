@@ -3,6 +3,11 @@ import lib.classImageClassification
 import sys
 
 def main():
+    """
+    Main function
+
+    Starts MQTT connection and sends read every 30secs
+    """
     try:
         #image = lib.classImageClassification.ImageClassification()
         #image.readImage()

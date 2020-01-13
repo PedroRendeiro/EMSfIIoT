@@ -7,7 +7,27 @@ import imutils
 import cv2
 
 class ImageClassification:
+    """
+    ImageClassification Class
+
+    Reads number from image with template matching
+
+    Attributes:
+        reference: Reference template path
+        image:  Image to process path
+        rectKernel: Morphological structural element, rectangle
+        sqKernel: Morphological structural element, square
+        digits: Digits retrived from template
+    """
+
     def __init__(self):
+        """
+        Class constructor
+
+        Reads configuration file and sets variables.
+        Reads arguments from input command.
+        Processes and stores template image
+        """
         config = configparser.ConfigParser()
         config.read("./config/config.ini")
 
@@ -59,6 +79,9 @@ class ImageClassification:
             self.digits[i] = roi
 
     def readImage(self, showResult = False):
+        """
+        Read digits from image function
+        """
         # resize the input image, and convert it to grayscale
         image = imutils.resize(self.image, width=300)
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)

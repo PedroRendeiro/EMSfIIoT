@@ -1,4 +1,4 @@
-README {#mainpage}
+README
 =========
 
 Projeto desenvolvido no âmbito da unidade curricular de Tecnologias de Accionamento e Comando.

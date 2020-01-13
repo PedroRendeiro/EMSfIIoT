@@ -5,8 +5,25 @@ from PIL import Image
 import os, time
 
 class ImageAcquisition:
+    """
+    ImageAcquisition Class
+
+    Retrives image from HTTP request
+
+    Attributes:
+        TimeoutLoadImage: HTTP request timeout
+        URLImageSource: URL to get image from
+        logImage: Where to save the image
+        logOnlyFalsePictures: Save only errors
+        lastImageSaved: Last image saved log
+    """
 
     def __init__(self):
+        """
+        Class constructor
+
+        Reads configuration file and sets variables
+        """
         config = configparser.ConfigParser()
         config.read('./config/config.ini')
 
@@ -29,10 +46,31 @@ class ImageAcquisition:
         self.lastImageSaved = ""
 
     def ReadURL(self, event, url, target):
+        """
+        Read URL function
+
+        Requests the url and returns image to target
+
+        Args:
+            event: Thread to set
+            url: URL to get
+            target: Image destination file
+        """
         urllib.request.urlretrieve(url, target)
         event.set()
 
     def LoadImageFromURL(self, url, target):
+        """
+        Load Image from URL
+
+        Starts the thread to get URL
+
+        Args:
+            url: URL to get
+            target: Image destination file
+
+        If no url is set uses one from config file
+        """
         self.lastImageSaved = ''
         if not url:
             url = self.URLImageSource
@@ -53,6 +91,18 @@ class ImageAcquisition:
         return (result, logtime)
 
     def VerifyImage(self, img_file):
+        """
+        Verify Image
+
+        Checks if file is an image
+
+        Args:
+            img_file: Image to check
+
+        Returns:
+            True: if file is image
+            False: if not
+        """
         try:
             v_image = Image.open(img_file)
             v_image.verify()

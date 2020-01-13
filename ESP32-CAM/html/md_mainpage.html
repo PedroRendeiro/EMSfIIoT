@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ESP32-CAM: mainpage</title>
+<title>ESP32-CAM: Doxyfile 1.8.17</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,10 +62,3453 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">mainpage </div>  </div>
+<div class="title">Doxyfile 1.8.17 </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Teste </p>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md1"></a>
+This file describes the settings to be used by the documentation system</h1>
+<h1><a class="anchor" id="autotoc_md2"></a>
+doxygen (www.doxygen.org) for a project.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md3"></a>
+All text after a double hash (##) is considered a comment and is placed in</h1>
+<h1><a class="anchor" id="autotoc_md4"></a>
+front of the TAG it is preceding.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md5"></a>
+All text after a single hash (#) is considered a comment and will be ignored.</h1>
+<h1><a class="anchor" id="autotoc_md6"></a>
+The format is:</h1>
+<h1><a class="anchor" id="autotoc_md7"></a>
+TAG = value [value, ...]</h1>
+<h1><a class="anchor" id="autotoc_md8"></a>
+For lists, items can also be appended using:</h1>
+<h1><a class="anchor" id="autotoc_md9"></a>
+TAG += value [value, ...]</h1>
+<h1><a class="anchor" id="autotoc_md10"></a>
+Values that contain spaces should be placed between quotes (\" \").</h1>
+<p>#------------------------------------------------------------------------&mdash; </p>
+<h1><a class="anchor" id="autotoc_md11"></a>
+Project related configuration options</h1>
+<p>#------------------------------------------------------------------------&mdash;</p>
+<h1><a class="anchor" id="autotoc_md12"></a>
+This tag specifies the encoding used for all characters in the configuration</h1>
+<h1><a class="anchor" id="autotoc_md13"></a>
+file that follow. The default is UTF-8 which is also the encoding used for all</h1>
+<h1><a class="anchor" id="autotoc_md14"></a>
+text before the first occurrence of this tag. Doxygen uses libiconv (or the</h1>
+<h1><a class="anchor" id="autotoc_md15"></a>
+iconv built into libc) for the transcoding. See</h1>
+<h1><a class="anchor" id="autotoc_md16"></a>
+https://www.gnu.org/software/libiconv/ for the list of possible encodings.</h1>
+<h1><a class="anchor" id="autotoc_md17"></a>
+The default value is: UTF-8.</h1>
+<p>DOXYFILE_ENCODING = UTF-8</p>
+<h1><a class="anchor" id="autotoc_md18"></a>
+The PROJECT_NAME tag is a single word (or a sequence of words surrounded by</h1>
+<h1><a class="anchor" id="autotoc_md19"></a>
+double-quotes, unless you are using Doxywizard) that should identify the</h1>
+<h1><a class="anchor" id="autotoc_md20"></a>
+project for which the documentation is generated. This name is used in the</h1>
+<h1><a class="anchor" id="autotoc_md21"></a>
+title of most generated pages and in a few other places.</h1>
+<h1><a class="anchor" id="autotoc_md22"></a>
+The default value is: My Project.</h1>
+<p>PROJECT_NAME = ESP32-CAM</p>
+<h1><a class="anchor" id="autotoc_md23"></a>
+The PROJECT_NUMBER tag can be used to enter a project or revision number. This</h1>
+<h1><a class="anchor" id="autotoc_md24"></a>
+could be handy for archiving the generated documentation or if some version</h1>
+<h1><a class="anchor" id="autotoc_md25"></a>
+control system is used.</h1>
+<p>PROJECT_NUMBER =</p>
+<h1><a class="anchor" id="autotoc_md26"></a>
+Using the PROJECT_BRIEF tag one can provide an optional one line description</h1>
+<h1><a class="anchor" id="autotoc_md27"></a>
+for a project that appears at the top of each page and should give viewer a</h1>
+<h1><a class="anchor" id="autotoc_md28"></a>
+quick idea about the purpose of the project. Keep the description short.</h1>
+<p>PROJECT_BRIEF =</p>
+<h1><a class="anchor" id="autotoc_md29"></a>
+With the PROJECT_LOGO tag one can specify a logo or an icon that is included</h1>
+<h1><a class="anchor" id="autotoc_md30"></a>
+in the documentation. The maximum height of the logo should not exceed 55</h1>
+<h1><a class="anchor" id="autotoc_md31"></a>
+pixels and the maximum width should not exceed 200 pixels. Doxygen will copy</h1>
+<h1><a class="anchor" id="autotoc_md32"></a>
+the logo to the output directory.</h1>
+<p>PROJECT_LOGO =</p>
+<h1><a class="anchor" id="autotoc_md33"></a>
+The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) path</h1>
+<h1><a class="anchor" id="autotoc_md34"></a>
+into which the generated documentation will be written. If a relative path is</h1>
+<h1><a class="anchor" id="autotoc_md35"></a>
+entered, it will be relative to the location where doxygen was started. If</h1>
+<h1><a class="anchor" id="autotoc_md36"></a>
+left blank the current directory will be used.</h1>
+<p>OUTPUT_DIRECTORY =</p>
+<h1><a class="anchor" id="autotoc_md37"></a>
+If the CREATE_SUBDIRS tag is set to YES then doxygen will create 4096 sub-</h1>
+<h1><a class="anchor" id="autotoc_md38"></a>
+directories (in 2 levels) under the output directory of each output format and</h1>
+<h1><a class="anchor" id="autotoc_md39"></a>
+will distribute the generated files over these directories. Enabling this</h1>
+<h1><a class="anchor" id="autotoc_md40"></a>
+option can be useful when feeding doxygen a huge amount of source files, where</h1>
+<h1><a class="anchor" id="autotoc_md41"></a>
+putting all generated files in the same directory would otherwise causes</h1>
+<h1><a class="anchor" id="autotoc_md42"></a>
+performance problems for the file system.</h1>
+<h1><a class="anchor" id="autotoc_md43"></a>
+The default value is: NO.</h1>
+<p>CREATE_SUBDIRS = NO</p>
+<h1><a class="anchor" id="autotoc_md44"></a>
+If the ALLOW_UNICODE_NAMES tag is set to YES, doxygen will allow non-ASCII</h1>
+<h1><a class="anchor" id="autotoc_md45"></a>
+characters to appear in the names of generated files. If set to NO, non-ASCII</h1>
+<h1><a class="anchor" id="autotoc_md46"></a>
+characters will be escaped, for example _xE3_x81_x84 will be used for Unicode</h1>
+<h1><a class="anchor" id="autotoc_md47"></a>
+U+3044.</h1>
+<h1><a class="anchor" id="autotoc_md48"></a>
+The default value is: NO.</h1>
+<p>ALLOW_UNICODE_NAMES = NO</p>
+<h1><a class="anchor" id="autotoc_md49"></a>
+The OUTPUT_LANGUAGE tag is used to specify the language in which all</h1>
+<h1><a class="anchor" id="autotoc_md50"></a>
+documentation generated by doxygen is written. Doxygen will use this</h1>
+<h1><a class="anchor" id="autotoc_md51"></a>
+information to generate all constant output in the proper language.</h1>
+<h1><a class="anchor" id="autotoc_md52"></a>
+Possible values are: Afrikaans, Arabic, Armenian, Brazilian, Catalan, Chinese,</h1>
+<h1><a class="anchor" id="autotoc_md53"></a>
+Chinese-Traditional, Croatian, Czech, Danish, Dutch, English (United States),</h1>
+<h1><a class="anchor" id="autotoc_md54"></a>
+Esperanto, Farsi (Persian), Finnish, French, German, Greek, Hungarian,</h1>
+<h1><a class="anchor" id="autotoc_md55"></a>
+Indonesian, Italian, Japanese, Japanese-en (Japanese with English messages),</h1>
+<h1><a class="anchor" id="autotoc_md56"></a>
+Korean, Korean-en (Korean with English messages), Latvian, Lithuanian,</h1>
+<h1><a class="anchor" id="autotoc_md57"></a>
+Macedonian, Norwegian, Persian (Farsi), Polish, Portuguese, Romanian, Russian,</h1>
+<h1><a class="anchor" id="autotoc_md58"></a>
+Serbian, Serbian-Cyrillic, Slovak, Slovene, Spanish, Swedish, Turkish,</h1>
+<h1><a class="anchor" id="autotoc_md59"></a>
+Ukrainian and Vietnamese.</h1>
+<h1><a class="anchor" id="autotoc_md60"></a>
+The default value is: English.</h1>
+<p>OUTPUT_LANGUAGE = English</p>
+<h1><a class="anchor" id="autotoc_md61"></a>
+The OUTPUT_TEXT_DIRECTION tag is used to specify the direction in which all</h1>
+<h1><a class="anchor" id="autotoc_md62"></a>
+documentation generated by doxygen is written. Doxygen will use this</h1>
+<h1><a class="anchor" id="autotoc_md63"></a>
+information to generate all generated output in the proper direction.</h1>
+<h1><a class="anchor" id="autotoc_md64"></a>
+Possible values are: None, LTR, RTL and Context.</h1>
+<h1><a class="anchor" id="autotoc_md65"></a>
+The default value is: None.</h1>
+<p>OUTPUT_TEXT_DIRECTION = None</p>
+<h1><a class="anchor" id="autotoc_md66"></a>
+If the BRIEF_MEMBER_DESC tag is set to YES, doxygen will include brief member</h1>
+<h1><a class="anchor" id="autotoc_md67"></a>
+descriptions after the members that are listed in the file and class</h1>
+<h1><a class="anchor" id="autotoc_md68"></a>
+documentation (similar to Javadoc). Set to NO to disable this.</h1>
+<h1><a class="anchor" id="autotoc_md69"></a>
+The default value is: YES.</h1>
+<p>BRIEF_MEMBER_DESC = YES</p>
+<h1><a class="anchor" id="autotoc_md70"></a>
+If the REPEAT_BRIEF tag is set to YES, doxygen will prepend the brief</h1>
+<h1><a class="anchor" id="autotoc_md71"></a>
+description of a member or function before the detailed description</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md72"></a>
+Note: If both HIDE_UNDOC_MEMBERS and BRIEF_MEMBER_DESC are set to NO, the</h1>
+<h1><a class="anchor" id="autotoc_md73"></a>
+brief descriptions will be completely suppressed.</h1>
+<h1><a class="anchor" id="autotoc_md74"></a>
+The default value is: YES.</h1>
+<p>REPEAT_BRIEF = YES</p>
+<h1><a class="anchor" id="autotoc_md75"></a>
+This tag implements a quasi-intelligent brief description abbreviator that is</h1>
+<h1><a class="anchor" id="autotoc_md76"></a>
+used to form the text in various listings. Each string in this list, if found</h1>
+<h1><a class="anchor" id="autotoc_md77"></a>
+as the leading text of the brief description, will be stripped from the text</h1>
+<h1><a class="anchor" id="autotoc_md78"></a>
+and the result, after processing the whole list, is used as the annotated</h1>
+<h1><a class="anchor" id="autotoc_md79"></a>
+text. Otherwise, the brief description is used as-is. If left blank, the</h1>
+<h1><a class="anchor" id="autotoc_md80"></a>
+following values are used ($name is automatically replaced with the name of</h1>
+<h1><a class="anchor" id="autotoc_md81"></a>
+the entity):The $name class, The $name widget, The $name file, is, provides,</h1>
+<h1><a class="anchor" id="autotoc_md82"></a>
+specifies, contains, represents, a, an and the.</h1>
+<p>ABBREVIATE_BRIEF = "The $name class" \ "The $name widget" \ "The $name file" \ is \ provides \ specifies \ contains \ represents \ a \ an \ the</p>
+<h1><a class="anchor" id="autotoc_md83"></a>
+If the ALWAYS_DETAILED_SEC and REPEAT_BRIEF tags are both set to YES then</h1>
+<h1><a class="anchor" id="autotoc_md84"></a>
+doxygen will generate a detailed section even if there is only a brief</h1>
+<h1><a class="anchor" id="autotoc_md85"></a>
+description.</h1>
+<h1><a class="anchor" id="autotoc_md86"></a>
+The default value is: NO.</h1>
+<p>ALWAYS_DETAILED_SEC = NO</p>
+<h1><a class="anchor" id="autotoc_md87"></a>
+If the INLINE_INHERITED_MEMB tag is set to YES, doxygen will show all</h1>
+<h1><a class="anchor" id="autotoc_md88"></a>
+inherited members of a class in the documentation of that class as if those</h1>
+<h1><a class="anchor" id="autotoc_md89"></a>
+members were ordinary class members. Constructors, destructors and assignment</h1>
+<h1><a class="anchor" id="autotoc_md90"></a>
+operators of the base classes will not be shown.</h1>
+<h1><a class="anchor" id="autotoc_md91"></a>
+The default value is: NO.</h1>
+<p>INLINE_INHERITED_MEMB = NO</p>
+<h1><a class="anchor" id="autotoc_md92"></a>
+If the FULL_PATH_NAMES tag is set to YES, doxygen will prepend the full path</h1>
+<h1><a class="anchor" id="autotoc_md93"></a>
+before files name in the file list and in the header files. If set to NO the</h1>
+<h1><a class="anchor" id="autotoc_md94"></a>
+shortest path that makes the file name unique will be used</h1>
+<h1><a class="anchor" id="autotoc_md95"></a>
+The default value is: YES.</h1>
+<p>FULL_PATH_NAMES = YES</p>
+<h1><a class="anchor" id="autotoc_md96"></a>
+The STRIP_FROM_PATH tag can be used to strip a user-defined part of the path.</h1>
+<h1><a class="anchor" id="autotoc_md97"></a>
+Stripping is only done if one of the specified strings matches the left-hand</h1>
+<h1><a class="anchor" id="autotoc_md98"></a>
+part of the path. The tag can be used to show relative paths in the file list.</h1>
+<h1><a class="anchor" id="autotoc_md99"></a>
+If left blank the directory from which doxygen is run is used as the path to</h1>
+<h1><a class="anchor" id="autotoc_md100"></a>
+strip.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md101"></a>
+Note that you can specify absolute paths here, but also relative paths, which</h1>
+<h1><a class="anchor" id="autotoc_md102"></a>
+will be relative from the directory where doxygen is started.</h1>
+<h1><a class="anchor" id="autotoc_md103"></a>
+This tag requires that the tag FULL_PATH_NAMES is set to YES.</h1>
+<p>STRIP_FROM_PATH =</p>
+<h1><a class="anchor" id="autotoc_md104"></a>
+The STRIP_FROM_INC_PATH tag can be used to strip a user-defined part of the</h1>
+<h1><a class="anchor" id="autotoc_md105"></a>
+path mentioned in the documentation of a class, which tells the reader which</h1>
+<h1><a class="anchor" id="autotoc_md106"></a>
+header file to include in order to use a class. If left blank only the name of</h1>
+<h1><a class="anchor" id="autotoc_md107"></a>
+the header file containing the class definition is used. Otherwise one should</h1>
+<h1><a class="anchor" id="autotoc_md108"></a>
+specify the list of include paths that are normally passed to the compiler</h1>
+<h1><a class="anchor" id="autotoc_md109"></a>
+using the -I flag.</h1>
+<p>STRIP_FROM_INC_PATH =</p>
+<h1><a class="anchor" id="autotoc_md110"></a>
+If the SHORT_NAMES tag is set to YES, doxygen will generate much shorter (but</h1>
+<h1><a class="anchor" id="autotoc_md111"></a>
+less readable) file names. This can be useful is your file systems doesn't</h1>
+<h1><a class="anchor" id="autotoc_md112"></a>
+support long names like on DOS, Mac, or CD-ROM.</h1>
+<h1><a class="anchor" id="autotoc_md113"></a>
+The default value is: NO.</h1>
+<p>SHORT_NAMES = NO</p>
+<h1><a class="anchor" id="autotoc_md114"></a>
+If the JAVADOC_AUTOBRIEF tag is set to YES then doxygen will interpret the</h1>
+<h1><a class="anchor" id="autotoc_md115"></a>
+first line (until the first dot) of a Javadoc-style comment as the brief</h1>
+<h1><a class="anchor" id="autotoc_md116"></a>
+description. If set to NO, the Javadoc-style will behave just like regular Qt-</h1>
+<h1><a class="anchor" id="autotoc_md117"></a>
+style comments (thus requiring an explicit @brief command for a brief</h1>
+<h1><a class="anchor" id="autotoc_md118"></a>
+description.)</h1>
+<h1><a class="anchor" id="autotoc_md119"></a>
+The default value is: NO.</h1>
+<p>JAVADOC_AUTOBRIEF = NO</p>
+<h1><a class="anchor" id="autotoc_md120"></a>
+If the JAVADOC_BANNER tag is set to YES then doxygen will interpret a line</h1>
+<h1><a class="anchor" id="autotoc_md121"></a>
+such as</h1>
+<h1><a class="anchor" id="autotoc_md122"></a>
+/***************</h1>
+<h1><a class="anchor" id="autotoc_md123"></a>
+as being the beginning of a Javadoc-style comment "banner". If set to NO, the</h1>
+<h1><a class="anchor" id="autotoc_md124"></a>
+Javadoc-style will behave just like regular comments and it will not be</h1>
+<h1><a class="anchor" id="autotoc_md125"></a>
+interpreted by doxygen.</h1>
+<h1><a class="anchor" id="autotoc_md126"></a>
+The default value is: NO.</h1>
+<p>JAVADOC_BANNER = NO</p>
+<h1><a class="anchor" id="autotoc_md127"></a>
+If the QT_AUTOBRIEF tag is set to YES then doxygen will interpret the first</h1>
+<h1><a class="anchor" id="autotoc_md128"></a>
+line (until the first dot) of a Qt-style comment as the brief description. If</h1>
+<h1><a class="anchor" id="autotoc_md129"></a>
+set to NO, the Qt-style will behave just like regular Qt-style comments (thus</h1>
+<h1><a class="anchor" id="autotoc_md130"></a>
+requiring an explicit \brief command for a brief description.)</h1>
+<h1><a class="anchor" id="autotoc_md131"></a>
+The default value is: NO.</h1>
+<p>QT_AUTOBRIEF = NO</p>
+<h1><a class="anchor" id="autotoc_md132"></a>
+The MULTILINE_CPP_IS_BRIEF tag can be set to YES to make doxygen treat a</h1>
+<h1><a class="anchor" id="autotoc_md133"></a>
+multi-line C++ special comment block (i.e. a block of //! or /// comments) as</h1>
+<h1><a class="anchor" id="autotoc_md134"></a>
+a brief description. This used to be the default behavior. The new default is</h1>
+<h1><a class="anchor" id="autotoc_md135"></a>
+to treat a multi-line C++ comment block as a detailed description. Set this</h1>
+<h1><a class="anchor" id="autotoc_md136"></a>
+tag to YES if you prefer the old behavior instead.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md137"></a>
+Note that setting this tag to YES also means that rational rose comments are</h1>
+<h1><a class="anchor" id="autotoc_md138"></a>
+not recognized any more.</h1>
+<h1><a class="anchor" id="autotoc_md139"></a>
+The default value is: NO.</h1>
+<p>MULTILINE_CPP_IS_BRIEF = NO</p>
+<h1><a class="anchor" id="autotoc_md140"></a>
+If the INHERIT_DOCS tag is set to YES then an undocumented member inherits the</h1>
+<h1><a class="anchor" id="autotoc_md141"></a>
+documentation from any documented member that it re-implements.</h1>
+<h1><a class="anchor" id="autotoc_md142"></a>
+The default value is: YES.</h1>
+<p>INHERIT_DOCS = YES</p>
+<h1><a class="anchor" id="autotoc_md143"></a>
+If the SEPARATE_MEMBER_PAGES tag is set to YES then doxygen will produce a new</h1>
+<h1><a class="anchor" id="autotoc_md144"></a>
+page for each member. If set to NO, the documentation of a member will be part</h1>
+<h1><a class="anchor" id="autotoc_md145"></a>
+of the file/class/namespace that contains it.</h1>
+<h1><a class="anchor" id="autotoc_md146"></a>
+The default value is: NO.</h1>
+<p>SEPARATE_MEMBER_PAGES = NO</p>
+<h1><a class="anchor" id="autotoc_md147"></a>
+The TAB_SIZE tag can be used to set the number of spaces in a tab. Doxygen</h1>
+<h1><a class="anchor" id="autotoc_md148"></a>
+uses this value to replace tabs by spaces in code fragments.</h1>
+<h1><a class="anchor" id="autotoc_md149"></a>
+Minimum value: 1, maximum value: 16, default value: 4.</h1>
+<p>TAB_SIZE = 4</p>
+<h1><a class="anchor" id="autotoc_md150"></a>
+This tag can be used to specify a number of aliases that act as commands in</h1>
+<h1><a class="anchor" id="autotoc_md151"></a>
+the documentation. An alias has the form:</h1>
+<h1><a class="anchor" id="autotoc_md152"></a>
+name=value</h1>
+<h1><a class="anchor" id="autotoc_md153"></a>
+For example adding</h1>
+<h1><a class="anchor" id="autotoc_md154"></a>
+"sideeffect=@par Side Effects:\n"</h1>
+<h1><a class="anchor" id="autotoc_md155"></a>
+will allow you to put the command \sideeffect (or @sideeffect) in the</h1>
+<h1><a class="anchor" id="autotoc_md156"></a>
+documentation, which will result in a user-defined paragraph with heading</h1>
+<h1><a class="anchor" id="autotoc_md157"></a>
+"Side Effects:". You can put \n's in the value part of an alias to insert</h1>
+<h1><a class="anchor" id="autotoc_md158"></a>
+newlines (in the resulting output). You can put ^^ in the value part of an</h1>
+<h1><a class="anchor" id="autotoc_md159"></a>
+alias to insert a newline as if a physical newline was in the original file.</h1>
+<h1><a class="anchor" id="autotoc_md160"></a>
+When you need a literal { or } or , in the value part of an alias you have to</h1>
+<h1><a class="anchor" id="autotoc_md161"></a>
+escape them by means of a backslash (), this can lead to conflicts with the</h1>
+<h1><a class="anchor" id="autotoc_md162"></a>
+commands \{ and \} for these it is advised to use the version @{ and @} or use</h1>
+<h1><a class="anchor" id="autotoc_md163"></a>
+a double escape (\{ and \})</h1>
+<p>ALIASES =</p>
+<h1><a class="anchor" id="autotoc_md164"></a>
+This tag can be used to specify a number of word-keyword mappings (TCL only).</h1>
+<h1><a class="anchor" id="autotoc_md165"></a>
+A mapping has the form "name=value". For example adding "class=itcl::class"</h1>
+<h1><a class="anchor" id="autotoc_md166"></a>
+will allow you to use the command class in the itcl::class meaning.</h1>
+<p>TCL_SUBST =</p>
+<h1><a class="anchor" id="autotoc_md167"></a>
+Set the OPTIMIZE_OUTPUT_FOR_C tag to YES if your project consists of C sources</h1>
+<h1><a class="anchor" id="autotoc_md168"></a>
+only. Doxygen will then generate output that is more tailored for C. For</h1>
+<h1><a class="anchor" id="autotoc_md169"></a>
+instance, some of the names that are used will be different. The list of all</h1>
+<h1><a class="anchor" id="autotoc_md170"></a>
+members will be omitted, etc.</h1>
+<h1><a class="anchor" id="autotoc_md171"></a>
+The default value is: NO.</h1>
+<p>OPTIMIZE_OUTPUT_FOR_C = NO</p>
+<h1><a class="anchor" id="autotoc_md172"></a>
+Set the OPTIMIZE_OUTPUT_JAVA tag to YES if your project consists of Java or</h1>
+<h1><a class="anchor" id="autotoc_md173"></a>
+Python sources only. Doxygen will then generate output that is more tailored</h1>
+<h1><a class="anchor" id="autotoc_md174"></a>
+for that language. For instance, namespaces will be presented as packages,</h1>
+<h1><a class="anchor" id="autotoc_md175"></a>
+qualified scopes will look different, etc.</h1>
+<h1><a class="anchor" id="autotoc_md176"></a>
+The default value is: NO.</h1>
+<p>OPTIMIZE_OUTPUT_JAVA = NO</p>
+<h1><a class="anchor" id="autotoc_md177"></a>
+Set the OPTIMIZE_FOR_FORTRAN tag to YES if your project consists of Fortran</h1>
+<h1><a class="anchor" id="autotoc_md178"></a>
+sources. Doxygen will then generate output that is tailored for Fortran.</h1>
+<h1><a class="anchor" id="autotoc_md179"></a>
+The default value is: NO.</h1>
+<p>OPTIMIZE_FOR_FORTRAN = NO</p>
+<h1><a class="anchor" id="autotoc_md180"></a>
+Set the OPTIMIZE_OUTPUT_VHDL tag to YES if your project consists of VHDL</h1>
+<h1><a class="anchor" id="autotoc_md181"></a>
+sources. Doxygen will then generate output that is tailored for VHDL.</h1>
+<h1><a class="anchor" id="autotoc_md182"></a>
+The default value is: NO.</h1>
+<p>OPTIMIZE_OUTPUT_VHDL = NO</p>
+<h1><a class="anchor" id="autotoc_md183"></a>
+Set the OPTIMIZE_OUTPUT_SLICE tag to YES if your project consists of Slice</h1>
+<h1><a class="anchor" id="autotoc_md184"></a>
+sources only. Doxygen will then generate output that is more tailored for that</h1>
+<h1><a class="anchor" id="autotoc_md185"></a>
+language. For instance, namespaces will be presented as modules, types will be</h1>
+<h1><a class="anchor" id="autotoc_md186"></a>
+separated into more groups, etc.</h1>
+<h1><a class="anchor" id="autotoc_md187"></a>
+The default value is: NO.</h1>
+<p>OPTIMIZE_OUTPUT_SLICE = NO</p>
+<h1><a class="anchor" id="autotoc_md188"></a>
+Doxygen selects the parser to use depending on the extension of the files it</h1>
+<h1><a class="anchor" id="autotoc_md189"></a>
+parses. With this tag you can assign which parser to use for a given</h1>
+<h1><a class="anchor" id="autotoc_md190"></a>
+extension. Doxygen has a built-in mapping, but you can override or extend it</h1>
+<h1><a class="anchor" id="autotoc_md191"></a>
+using this tag. The format is ext=language, where ext is a file extension, and</h1>
+<h1><a class="anchor" id="autotoc_md192"></a>
+language is one of the parsers supported by doxygen: IDL, Java, JavaScript,</h1>
+<h1><a class="anchor" id="autotoc_md193"></a>
+Csharp (C#), C, C++, D, PHP, md (Markdown), Objective-C, Python, Slice,</h1>
+<h1><a class="anchor" id="autotoc_md194"></a>
+Fortran (fixed format Fortran: FortranFixed, free formatted Fortran:</h1>
+<h1><a class="anchor" id="autotoc_md195"></a>
+FortranFree, unknown formatted Fortran: Fortran. In the later case the parser</h1>
+<h1><a class="anchor" id="autotoc_md196"></a>
+tries to guess whether the code is fixed or free formatted code, this is the</h1>
+<h1><a class="anchor" id="autotoc_md197"></a>
+default for Fortran type files), VHDL, tcl. For instance to make doxygen treat</h1>
+<h1><a class="anchor" id="autotoc_md198"></a>
+.inc files as Fortran files (default is PHP), and .f files as C (default is</h1>
+<h1><a class="anchor" id="autotoc_md199"></a>
+Fortran), use: inc=Fortran f=C.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md200"></a>
+Note: For files without extension you can use no_extension as a placeholder.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md201"></a>
+Note that for custom extensions you also need to set FILE_PATTERNS otherwise</h1>
+<h1><a class="anchor" id="autotoc_md202"></a>
+the files are not read by doxygen.</h1>
+<p>EXTENSION_MAPPING =</p>
+<h1><a class="anchor" id="autotoc_md203"></a>
+If the MARKDOWN_SUPPORT tag is enabled then doxygen pre-processes all comments</h1>
+<h1><a class="anchor" id="autotoc_md204"></a>
+according to the Markdown format, which allows for more readable</h1>
+<h1><a class="anchor" id="autotoc_md205"></a>
+documentation. See https://daringfireball.net/projects/markdown/ for details.</h1>
+<h1><a class="anchor" id="autotoc_md206"></a>
+The output of markdown processing is further processed by doxygen, so you can</h1>
+<h1><a class="anchor" id="autotoc_md207"></a>
+mix doxygen, HTML, and XML commands with Markdown formatting. Disable only in</h1>
+<h1><a class="anchor" id="autotoc_md208"></a>
+case of backward compatibilities issues.</h1>
+<h1><a class="anchor" id="autotoc_md209"></a>
+The default value is: YES.</h1>
+<p>MARKDOWN_SUPPORT = YES</p>
+<h1><a class="anchor" id="autotoc_md210"></a>
+When the TOC_INCLUDE_HEADINGS tag is set to a non-zero value, all headings up</h1>
+<h1><a class="anchor" id="autotoc_md211"></a>
+to that level are automatically included in the table of contents, even if</h1>
+<h1><a class="anchor" id="autotoc_md212"></a>
+they do not have an id attribute.</h1>
+<h1><a class="anchor" id="autotoc_md213"></a>
+Note: This feature currently applies only to Markdown headings.</h1>
+<h1><a class="anchor" id="autotoc_md214"></a>
+Minimum value: 0, maximum value: 99, default value: 5.</h1>
+<h1><a class="anchor" id="autotoc_md215"></a>
+This tag requires that the tag MARKDOWN_SUPPORT is set to YES.</h1>
+<p>TOC_INCLUDE_HEADINGS = 5</p>
+<h1><a class="anchor" id="autotoc_md216"></a>
+When enabled doxygen tries to link words that correspond to documented</h1>
+<h1><a class="anchor" id="autotoc_md217"></a>
+classes, or namespaces to their corresponding documentation. Such a link can</h1>
+<h1><a class="anchor" id="autotoc_md218"></a>
+be prevented in individual cases by putting a % sign in front of the word or</h1>
+<h1><a class="anchor" id="autotoc_md219"></a>
+globally by setting AUTOLINK_SUPPORT to NO.</h1>
+<h1><a class="anchor" id="autotoc_md220"></a>
+The default value is: YES.</h1>
+<p>AUTOLINK_SUPPORT = YES</p>
+<h1><a class="anchor" id="autotoc_md221"></a>
+If you use STL classes (i.e. std::string, std::vector, etc.) but do not want</h1>
+<h1><a class="anchor" id="autotoc_md222"></a>
+to include (a tag file for) the STL sources as input, then you should set this</h1>
+<h1><a class="anchor" id="autotoc_md223"></a>
+tag to YES in order to let doxygen match functions declarations and</h1>
+<h1><a class="anchor" id="autotoc_md224"></a>
+definitions whose arguments contain STL classes (e.g. func(std::string);</h1>
+<h1><a class="anchor" id="autotoc_md225"></a>
+versus func(std::string) {}). This also make the inheritance and collaboration</h1>
+<h1><a class="anchor" id="autotoc_md226"></a>
+diagrams that involve STL classes more complete and accurate.</h1>
+<h1><a class="anchor" id="autotoc_md227"></a>
+The default value is: NO.</h1>
+<p>BUILTIN_STL_SUPPORT = NO</p>
+<h1><a class="anchor" id="autotoc_md228"></a>
+If you use Microsoft's C++/CLI language, you should set this option to YES to</h1>
+<h1><a class="anchor" id="autotoc_md229"></a>
+enable parsing support.</h1>
+<h1><a class="anchor" id="autotoc_md230"></a>
+The default value is: NO.</h1>
+<p>CPP_CLI_SUPPORT = NO</p>
+<h1><a class="anchor" id="autotoc_md231"></a>
+Set the SIP_SUPPORT tag to YES if your project consists of sip (see:</h1>
+<h1><a class="anchor" id="autotoc_md232"></a>
+https://www.riverbankcomputing.com/software/sip/intro) sources only. Doxygen</h1>
+<h1><a class="anchor" id="autotoc_md233"></a>
+will parse them like normal C++ but will assume all classes use public instead</h1>
+<h1><a class="anchor" id="autotoc_md234"></a>
+of private inheritance when no explicit protection keyword is present.</h1>
+<h1><a class="anchor" id="autotoc_md235"></a>
+The default value is: NO.</h1>
+<p>SIP_SUPPORT = NO</p>
+<h1><a class="anchor" id="autotoc_md236"></a>
+For Microsoft's IDL there are propget and propput attributes to indicate</h1>
+<h1><a class="anchor" id="autotoc_md237"></a>
+getter and setter methods for a property. Setting this option to YES will make</h1>
+<h1><a class="anchor" id="autotoc_md238"></a>
+doxygen to replace the get and set methods by a property in the documentation.</h1>
+<h1><a class="anchor" id="autotoc_md239"></a>
+This will only work if the methods are indeed getting or setting a simple</h1>
+<h1><a class="anchor" id="autotoc_md240"></a>
+type. If this is not the case, or you want to show the methods anyway, you</h1>
+<h1><a class="anchor" id="autotoc_md241"></a>
+should set this option to NO.</h1>
+<h1><a class="anchor" id="autotoc_md242"></a>
+The default value is: YES.</h1>
+<p>IDL_PROPERTY_SUPPORT = YES</p>
+<h1><a class="anchor" id="autotoc_md243"></a>
+If member grouping is used in the documentation and the DISTRIBUTE_GROUP_DOC</h1>
+<h1><a class="anchor" id="autotoc_md244"></a>
+tag is set to YES then doxygen will reuse the documentation of the first</h1>
+<h1><a class="anchor" id="autotoc_md245"></a>
+member in the group (if any) for the other members of the group. By default</h1>
+<h1><a class="anchor" id="autotoc_md246"></a>
+all members of a group must be documented explicitly.</h1>
+<h1><a class="anchor" id="autotoc_md247"></a>
+The default value is: NO.</h1>
+<p>DISTRIBUTE_GROUP_DOC = NO</p>
+<h1><a class="anchor" id="autotoc_md248"></a>
+If one adds a struct or class to a group and this option is enabled, then also</h1>
+<h1><a class="anchor" id="autotoc_md249"></a>
+any nested class or struct is added to the same group. By default this option</h1>
+<h1><a class="anchor" id="autotoc_md250"></a>
+is disabled and one has to add nested compounds explicitly via \ingroup.</h1>
+<h1><a class="anchor" id="autotoc_md251"></a>
+The default value is: NO.</h1>
+<p>GROUP_NESTED_COMPOUNDS = NO</p>
+<h1><a class="anchor" id="autotoc_md252"></a>
+Set the SUBGROUPING tag to YES to allow class member groups of the same type</h1>
+<h1><a class="anchor" id="autotoc_md253"></a>
+(for instance a group of public functions) to be put as a subgroup of that</h1>
+<h1><a class="anchor" id="autotoc_md254"></a>
+type (e.g. under the Public Functions section). Set it to NO to prevent</h1>
+<h1><a class="anchor" id="autotoc_md255"></a>
+subgrouping. Alternatively, this can be done per class using the</h1>
+<h1><a class="anchor" id="autotoc_md256"></a>
+\nosubgrouping command.</h1>
+<h1><a class="anchor" id="autotoc_md257"></a>
+The default value is: YES.</h1>
+<p>SUBGROUPING = YES</p>
+<h1><a class="anchor" id="autotoc_md258"></a>
+When the INLINE_GROUPED_CLASSES tag is set to YES, classes, structs and unions</h1>
+<h1><a class="anchor" id="autotoc_md259"></a>
+are shown inside the group in which they are included (e.g. using \ingroup)</h1>
+<h1><a class="anchor" id="autotoc_md260"></a>
+instead of on a separate page (for HTML and Man pages) or section (for LaTeX</h1>
+<h1><a class="anchor" id="autotoc_md261"></a>
+and RTF).</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md262"></a>
+Note that this feature does not work in combination with</h1>
+<h1><a class="anchor" id="autotoc_md263"></a>
+SEPARATE_MEMBER_PAGES.</h1>
+<h1><a class="anchor" id="autotoc_md264"></a>
+The default value is: NO.</h1>
+<p>INLINE_GROUPED_CLASSES = NO</p>
+<h1><a class="anchor" id="autotoc_md265"></a>
+When the INLINE_SIMPLE_STRUCTS tag is set to YES, structs, classes, and unions</h1>
+<h1><a class="anchor" id="autotoc_md266"></a>
+with only public data fields or simple typedef fields will be shown inline in</h1>
+<h1><a class="anchor" id="autotoc_md267"></a>
+the documentation of the scope in which they are defined (i.e. file,</h1>
+<h1><a class="anchor" id="autotoc_md268"></a>
+namespace, or group documentation), provided this scope is documented. If set</h1>
+<h1><a class="anchor" id="autotoc_md269"></a>
+to NO, structs, classes, and unions are shown on a separate page (for HTML and</h1>
+<h1><a class="anchor" id="autotoc_md270"></a>
+Man pages) or section (for LaTeX and RTF).</h1>
+<h1><a class="anchor" id="autotoc_md271"></a>
+The default value is: NO.</h1>
+<p>INLINE_SIMPLE_STRUCTS = NO</p>
+<h1><a class="anchor" id="autotoc_md272"></a>
+When TYPEDEF_HIDES_STRUCT tag is enabled, a typedef of a struct, union, or</h1>
+<h1><a class="anchor" id="autotoc_md273"></a>
+enum is documented as struct, union, or enum with the name of the typedef. So</h1>
+<h1><a class="anchor" id="autotoc_md274"></a>
+typedef struct TypeS {} TypeT, will appear in the documentation as a struct</h1>
+<h1><a class="anchor" id="autotoc_md275"></a>
+with name TypeT. When disabled the typedef will appear as a member of a file,</h1>
+<h1><a class="anchor" id="autotoc_md276"></a>
+namespace, or class. And the struct will be named TypeS. This can typically be</h1>
+<h1><a class="anchor" id="autotoc_md277"></a>
+useful for C code in case the coding convention dictates that all compound</h1>
+<h1><a class="anchor" id="autotoc_md278"></a>
+types are typedef'ed and only the typedef is referenced, never the tag name.</h1>
+<h1><a class="anchor" id="autotoc_md279"></a>
+The default value is: NO.</h1>
+<p>TYPEDEF_HIDES_STRUCT = NO</p>
+<h1><a class="anchor" id="autotoc_md280"></a>
+The size of the symbol lookup cache can be set using LOOKUP_CACHE_SIZE. This</h1>
+<h1><a class="anchor" id="autotoc_md281"></a>
+cache is used to resolve symbols given their name and scope. Since this can be</h1>
+<h1><a class="anchor" id="autotoc_md282"></a>
+an expensive process and often the same symbol appears multiple times in the</h1>
+<h1><a class="anchor" id="autotoc_md283"></a>
+code, doxygen keeps a cache of pre-resolved symbols. If the cache is too small</h1>
+<h1><a class="anchor" id="autotoc_md284"></a>
+doxygen will become slower. If the cache is too large, memory is wasted. The</h1>
+<h1><a class="anchor" id="autotoc_md285"></a>
+cache size is given by this formula: 2^(16+LOOKUP_CACHE_SIZE). The valid range</h1>
+<h1><a class="anchor" id="autotoc_md286"></a>
+is 0..9, the default is 0, corresponding to a cache size of 2^16=65536</h1>
+<h1><a class="anchor" id="autotoc_md287"></a>
+symbols. At the end of a run doxygen will report the cache usage and suggest</h1>
+<h1><a class="anchor" id="autotoc_md288"></a>
+the optimal cache size from a speed point of view.</h1>
+<h1><a class="anchor" id="autotoc_md289"></a>
+Minimum value: 0, maximum value: 9, default value: 0.</h1>
+<p>LOOKUP_CACHE_SIZE = 0</p>
+<p>#------------------------------------------------------------------------&mdash; </p>
+<h1><a class="anchor" id="autotoc_md290"></a>
+Build related configuration options</h1>
+<p>#------------------------------------------------------------------------&mdash;</p>
+<h1><a class="anchor" id="autotoc_md291"></a>
+If the EXTRACT_ALL tag is set to YES, doxygen will assume all entities in</h1>
+<h1><a class="anchor" id="autotoc_md292"></a>
+documentation are documented, even if no documentation was available. Private</h1>
+<h1><a class="anchor" id="autotoc_md293"></a>
+class members and static file members will be hidden unless the</h1>
+<h1><a class="anchor" id="autotoc_md294"></a>
+EXTRACT_PRIVATE respectively EXTRACT_STATIC tags are set to YES.</h1>
+<h1><a class="anchor" id="autotoc_md295"></a>
+Note: This will also disable the warnings about undocumented members that are</h1>
+<h1><a class="anchor" id="autotoc_md296"></a>
+normally produced when WARNINGS is set to YES.</h1>
+<h1><a class="anchor" id="autotoc_md297"></a>
+The default value is: NO.</h1>
+<p>EXTRACT_ALL = NO</p>
+<h1><a class="anchor" id="autotoc_md298"></a>
+If the EXTRACT_PRIVATE tag is set to YES, all private members of a class will</h1>
+<h1><a class="anchor" id="autotoc_md299"></a>
+be included in the documentation.</h1>
+<h1><a class="anchor" id="autotoc_md300"></a>
+The default value is: NO.</h1>
+<p>EXTRACT_PRIVATE = NO</p>
+<h1><a class="anchor" id="autotoc_md301"></a>
+If the EXTRACT_PRIV_VIRTUAL tag is set to YES, documented private virtual</h1>
+<h1><a class="anchor" id="autotoc_md302"></a>
+methods of a class will be included in the documentation.</h1>
+<h1><a class="anchor" id="autotoc_md303"></a>
+The default value is: NO.</h1>
+<p>EXTRACT_PRIV_VIRTUAL = NO</p>
+<h1><a class="anchor" id="autotoc_md304"></a>
+If the EXTRACT_PACKAGE tag is set to YES, all members with package or internal</h1>
+<h1><a class="anchor" id="autotoc_md305"></a>
+scope will be included in the documentation.</h1>
+<h1><a class="anchor" id="autotoc_md306"></a>
+The default value is: NO.</h1>
+<p>EXTRACT_PACKAGE = NO</p>
+<h1><a class="anchor" id="autotoc_md307"></a>
+If the EXTRACT_STATIC tag is set to YES, all static members of a file will be</h1>
+<h1><a class="anchor" id="autotoc_md308"></a>
+included in the documentation.</h1>
+<h1><a class="anchor" id="autotoc_md309"></a>
+The default value is: NO.</h1>
+<p>EXTRACT_STATIC = NO</p>
+<h1><a class="anchor" id="autotoc_md310"></a>
+If the EXTRACT_LOCAL_CLASSES tag is set to YES, classes (and structs) defined</h1>
+<h1><a class="anchor" id="autotoc_md311"></a>
+locally in source files will be included in the documentation. If set to NO,</h1>
+<h1><a class="anchor" id="autotoc_md312"></a>
+only classes defined in header files are included. Does not have any effect</h1>
+<h1><a class="anchor" id="autotoc_md313"></a>
+for Java sources.</h1>
+<h1><a class="anchor" id="autotoc_md314"></a>
+The default value is: YES.</h1>
+<p>EXTRACT_LOCAL_CLASSES = YES</p>
+<h1><a class="anchor" id="autotoc_md315"></a>
+This flag is only useful for Objective-C code. If set to YES, local methods,</h1>
+<h1><a class="anchor" id="autotoc_md316"></a>
+which are defined in the implementation section but not in the interface are</h1>
+<h1><a class="anchor" id="autotoc_md317"></a>
+included in the documentation. If set to NO, only methods in the interface are</h1>
+<h1><a class="anchor" id="autotoc_md318"></a>
+included.</h1>
+<h1><a class="anchor" id="autotoc_md319"></a>
+The default value is: NO.</h1>
+<p>EXTRACT_LOCAL_METHODS = NO</p>
+<h1><a class="anchor" id="autotoc_md320"></a>
+If this flag is set to YES, the members of anonymous namespaces will be</h1>
+<h1><a class="anchor" id="autotoc_md321"></a>
+extracted and appear in the documentation as a namespace called</h1>
+<h1><a class="anchor" id="autotoc_md322"></a>
+'anonymous_namespace{file}', where file will be replaced with the base name of</h1>
+<h1><a class="anchor" id="autotoc_md323"></a>
+the file that contains the anonymous namespace. By default anonymous namespace</h1>
+<h1><a class="anchor" id="autotoc_md324"></a>
+are hidden.</h1>
+<h1><a class="anchor" id="autotoc_md325"></a>
+The default value is: NO.</h1>
+<p>EXTRACT_ANON_NSPACES = NO</p>
+<h1><a class="anchor" id="autotoc_md326"></a>
+If the HIDE_UNDOC_MEMBERS tag is set to YES, doxygen will hide all</h1>
+<h1><a class="anchor" id="autotoc_md327"></a>
+undocumented members inside documented classes or files. If set to NO these</h1>
+<h1><a class="anchor" id="autotoc_md328"></a>
+members will be included in the various overviews, but no documentation</h1>
+<h1><a class="anchor" id="autotoc_md329"></a>
+section is generated. This option has no effect if EXTRACT_ALL is enabled.</h1>
+<h1><a class="anchor" id="autotoc_md330"></a>
+The default value is: NO.</h1>
+<p>HIDE_UNDOC_MEMBERS = NO</p>
+<h1><a class="anchor" id="autotoc_md331"></a>
+If the HIDE_UNDOC_CLASSES tag is set to YES, doxygen will hide all</h1>
+<h1><a class="anchor" id="autotoc_md332"></a>
+undocumented classes that are normally visible in the class hierarchy. If set</h1>
+<h1><a class="anchor" id="autotoc_md333"></a>
+to NO, these classes will be included in the various overviews. This option</h1>
+<h1><a class="anchor" id="autotoc_md334"></a>
+has no effect if EXTRACT_ALL is enabled.</h1>
+<h1><a class="anchor" id="autotoc_md335"></a>
+The default value is: NO.</h1>
+<p>HIDE_UNDOC_CLASSES = NO</p>
+<h1><a class="anchor" id="autotoc_md336"></a>
+If the HIDE_FRIEND_COMPOUNDS tag is set to YES, doxygen will hide all friend</h1>
+<h1><a class="anchor" id="autotoc_md337"></a>
+declarations. If set to NO, these declarations will be included in the</h1>
+<h1><a class="anchor" id="autotoc_md338"></a>
+documentation.</h1>
+<h1><a class="anchor" id="autotoc_md339"></a>
+The default value is: NO.</h1>
+<p>HIDE_FRIEND_COMPOUNDS = NO</p>
+<h1><a class="anchor" id="autotoc_md340"></a>
+If the HIDE_IN_BODY_DOCS tag is set to YES, doxygen will hide any</h1>
+<h1><a class="anchor" id="autotoc_md341"></a>
+documentation blocks found inside the body of a function. If set to NO, these</h1>
+<h1><a class="anchor" id="autotoc_md342"></a>
+blocks will be appended to the function's detailed documentation block.</h1>
+<h1><a class="anchor" id="autotoc_md343"></a>
+The default value is: NO.</h1>
+<p>HIDE_IN_BODY_DOCS = NO</p>
+<h1><a class="anchor" id="autotoc_md344"></a>
+The INTERNAL_DOCS tag determines if documentation that is typed after a</h1>
+<h1><a class="anchor" id="autotoc_md345"></a>
+\internal command is included. If the tag is set to NO then the documentation</h1>
+<h1><a class="anchor" id="autotoc_md346"></a>
+will be excluded. Set it to YES to include the internal documentation.</h1>
+<h1><a class="anchor" id="autotoc_md347"></a>
+The default value is: NO.</h1>
+<p>INTERNAL_DOCS = NO</p>
+<h1><a class="anchor" id="autotoc_md348"></a>
+If the CASE_SENSE_NAMES tag is set to NO then doxygen will only generate file</h1>
+<h1><a class="anchor" id="autotoc_md349"></a>
+names in lower-case letters. If set to YES, upper-case letters are also</h1>
+<h1><a class="anchor" id="autotoc_md350"></a>
+allowed. This is useful if you have classes or files whose names only differ</h1>
+<h1><a class="anchor" id="autotoc_md351"></a>
+in case and if your file system supports case sensitive file names. Windows</h1>
+<h1><a class="anchor" id="autotoc_md352"></a>
+(including Cygwin) ands Mac users are advised to set this option to NO.</h1>
+<h1><a class="anchor" id="autotoc_md353"></a>
+The default value is: system dependent.</h1>
+<p>CASE_SENSE_NAMES = NO</p>
+<h1><a class="anchor" id="autotoc_md354"></a>
+If the HIDE_SCOPE_NAMES tag is set to NO then doxygen will show members with</h1>
+<h1><a class="anchor" id="autotoc_md355"></a>
+their full class and namespace scopes in the documentation. If set to YES, the</h1>
+<h1><a class="anchor" id="autotoc_md356"></a>
+scope will be hidden.</h1>
+<h1><a class="anchor" id="autotoc_md357"></a>
+The default value is: NO.</h1>
+<p>HIDE_SCOPE_NAMES = NO</p>
+<h1><a class="anchor" id="autotoc_md358"></a>
+If the HIDE_COMPOUND_REFERENCE tag is set to NO (default) then doxygen will</h1>
+<h1><a class="anchor" id="autotoc_md359"></a>
+append additional text to a page's title, such as Class Reference. If set to</h1>
+<h1><a class="anchor" id="autotoc_md360"></a>
+YES the compound reference will be hidden.</h1>
+<h1><a class="anchor" id="autotoc_md361"></a>
+The default value is: NO.</h1>
+<p>HIDE_COMPOUND_REFERENCE= NO</p>
+<h1><a class="anchor" id="autotoc_md362"></a>
+If the SHOW_INCLUDE_FILES tag is set to YES then doxygen will put a list of</h1>
+<h1><a class="anchor" id="autotoc_md363"></a>
+the files that are included by a file in the documentation of that file.</h1>
+<h1><a class="anchor" id="autotoc_md364"></a>
+The default value is: YES.</h1>
+<p>SHOW_INCLUDE_FILES = YES</p>
+<h1><a class="anchor" id="autotoc_md365"></a>
+If the SHOW_GROUPED_MEMB_INC tag is set to YES then Doxygen will add for each</h1>
+<h1><a class="anchor" id="autotoc_md366"></a>
+grouped member an include statement to the documentation, telling the reader</h1>
+<h1><a class="anchor" id="autotoc_md367"></a>
+which file to include in order to use the member.</h1>
+<h1><a class="anchor" id="autotoc_md368"></a>
+The default value is: NO.</h1>
+<p>SHOW_GROUPED_MEMB_INC = NO</p>
+<h1><a class="anchor" id="autotoc_md369"></a>
+If the FORCE_LOCAL_INCLUDES tag is set to YES then doxygen will list include</h1>
+<h1><a class="anchor" id="autotoc_md370"></a>
+files with double quotes in the documentation rather than with sharp brackets.</h1>
+<h1><a class="anchor" id="autotoc_md371"></a>
+The default value is: NO.</h1>
+<p>FORCE_LOCAL_INCLUDES = NO</p>
+<h1><a class="anchor" id="autotoc_md372"></a>
+If the INLINE_INFO tag is set to YES then a tag [inline] is inserted in the</h1>
+<h1><a class="anchor" id="autotoc_md373"></a>
+documentation for inline members.</h1>
+<h1><a class="anchor" id="autotoc_md374"></a>
+The default value is: YES.</h1>
+<p>INLINE_INFO = YES</p>
+<h1><a class="anchor" id="autotoc_md375"></a>
+If the SORT_MEMBER_DOCS tag is set to YES then doxygen will sort the</h1>
+<h1><a class="anchor" id="autotoc_md376"></a>
+(detailed) documentation of file and class members alphabetically by member</h1>
+<h1><a class="anchor" id="autotoc_md377"></a>
+name. If set to NO, the members will appear in declaration order.</h1>
+<h1><a class="anchor" id="autotoc_md378"></a>
+The default value is: YES.</h1>
+<p>SORT_MEMBER_DOCS = YES</p>
+<h1><a class="anchor" id="autotoc_md379"></a>
+If the SORT_BRIEF_DOCS tag is set to YES then doxygen will sort the brief</h1>
+<h1><a class="anchor" id="autotoc_md380"></a>
+descriptions of file, namespace and class members alphabetically by member</h1>
+<h1><a class="anchor" id="autotoc_md381"></a>
+name. If set to NO, the members will appear in declaration order. Note that</h1>
+<h1><a class="anchor" id="autotoc_md382"></a>
+this will also influence the order of the classes in the class list.</h1>
+<h1><a class="anchor" id="autotoc_md383"></a>
+The default value is: NO.</h1>
+<p>SORT_BRIEF_DOCS = NO</p>
+<h1><a class="anchor" id="autotoc_md384"></a>
+If the SORT_MEMBERS_CTORS_1ST tag is set to YES then doxygen will sort the</h1>
+<h1><a class="anchor" id="autotoc_md385"></a>
+(brief and detailed) documentation of class members so that constructors and</h1>
+<h1><a class="anchor" id="autotoc_md386"></a>
+destructors are listed first. If set to NO the constructors will appear in the</h1>
+<h1><a class="anchor" id="autotoc_md387"></a>
+respective orders defined by SORT_BRIEF_DOCS and SORT_MEMBER_DOCS.</h1>
+<h1><a class="anchor" id="autotoc_md388"></a>
+Note: If SORT_BRIEF_DOCS is set to NO this option is ignored for sorting brief</h1>
+<h1><a class="anchor" id="autotoc_md389"></a>
+member documentation.</h1>
+<h1><a class="anchor" id="autotoc_md390"></a>
+Note: If SORT_MEMBER_DOCS is set to NO this option is ignored for sorting</h1>
+<h1><a class="anchor" id="autotoc_md391"></a>
+detailed member documentation.</h1>
+<h1><a class="anchor" id="autotoc_md392"></a>
+The default value is: NO.</h1>
+<p>SORT_MEMBERS_CTORS_1ST = NO</p>
+<h1><a class="anchor" id="autotoc_md393"></a>
+If the SORT_GROUP_NAMES tag is set to YES then doxygen will sort the hierarchy</h1>
+<h1><a class="anchor" id="autotoc_md394"></a>
+of group names into alphabetical order. If set to NO the group names will</h1>
+<h1><a class="anchor" id="autotoc_md395"></a>
+appear in their defined order.</h1>
+<h1><a class="anchor" id="autotoc_md396"></a>
+The default value is: NO.</h1>
+<p>SORT_GROUP_NAMES = NO</p>
+<h1><a class="anchor" id="autotoc_md397"></a>
+If the SORT_BY_SCOPE_NAME tag is set to YES, the class list will be sorted by</h1>
+<h1><a class="anchor" id="autotoc_md398"></a>
+fully-qualified names, including namespaces. If set to NO, the class list will</h1>
+<h1><a class="anchor" id="autotoc_md399"></a>
+be sorted only by class name, not including the namespace part.</h1>
+<h1><a class="anchor" id="autotoc_md400"></a>
+Note: This option is not very useful if HIDE_SCOPE_NAMES is set to YES.</h1>
+<h1><a class="anchor" id="autotoc_md401"></a>
+Note: This option applies only to the class list, not to the alphabetical</h1>
+<h1><a class="anchor" id="autotoc_md402"></a>
+list.</h1>
+<h1><a class="anchor" id="autotoc_md403"></a>
+The default value is: NO.</h1>
+<p>SORT_BY_SCOPE_NAME = NO</p>
+<h1><a class="anchor" id="autotoc_md404"></a>
+If the STRICT_PROTO_MATCHING option is enabled and doxygen fails to do proper</h1>
+<h1><a class="anchor" id="autotoc_md405"></a>
+type resolution of all parameters of a function it will reject a match between</h1>
+<h1><a class="anchor" id="autotoc_md406"></a>
+the prototype and the implementation of a member function even if there is</h1>
+<h1><a class="anchor" id="autotoc_md407"></a>
+only one candidate or it is obvious which candidate to choose by doing a</h1>
+<h1><a class="anchor" id="autotoc_md408"></a>
+simple string match. By disabling STRICT_PROTO_MATCHING doxygen will still</h1>
+<h1><a class="anchor" id="autotoc_md409"></a>
+accept a match between prototype and implementation in such cases.</h1>
+<h1><a class="anchor" id="autotoc_md410"></a>
+The default value is: NO.</h1>
+<p>STRICT_PROTO_MATCHING = NO</p>
+<h1><a class="anchor" id="autotoc_md411"></a>
+The GENERATE_TODOLIST tag can be used to enable (YES) or disable (NO) the todo</h1>
+<h1><a class="anchor" id="autotoc_md412"></a>
+list. This list is created by putting \todo commands in the documentation.</h1>
+<h1><a class="anchor" id="autotoc_md413"></a>
+The default value is: YES.</h1>
+<p>GENERATE_TODOLIST = YES</p>
+<h1><a class="anchor" id="autotoc_md414"></a>
+The GENERATE_TESTLIST tag can be used to enable (YES) or disable (NO) the test</h1>
+<h1><a class="anchor" id="autotoc_md415"></a>
+list. This list is created by putting \test commands in the documentation.</h1>
+<h1><a class="anchor" id="autotoc_md416"></a>
+The default value is: YES.</h1>
+<p>GENERATE_TESTLIST = YES</p>
+<h1><a class="anchor" id="autotoc_md417"></a>
+The GENERATE_BUGLIST tag can be used to enable (YES) or disable (NO) the bug</h1>
+<h1><a class="anchor" id="autotoc_md418"></a>
+list. This list is created by putting \bug commands in the documentation.</h1>
+<h1><a class="anchor" id="autotoc_md419"></a>
+The default value is: YES.</h1>
+<p>GENERATE_BUGLIST = YES</p>
+<h1><a class="anchor" id="autotoc_md420"></a>
+The GENERATE_DEPRECATEDLIST tag can be used to enable (YES) or disable (NO)</h1>
+<h1><a class="anchor" id="autotoc_md421"></a>
+the deprecated list. This list is created by putting \deprecated commands in</h1>
+<h1><a class="anchor" id="autotoc_md422"></a>
+the documentation.</h1>
+<h1><a class="anchor" id="autotoc_md423"></a>
+The default value is: YES.</h1>
+<p>GENERATE_DEPRECATEDLIST= YES</p>
+<h1><a class="anchor" id="autotoc_md424"></a>
+The ENABLED_SECTIONS tag can be used to enable conditional documentation</h1>
+<h1><a class="anchor" id="autotoc_md425"></a>
+sections, marked by \if &lt;section_label&gt; ... \endif and</h1>
+<p>blocks.</p>
+<p>ENABLED_SECTIONS =</p>
+<h1><a class="anchor" id="autotoc_md426"></a>
+The MAX_INITIALIZER_LINES tag determines the maximum number of lines that the</h1>
+<h1><a class="anchor" id="autotoc_md427"></a>
+initial value of a variable or macro / define can have for it to appear in the</h1>
+<h1><a class="anchor" id="autotoc_md428"></a>
+documentation. If the initializer consists of more lines than specified here</h1>
+<h1><a class="anchor" id="autotoc_md429"></a>
+it will be hidden. Use a value of 0 to hide initializers completely. The</h1>
+<h1><a class="anchor" id="autotoc_md430"></a>
+appearance of the value of individual variables and macros / defines can be</h1>
+<h1><a class="anchor" id="autotoc_md431"></a>
+controlled using \showinitializer or \hideinitializer command in the</h1>
+<h1><a class="anchor" id="autotoc_md432"></a>
+documentation regardless of this setting.</h1>
+<h1><a class="anchor" id="autotoc_md433"></a>
+Minimum value: 0, maximum value: 10000, default value: 30.</h1>
+<p>MAX_INITIALIZER_LINES = 30</p>
+<h1><a class="anchor" id="autotoc_md434"></a>
+Set the SHOW_USED_FILES tag to NO to disable the list of files generated at</h1>
+<h1><a class="anchor" id="autotoc_md435"></a>
+the bottom of the documentation of classes and structs. If set to YES, the</h1>
+<h1><a class="anchor" id="autotoc_md436"></a>
+list will mention the files that were used to generate the documentation.</h1>
+<h1><a class="anchor" id="autotoc_md437"></a>
+The default value is: YES.</h1>
+<p>SHOW_USED_FILES = YES</p>
+<h1><a class="anchor" id="autotoc_md438"></a>
+Set the SHOW_FILES tag to NO to disable the generation of the Files page. This</h1>
+<h1><a class="anchor" id="autotoc_md439"></a>
+will remove the Files entry from the Quick Index and from the Folder Tree View</h1>
+<h1><a class="anchor" id="autotoc_md440"></a>
+(if specified).</h1>
+<h1><a class="anchor" id="autotoc_md441"></a>
+The default value is: YES.</h1>
+<p>SHOW_FILES = YES</p>
+<h1><a class="anchor" id="autotoc_md442"></a>
+Set the SHOW_NAMESPACES tag to NO to disable the generation of the Namespaces</h1>
+<h1><a class="anchor" id="autotoc_md443"></a>
+page. This will remove the Namespaces entry from the Quick Index and from the</h1>
+<h1><a class="anchor" id="autotoc_md444"></a>
+Folder Tree View (if specified).</h1>
+<h1><a class="anchor" id="autotoc_md445"></a>
+The default value is: YES.</h1>
+<p>SHOW_NAMESPACES = YES</p>
+<h1><a class="anchor" id="autotoc_md446"></a>
+The FILE_VERSION_FILTER tag can be used to specify a program or script that</h1>
+<h1><a class="anchor" id="autotoc_md447"></a>
+doxygen should invoke to get the current version for each file (typically from</h1>
+<h1><a class="anchor" id="autotoc_md448"></a>
+the version control system). Doxygen will invoke the program by executing (via</h1>
+<h1><a class="anchor" id="autotoc_md449"></a>
+popen()) the command command input-file, where command is the value of the</h1>
+<h1><a class="anchor" id="autotoc_md450"></a>
+FILE_VERSION_FILTER tag, and input-file is the name of an input file provided</h1>
+<h1><a class="anchor" id="autotoc_md451"></a>
+by doxygen. Whatever the program writes to standard output is used as the file</h1>
+<h1><a class="anchor" id="autotoc_md452"></a>
+version. For an example see the documentation.</h1>
+<p>FILE_VERSION_FILTER =</p>
+<h1><a class="anchor" id="autotoc_md453"></a>
+The LAYOUT_FILE tag can be used to specify a layout file which will be parsed</h1>
+<h1><a class="anchor" id="autotoc_md454"></a>
+by doxygen. The layout file controls the global structure of the generated</h1>
+<h1><a class="anchor" id="autotoc_md455"></a>
+output files in an output format independent way. To create the layout file</h1>
+<h1><a class="anchor" id="autotoc_md456"></a>
+that represents doxygen's defaults, run doxygen with the -l option. You can</h1>
+<h1><a class="anchor" id="autotoc_md457"></a>
+optionally specify a file name after the option, if omitted DoxygenLayout.xml</h1>
+<h1><a class="anchor" id="autotoc_md458"></a>
+will be used as the name of the layout file.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md459"></a>
+Note that if you run doxygen from a directory containing a file called</h1>
+<h1><a class="anchor" id="autotoc_md460"></a>
+DoxygenLayout.xml, doxygen will parse it automatically even if the LAYOUT_FILE</h1>
+<h1><a class="anchor" id="autotoc_md461"></a>
+tag is left empty.</h1>
+<p>LAYOUT_FILE =</p>
+<h1><a class="anchor" id="autotoc_md462"></a>
+The CITE_BIB_FILES tag can be used to specify one or more bib files containing</h1>
+<h1><a class="anchor" id="autotoc_md463"></a>
+the reference definitions. This must be a list of .bib files. The .bib</h1>
+<h1><a class="anchor" id="autotoc_md464"></a>
+extension is automatically appended if omitted. This requires the bibtex tool</h1>
+<h1><a class="anchor" id="autotoc_md465"></a>
+to be installed. See also https://en.wikipedia.org/wiki/BibTeX for more info.</h1>
+<h1><a class="anchor" id="autotoc_md466"></a>
+For LaTeX the style of the bibliography can be controlled using</h1>
+<h1><a class="anchor" id="autotoc_md467"></a>
+LATEX_BIB_STYLE. To use this feature you need bibtex and perl available in the</h1>
+<h1><a class="anchor" id="autotoc_md468"></a>
+search path. See also \cite for info how to create references.</h1>
+<p>CITE_BIB_FILES =</p>
+<p>#------------------------------------------------------------------------&mdash; </p>
+<h1><a class="anchor" id="autotoc_md469"></a>
+Configuration options related to warning and progress messages</h1>
+<p>#------------------------------------------------------------------------&mdash;</p>
+<h1><a class="anchor" id="autotoc_md470"></a>
+The QUIET tag can be used to turn on/off the messages that are generated to</h1>
+<h1><a class="anchor" id="autotoc_md471"></a>
+standard output by doxygen. If QUIET is set to YES this implies that the</h1>
+<h1><a class="anchor" id="autotoc_md472"></a>
+messages are off.</h1>
+<h1><a class="anchor" id="autotoc_md473"></a>
+The default value is: NO.</h1>
+<p>QUIET = NO</p>
+<h1><a class="anchor" id="autotoc_md474"></a>
+The WARNINGS tag can be used to turn on/off the warning messages that are</h1>
+<h1><a class="anchor" id="autotoc_md475"></a>
+generated to standard error (stderr) by doxygen. If WARNINGS is set to YES</h1>
+<h1><a class="anchor" id="autotoc_md476"></a>
+this implies that the warnings are on.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md477"></a>
+Tip: Turn warnings on while writing the documentation.</h1>
+<h1><a class="anchor" id="autotoc_md478"></a>
+The default value is: YES.</h1>
+<p>WARNINGS = YES</p>
+<h1><a class="anchor" id="autotoc_md479"></a>
+If the WARN_IF_UNDOCUMENTED tag is set to YES then doxygen will generate</h1>
+<h1><a class="anchor" id="autotoc_md480"></a>
+warnings for undocumented members. If EXTRACT_ALL is set to YES then this flag</h1>
+<h1><a class="anchor" id="autotoc_md481"></a>
+will automatically be disabled.</h1>
+<h1><a class="anchor" id="autotoc_md482"></a>
+The default value is: YES.</h1>
+<p>WARN_IF_UNDOCUMENTED = YES</p>
+<h1><a class="anchor" id="autotoc_md483"></a>
+If the WARN_IF_DOC_ERROR tag is set to YES, doxygen will generate warnings for</h1>
+<h1><a class="anchor" id="autotoc_md484"></a>
+potential errors in the documentation, such as not documenting some parameters</h1>
+<h1><a class="anchor" id="autotoc_md485"></a>
+in a documented function, or documenting parameters that don't exist or using</h1>
+<h1><a class="anchor" id="autotoc_md486"></a>
+markup commands wrongly.</h1>
+<h1><a class="anchor" id="autotoc_md487"></a>
+The default value is: YES.</h1>
+<p>WARN_IF_DOC_ERROR = YES</p>
+<h1><a class="anchor" id="autotoc_md488"></a>
+This WARN_NO_PARAMDOC option can be enabled to get warnings for functions that</h1>
+<h1><a class="anchor" id="autotoc_md489"></a>
+are documented, but have no documentation for their parameters or return</h1>
+<h1><a class="anchor" id="autotoc_md490"></a>
+value. If set to NO, doxygen will only warn about wrong or incomplete</h1>
+<h1><a class="anchor" id="autotoc_md491"></a>
+parameter documentation, but not about the absence of documentation. If</h1>
+<h1><a class="anchor" id="autotoc_md492"></a>
+EXTRACT_ALL is set to YES then this flag will automatically be disabled.</h1>
+<h1><a class="anchor" id="autotoc_md493"></a>
+The default value is: NO.</h1>
+<p>WARN_NO_PARAMDOC = NO</p>
+<h1><a class="anchor" id="autotoc_md494"></a>
+If the WARN_AS_ERROR tag is set to YES then doxygen will immediately stop when</h1>
+<h1><a class="anchor" id="autotoc_md495"></a>
+a warning is encountered.</h1>
+<h1><a class="anchor" id="autotoc_md496"></a>
+The default value is: NO.</h1>
+<p>WARN_AS_ERROR = NO</p>
+<h1><a class="anchor" id="autotoc_md497"></a>
+The WARN_FORMAT tag determines the format of the warning messages that doxygen</h1>
+<h1><a class="anchor" id="autotoc_md498"></a>
+can produce. The string should contain the $file, $line, and $text tags, which</h1>
+<h1><a class="anchor" id="autotoc_md499"></a>
+will be replaced by the file and line number from which the warning originated</h1>
+<h1><a class="anchor" id="autotoc_md500"></a>
+and the warning text. Optionally the format may contain $version, which will</h1>
+<h1><a class="anchor" id="autotoc_md501"></a>
+be replaced by the version of the file (if it could be obtained via</h1>
+<h1><a class="anchor" id="autotoc_md502"></a>
+FILE_VERSION_FILTER)</h1>
+<h1><a class="anchor" id="autotoc_md503"></a>
+The default value is: $file:$line: $text.</h1>
+<p>WARN_FORMAT = "$file:$line: $text"</p>
+<h1><a class="anchor" id="autotoc_md504"></a>
+The WARN_LOGFILE tag can be used to specify a file to which warning and error</h1>
+<h1><a class="anchor" id="autotoc_md505"></a>
+messages should be written. If left blank the output is written to standard</h1>
+<h1><a class="anchor" id="autotoc_md506"></a>
+error (stderr).</h1>
+<p>WARN_LOGFILE =</p>
+<p>#------------------------------------------------------------------------&mdash; </p>
+<h1><a class="anchor" id="autotoc_md507"></a>
+Configuration options related to the input files</h1>
+<p>#------------------------------------------------------------------------&mdash;</p>
+<h1><a class="anchor" id="autotoc_md508"></a>
+The INPUT tag is used to specify the files and/or directories that contain</h1>
+<h1><a class="anchor" id="autotoc_md509"></a>
+documented source files. You may enter file names like myfile.cpp or</h1>
+<h1><a class="anchor" id="autotoc_md510"></a>
+directories like /usr/src/myproject. Separate the files or directories with</h1>
+<h1><a class="anchor" id="autotoc_md511"></a>
+spaces. See also FILE_PATTERNS and EXTENSION_MAPPING</h1>
+<h1><a class="anchor" id="autotoc_md512"></a>
+Note: If this tag is empty the current directory is searched.</h1>
+<p>INPUT =</p>
+<h1><a class="anchor" id="autotoc_md513"></a>
+This tag can be used to specify the character encoding of the source files</h1>
+<h1><a class="anchor" id="autotoc_md514"></a>
+that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses</h1>
+<h1><a class="anchor" id="autotoc_md515"></a>
+libiconv (or the iconv built into libc) for the transcoding. See the libiconv</h1>
+<h1><a class="anchor" id="autotoc_md516"></a>
+documentation (see: https://www.gnu.org/software/libiconv/) for the list of</h1>
+<h1><a class="anchor" id="autotoc_md517"></a>
+possible encodings.</h1>
+<h1><a class="anchor" id="autotoc_md518"></a>
+The default value is: UTF-8.</h1>
+<p>INPUT_ENCODING = UTF-8</p>
+<h1><a class="anchor" id="autotoc_md519"></a>
+If the value of the INPUT tag contains directories, you can use the</h1>
+<h1><a class="anchor" id="autotoc_md520"></a>
+FILE_PATTERNS tag to specify one or more wildcard patterns (like *.cpp and</h1>
+<h1><a class="anchor" id="autotoc_md521"></a>
+*.h) to filter out the source-files in the directories.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md522"></a>
+Note that for custom extensions or not directly supported extensions you also</h1>
+<h1><a class="anchor" id="autotoc_md523"></a>
+need to set EXTENSION_MAPPING for the extension otherwise the files are not</h1>
+<h1><a class="anchor" id="autotoc_md524"></a>
+read by doxygen.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md525"></a>
+If left blank the following patterns are tested:*.c, *.cc, *.cxx, *.cpp,</h1>
+<h1><a class="anchor" id="autotoc_md526"></a>
+*.c++, *.java, *.ii, *.ixx, *.ipp, *.i++, *.inl, *.idl, *.ddl, *.odl, *.h,</h1>
+<h1><a class="anchor" id="autotoc_md527"></a>
+*.hh, *.hxx, *.hpp, *.h++, *.cs, *.d, *.php, *.php4, *.php5, *.phtml, *.inc,</h1>
+<h1><a class="anchor" id="autotoc_md528"></a>
+*.m, *.markdown, *.md, *.mm, *.dox (to be provided as doxygen C comment),</h1>
+<h1><a class="anchor" id="autotoc_md529"></a>
+*.doc (to be provided as doxygen C comment), *.txt (to be provided as doxygen</h1>
+<h1><a class="anchor" id="autotoc_md530"></a>
+C comment), *.py, *.pyw, *.f90, *.f95, *.f03, *.f08, *.f, *.for, *.tcl, *.vhd,</h1>
+<h1><a class="anchor" id="autotoc_md531"></a>
+*.vhdl, *.ucf, *.qsf and *.ice.</h1>
+<p>FILE_PATTERNS = *.c \ *.cc \ *.cxx \ *.cpp \ *.c++ \ *.java \ *.ii \ *.ixx \ *.ipp \ *.i++ \ *.inl \ *.idl \ *.ddl \ *.odl \ *.h \ *.hh \ *.hxx \ *.hpp \ *.h++ \ *.cs \ *.d \ *.php \ *.php4 \ *.php5 \ *.phtml \ *.inc \ *.m \ *.markdown \ *.md \ *.mm \ *.dox \ *.doc \ *.txt \ *.py \ *.pyw \ *.f90 \ *.f95 \ *.f03 \ *.f08 \ *.f \ *.for \ *.tcl \ *.vhd \ *.vhdl \ *.ucf \ *.qsf \ *.ice</p>
+<h1><a class="anchor" id="autotoc_md532"></a>
+The RECURSIVE tag can be used to specify whether or not subdirectories should</h1>
+<h1><a class="anchor" id="autotoc_md533"></a>
+be searched for input files as well.</h1>
+<h1><a class="anchor" id="autotoc_md534"></a>
+The default value is: NO.</h1>
+<p>RECURSIVE = NO</p>
+<h1><a class="anchor" id="autotoc_md535"></a>
+The EXCLUDE tag can be used to specify files and/or directories that should be</h1>
+<h1><a class="anchor" id="autotoc_md536"></a>
+excluded from the INPUT source files. This way you can easily exclude a</h1>
+<h1><a class="anchor" id="autotoc_md537"></a>
+subdirectory from a directory tree whose root is specified with the INPUT tag.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md538"></a>
+Note that relative paths are relative to the directory from which doxygen is</h1>
+<h1><a class="anchor" id="autotoc_md539"></a>
+run.</h1>
+<p>EXCLUDE =</p>
+<h1><a class="anchor" id="autotoc_md540"></a>
+The EXCLUDE_SYMLINKS tag can be used to select whether or not files or</h1>
+<h1><a class="anchor" id="autotoc_md541"></a>
+directories that are symbolic links (a Unix file system feature) are excluded</h1>
+<h1><a class="anchor" id="autotoc_md542"></a>
+from the input.</h1>
+<h1><a class="anchor" id="autotoc_md543"></a>
+The default value is: NO.</h1>
+<p>EXCLUDE_SYMLINKS = NO</p>
+<h1><a class="anchor" id="autotoc_md544"></a>
+If the value of the INPUT tag contains directories, you can use the</h1>
+<h1><a class="anchor" id="autotoc_md545"></a>
+EXCLUDE_PATTERNS tag to specify one or more wildcard patterns to exclude</h1>
+<h1><a class="anchor" id="autotoc_md546"></a>
+certain files from those directories.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md547"></a>
+Note that the wildcards are matched against the file with absolute path, so to</h1>
+<h1><a class="anchor" id="autotoc_md548"></a>
+exclude all test directories for example use the pattern */test/*</h1>
+<p>EXCLUDE_PATTERNS =</p>
+<h1><a class="anchor" id="autotoc_md549"></a>
+The EXCLUDE_SYMBOLS tag can be used to specify one or more symbol names</h1>
+<h1><a class="anchor" id="autotoc_md550"></a>
+(namespaces, classes, functions, etc.) that should be excluded from the</h1>
+<h1><a class="anchor" id="autotoc_md551"></a>
+output. The symbol name can be a fully qualified name, a word, or if the</h1>
+<h1><a class="anchor" id="autotoc_md552"></a>
+wildcard * is used, a substring. Examples: ANamespace, AClass,</h1>
+<h1><a class="anchor" id="autotoc_md553"></a>
+AClass::ANamespace, ANamespace::*Test</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md554"></a>
+Note that the wildcards are matched against the file with absolute path, so to</h1>
+<h1><a class="anchor" id="autotoc_md555"></a>
+exclude all test directories use the pattern */test/*</h1>
+<p>EXCLUDE_SYMBOLS =</p>
+<h1><a class="anchor" id="autotoc_md556"></a>
+The EXAMPLE_PATH tag can be used to specify one or more files or directories</h1>
+<h1><a class="anchor" id="autotoc_md557"></a>
+that contain example code fragments that are included (see the \include</h1>
+<h1><a class="anchor" id="autotoc_md558"></a>
+command).</h1>
+<p>EXAMPLE_PATH =</p>
+<h1><a class="anchor" id="autotoc_md559"></a>
+If the value of the EXAMPLE_PATH tag contains directories, you can use the</h1>
+<h1><a class="anchor" id="autotoc_md560"></a>
+EXAMPLE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp and</h1>
+<h1><a class="anchor" id="autotoc_md561"></a>
+*.h) to filter out the source-files in the directories. If left blank all</h1>
+<h1><a class="anchor" id="autotoc_md562"></a>
+files are included.</h1>
+<p>EXAMPLE_PATTERNS = *</p>
+<h1><a class="anchor" id="autotoc_md563"></a>
+If the EXAMPLE_RECURSIVE tag is set to YES then subdirectories will be</h1>
+<h1><a class="anchor" id="autotoc_md564"></a>
+searched for input files to be used with the \include or \dontinclude commands</h1>
+<h1><a class="anchor" id="autotoc_md565"></a>
+irrespective of the value of the RECURSIVE tag.</h1>
+<h1><a class="anchor" id="autotoc_md566"></a>
+The default value is: NO.</h1>
+<p>EXAMPLE_RECURSIVE = NO</p>
+<h1><a class="anchor" id="autotoc_md567"></a>
+The IMAGE_PATH tag can be used to specify one or more files or directories</h1>
+<h1><a class="anchor" id="autotoc_md568"></a>
+that contain images that are to be included in the documentation (see the</h1>
+<h1><a class="anchor" id="autotoc_md569"></a>
+\image command).</h1>
+<p>IMAGE_PATH =</p>
+<h1><a class="anchor" id="autotoc_md570"></a>
+The INPUT_FILTER tag can be used to specify a program that doxygen should</h1>
+<h1><a class="anchor" id="autotoc_md571"></a>
+invoke to filter for each input file. Doxygen will invoke the filter program</h1>
+<h1><a class="anchor" id="autotoc_md572"></a>
+by executing (via popen()) the command:</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md573"></a>
+&lt;filter&gt; &lt;input-file&gt;</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md574"></a>
+where &lt;filter&gt; is the value of the INPUT_FILTER tag, and &lt;input-file&gt; is the</h1>
+<h1><a class="anchor" id="autotoc_md575"></a>
+name of an input file. Doxygen will then use the output that the filter</h1>
+<h1><a class="anchor" id="autotoc_md576"></a>
+program writes to standard output. If FILTER_PATTERNS is specified, this tag</h1>
+<h1><a class="anchor" id="autotoc_md577"></a>
+will be ignored.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md578"></a>
+Note that the filter must not add or remove lines; it is applied before the</h1>
+<h1><a class="anchor" id="autotoc_md579"></a>
+code is scanned, but not when the output code is generated. If lines are added</h1>
+<h1><a class="anchor" id="autotoc_md580"></a>
+or removed, the anchors will not be placed correctly.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md581"></a>
+Note that for custom extensions or not directly supported extensions you also</h1>
+<h1><a class="anchor" id="autotoc_md582"></a>
+need to set EXTENSION_MAPPING for the extension otherwise the files are not</h1>
+<h1><a class="anchor" id="autotoc_md583"></a>
+properly processed by doxygen.</h1>
+<p>INPUT_FILTER =</p>
+<h1><a class="anchor" id="autotoc_md584"></a>
+The FILTER_PATTERNS tag can be used to specify filters on a per file pattern</h1>
+<h1><a class="anchor" id="autotoc_md585"></a>
+basis. Doxygen will compare the file name with each pattern and apply the</h1>
+<h1><a class="anchor" id="autotoc_md586"></a>
+filter if there is a match. The filters are a list of the form: pattern=filter</h1>
+<h1><a class="anchor" id="autotoc_md587"></a>
+(like *.cpp=my_cpp_filter). See INPUT_FILTER for further information on how</h1>
+<h1><a class="anchor" id="autotoc_md588"></a>
+filters are used. If the FILTER_PATTERNS tag is empty or if none of the</h1>
+<h1><a class="anchor" id="autotoc_md589"></a>
+patterns match the file name, INPUT_FILTER is applied.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md590"></a>
+Note that for custom extensions or not directly supported extensions you also</h1>
+<h1><a class="anchor" id="autotoc_md591"></a>
+need to set EXTENSION_MAPPING for the extension otherwise the files are not</h1>
+<h1><a class="anchor" id="autotoc_md592"></a>
+properly processed by doxygen.</h1>
+<p>FILTER_PATTERNS =</p>
+<h1><a class="anchor" id="autotoc_md593"></a>
+If the FILTER_SOURCE_FILES tag is set to YES, the input filter (if set using</h1>
+<h1><a class="anchor" id="autotoc_md594"></a>
+INPUT_FILTER) will also be used to filter the input files that are used for</h1>
+<h1><a class="anchor" id="autotoc_md595"></a>
+producing the source files to browse (i.e. when SOURCE_BROWSER is set to YES).</h1>
+<h1><a class="anchor" id="autotoc_md596"></a>
+The default value is: NO.</h1>
+<p>FILTER_SOURCE_FILES = NO</p>
+<h1><a class="anchor" id="autotoc_md597"></a>
+The FILTER_SOURCE_PATTERNS tag can be used to specify source filters per file</h1>
+<h1><a class="anchor" id="autotoc_md598"></a>
+pattern. A pattern will override the setting for FILTER_PATTERN (if any) and</h1>
+<h1><a class="anchor" id="autotoc_md599"></a>
+it is also possible to disable source filtering for a specific pattern using</h1>
+<h1><a class="anchor" id="autotoc_md600"></a>
+*.ext= (so without naming a filter).</h1>
+<h1><a class="anchor" id="autotoc_md601"></a>
+This tag requires that the tag FILTER_SOURCE_FILES is set to YES.</h1>
+<p>FILTER_SOURCE_PATTERNS =</p>
+<h1><a class="anchor" id="autotoc_md602"></a>
+If the USE_MDFILE_AS_MAINPAGE tag refers to the name of a markdown file that</h1>
+<h1><a class="anchor" id="autotoc_md603"></a>
+is part of the input, its contents will be placed on the main page</h1>
+<h1><a class="anchor" id="autotoc_md604"></a>
+(index.html). This can be useful if you have a project on for instance GitHub</h1>
+<h1><a class="anchor" id="autotoc_md605"></a>
+and want to reuse the introduction page also for the doxygen output.</h1>
+<p>USE_MDFILE_AS_MAINPAGE =</p>
+<p>#------------------------------------------------------------------------&mdash; </p>
+<h1><a class="anchor" id="autotoc_md606"></a>
+Configuration options related to source browsing</h1>
+<p>#------------------------------------------------------------------------&mdash;</p>
+<h1><a class="anchor" id="autotoc_md607"></a>
+If the SOURCE_BROWSER tag is set to YES then a list of source files will be</h1>
+<h1><a class="anchor" id="autotoc_md608"></a>
+generated. Documented entities will be cross-referenced with these sources.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md609"></a>
+Note: To get rid of all source code in the generated output, make sure that</h1>
+<h1><a class="anchor" id="autotoc_md610"></a>
+also VERBATIM_HEADERS is set to NO.</h1>
+<h1><a class="anchor" id="autotoc_md611"></a>
+The default value is: NO.</h1>
+<p>SOURCE_BROWSER = NO</p>
+<h1><a class="anchor" id="autotoc_md612"></a>
+Setting the INLINE_SOURCES tag to YES will include the body of functions,</h1>
+<h1><a class="anchor" id="autotoc_md613"></a>
+classes and enums directly into the documentation.</h1>
+<h1><a class="anchor" id="autotoc_md614"></a>
+The default value is: NO.</h1>
+<p>INLINE_SOURCES = NO</p>
+<h1><a class="anchor" id="autotoc_md615"></a>
+Setting the STRIP_CODE_COMMENTS tag to YES will instruct doxygen to hide any</h1>
+<h1><a class="anchor" id="autotoc_md616"></a>
+special comment blocks from generated source code fragments. Normal C, C++ and</h1>
+<h1><a class="anchor" id="autotoc_md617"></a>
+Fortran comments will always remain visible.</h1>
+<h1><a class="anchor" id="autotoc_md618"></a>
+The default value is: YES.</h1>
+<p>STRIP_CODE_COMMENTS = YES</p>
+<h1><a class="anchor" id="autotoc_md619"></a>
+If the REFERENCED_BY_RELATION tag is set to YES then for each documented</h1>
+<h1><a class="anchor" id="autotoc_md620"></a>
+entity all documented functions referencing it will be listed.</h1>
+<h1><a class="anchor" id="autotoc_md621"></a>
+The default value is: NO.</h1>
+<p>REFERENCED_BY_RELATION = NO</p>
+<h1><a class="anchor" id="autotoc_md622"></a>
+If the REFERENCES_RELATION tag is set to YES then for each documented function</h1>
+<h1><a class="anchor" id="autotoc_md623"></a>
+all documented entities called/used by that function will be listed.</h1>
+<h1><a class="anchor" id="autotoc_md624"></a>
+The default value is: NO.</h1>
+<p>REFERENCES_RELATION = NO</p>
+<h1><a class="anchor" id="autotoc_md625"></a>
+If the REFERENCES_LINK_SOURCE tag is set to YES and SOURCE_BROWSER tag is set</h1>
+<h1><a class="anchor" id="autotoc_md626"></a>
+to YES then the hyperlinks from functions in REFERENCES_RELATION and</h1>
+<h1><a class="anchor" id="autotoc_md627"></a>
+REFERENCED_BY_RELATION lists will link to the source code. Otherwise they will</h1>
+<h1><a class="anchor" id="autotoc_md628"></a>
+link to the documentation.</h1>
+<h1><a class="anchor" id="autotoc_md629"></a>
+The default value is: YES.</h1>
+<p>REFERENCES_LINK_SOURCE = YES</p>
+<h1><a class="anchor" id="autotoc_md630"></a>
+If SOURCE_TOOLTIPS is enabled (the default) then hovering a hyperlink in the</h1>
+<h1><a class="anchor" id="autotoc_md631"></a>
+source code will show a tooltip with additional information such as prototype,</h1>
+<h1><a class="anchor" id="autotoc_md632"></a>
+brief description and links to the definition and documentation. Since this</h1>
+<h1><a class="anchor" id="autotoc_md633"></a>
+will make the HTML file larger and loading of large files a bit slower, you</h1>
+<h1><a class="anchor" id="autotoc_md634"></a>
+can opt to disable this feature.</h1>
+<h1><a class="anchor" id="autotoc_md635"></a>
+The default value is: YES.</h1>
+<h1><a class="anchor" id="autotoc_md636"></a>
+This tag requires that the tag SOURCE_BROWSER is set to YES.</h1>
+<p>SOURCE_TOOLTIPS = YES</p>
+<h1><a class="anchor" id="autotoc_md637"></a>
+If the USE_HTAGS tag is set to YES then the references to source code will</h1>
+<h1><a class="anchor" id="autotoc_md638"></a>
+point to the HTML generated by the htags(1) tool instead of doxygen built-in</h1>
+<h1><a class="anchor" id="autotoc_md639"></a>
+source browser. The htags tool is part of GNU's global source tagging system</h1>
+<h1><a class="anchor" id="autotoc_md640"></a>
+(see https://www.gnu.org/software/global/global.html). You will need version</h1>
+<h1><a class="anchor" id="autotoc_md641"></a>
+4.8.6 or higher.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md642"></a>
+To use it do the following:</h1>
+<h1><a class="anchor" id="autotoc_md643"></a>
+- Install the latest version of global</h1>
+<h1><a class="anchor" id="autotoc_md644"></a>
+- Enable SOURCE_BROWSER and USE_HTAGS in the configuration file</h1>
+<h1><a class="anchor" id="autotoc_md645"></a>
+- Make sure the INPUT points to the root of the source tree</h1>
+<h1><a class="anchor" id="autotoc_md646"></a>
+- Run doxygen as normal</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md647"></a>
+Doxygen will invoke htags (and that will in turn invoke gtags), so these</h1>
+<h1><a class="anchor" id="autotoc_md648"></a>
+tools must be available from the command line (i.e. in the search path).</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md649"></a>
+The result: instead of the source browser generated by doxygen, the links to</h1>
+<h1><a class="anchor" id="autotoc_md650"></a>
+source code will now point to the output of htags.</h1>
+<h1><a class="anchor" id="autotoc_md651"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md652"></a>
+This tag requires that the tag SOURCE_BROWSER is set to YES.</h1>
+<p>USE_HTAGS = NO</p>
+<h1><a class="anchor" id="autotoc_md653"></a>
+If the VERBATIM_HEADERS tag is set the YES then doxygen will generate a</h1>
+<h1><a class="anchor" id="autotoc_md654"></a>
+verbatim copy of the header file for each class for which an include is</h1>
+<h1><a class="anchor" id="autotoc_md655"></a>
+specified. Set to NO to disable this.</h1>
+<h1><a class="anchor" id="autotoc_md656"></a>
+See also: Section \class.</h1>
+<h1><a class="anchor" id="autotoc_md657"></a>
+The default value is: YES.</h1>
+<p>VERBATIM_HEADERS = YES</p>
+<h1><a class="anchor" id="autotoc_md658"></a>
+If the CLANG_ASSISTED_PARSING tag is set to YES then doxygen will use the</h1>
+<h1><a class="anchor" id="autotoc_md659"></a>
+clang parser (see: http://clang.llvm.org/) for more accurate parsing at the</h1>
+<h1><a class="anchor" id="autotoc_md660"></a>
+cost of reduced performance. This can be particularly helpful with template</h1>
+<h1><a class="anchor" id="autotoc_md661"></a>
+rich C++ code for which doxygen's built-in parser lacks the necessary type</h1>
+<h1><a class="anchor" id="autotoc_md662"></a>
+information.</h1>
+<h1><a class="anchor" id="autotoc_md663"></a>
+Note: The availability of this option depends on whether or not doxygen was</h1>
+<h1><a class="anchor" id="autotoc_md664"></a>
+generated with the -Duse_libclang=ON option for CMake.</h1>
+<h1><a class="anchor" id="autotoc_md665"></a>
+The default value is: NO.</h1>
+<p>CLANG_ASSISTED_PARSING = NO</p>
+<h1><a class="anchor" id="autotoc_md666"></a>
+If clang assisted parsing is enabled you can provide the compiler with command</h1>
+<h1><a class="anchor" id="autotoc_md667"></a>
+line options that you would normally use when invoking the compiler. Note that</h1>
+<h1><a class="anchor" id="autotoc_md668"></a>
+the include paths will already be set by doxygen for the files and directories</h1>
+<h1><a class="anchor" id="autotoc_md669"></a>
+specified with INPUT and INCLUDE_PATH.</h1>
+<h1><a class="anchor" id="autotoc_md670"></a>
+This tag requires that the tag CLANG_ASSISTED_PARSING is set to YES.</h1>
+<p>CLANG_OPTIONS =</p>
+<h1><a class="anchor" id="autotoc_md671"></a>
+If clang assisted parsing is enabled you can provide the clang parser with the</h1>
+<h1><a class="anchor" id="autotoc_md672"></a>
+path to the compilation database (see:</h1>
+<h1><a class="anchor" id="autotoc_md673"></a>
+http://clang.llvm.org/docs/HowToSetupToolingForLLVM.html) used when the files</h1>
+<h1><a class="anchor" id="autotoc_md674"></a>
+were built. This is equivalent to specifying the "-p" option to a clang tool,</h1>
+<h1><a class="anchor" id="autotoc_md675"></a>
+such as clang-check. These options will then be passed to the parser.</h1>
+<h1><a class="anchor" id="autotoc_md676"></a>
+Note: The availability of this option depends on whether or not doxygen was</h1>
+<h1><a class="anchor" id="autotoc_md677"></a>
+generated with the -Duse_libclang=ON option for CMake.</h1>
+<p>CLANG_DATABASE_PATH =</p>
+<p>#------------------------------------------------------------------------&mdash; </p>
+<h1><a class="anchor" id="autotoc_md678"></a>
+Configuration options related to the alphabetical class index</h1>
+<p>#------------------------------------------------------------------------&mdash;</p>
+<h1><a class="anchor" id="autotoc_md679"></a>
+If the ALPHABETICAL_INDEX tag is set to YES, an alphabetical index of all</h1>
+<h1><a class="anchor" id="autotoc_md680"></a>
+compounds will be generated. Enable this if the project contains a lot of</h1>
+<h1><a class="anchor" id="autotoc_md681"></a>
+classes, structs, unions or interfaces.</h1>
+<h1><a class="anchor" id="autotoc_md682"></a>
+The default value is: YES.</h1>
+<p>ALPHABETICAL_INDEX = YES</p>
+<h1><a class="anchor" id="autotoc_md683"></a>
+The COLS_IN_ALPHA_INDEX tag can be used to specify the number of columns in</h1>
+<h1><a class="anchor" id="autotoc_md684"></a>
+which the alphabetical index list will be split.</h1>
+<h1><a class="anchor" id="autotoc_md685"></a>
+Minimum value: 1, maximum value: 20, default value: 5.</h1>
+<h1><a class="anchor" id="autotoc_md686"></a>
+This tag requires that the tag ALPHABETICAL_INDEX is set to YES.</h1>
+<p>COLS_IN_ALPHA_INDEX = 5</p>
+<h1><a class="anchor" id="autotoc_md687"></a>
+In case all classes in a project start with a common prefix, all classes will</h1>
+<h1><a class="anchor" id="autotoc_md688"></a>
+be put under the same header in the alphabetical index. The IGNORE_PREFIX tag</h1>
+<h1><a class="anchor" id="autotoc_md689"></a>
+can be used to specify a prefix (or a list of prefixes) that should be ignored</h1>
+<h1><a class="anchor" id="autotoc_md690"></a>
+while generating the index headers.</h1>
+<h1><a class="anchor" id="autotoc_md691"></a>
+This tag requires that the tag ALPHABETICAL_INDEX is set to YES.</h1>
+<p>IGNORE_PREFIX =</p>
+<p>#------------------------------------------------------------------------&mdash; </p>
+<h1><a class="anchor" id="autotoc_md692"></a>
+Configuration options related to the HTML output</h1>
+<p>#------------------------------------------------------------------------&mdash;</p>
+<h1><a class="anchor" id="autotoc_md693"></a>
+If the GENERATE_HTML tag is set to YES, doxygen will generate HTML output</h1>
+<h1><a class="anchor" id="autotoc_md694"></a>
+The default value is: YES.</h1>
+<p>GENERATE_HTML = YES</p>
+<h1><a class="anchor" id="autotoc_md695"></a>
+The HTML_OUTPUT tag is used to specify where the HTML docs will be put. If a</h1>
+<h1><a class="anchor" id="autotoc_md696"></a>
+relative path is entered the value of OUTPUT_DIRECTORY will be put in front of</h1>
+<h1><a class="anchor" id="autotoc_md697"></a>
+it.</h1>
+<h1><a class="anchor" id="autotoc_md698"></a>
+The default directory is: html.</h1>
+<h1><a class="anchor" id="autotoc_md699"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>HTML_OUTPUT = html</p>
+<h1><a class="anchor" id="autotoc_md700"></a>
+The HTML_FILE_EXTENSION tag can be used to specify the file extension for each</h1>
+<h1><a class="anchor" id="autotoc_md701"></a>
+generated HTML page (for example: .htm, .php, .asp).</h1>
+<h1><a class="anchor" id="autotoc_md702"></a>
+The default value is: .html.</h1>
+<h1><a class="anchor" id="autotoc_md703"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>HTML_FILE_EXTENSION = .html</p>
+<h1><a class="anchor" id="autotoc_md704"></a>
+The HTML_HEADER tag can be used to specify a user-defined HTML header file for</h1>
+<h1><a class="anchor" id="autotoc_md705"></a>
+each generated HTML page. If the tag is left blank doxygen will generate a</h1>
+<h1><a class="anchor" id="autotoc_md706"></a>
+standard header.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md707"></a>
+To get valid HTML the header file that includes any scripts and style sheets</h1>
+<h1><a class="anchor" id="autotoc_md708"></a>
+that doxygen needs, which is dependent on the configuration options used (e.g.</h1>
+<h1><a class="anchor" id="autotoc_md709"></a>
+the setting GENERATE_TREEVIEW). It is highly recommended to start with a</h1>
+<h1><a class="anchor" id="autotoc_md710"></a>
+default header using</h1>
+<h1><a class="anchor" id="autotoc_md711"></a>
+doxygen -w html new_header.html new_footer.html new_stylesheet.css</h1>
+<h1><a class="anchor" id="autotoc_md712"></a>
+YourConfigFile</h1>
+<h1><a class="anchor" id="autotoc_md713"></a>
+and then modify the file new_header.html. See also section "Doxygen usage"</h1>
+<h1><a class="anchor" id="autotoc_md714"></a>
+for information on how to generate the default header that doxygen normally</h1>
+<h1><a class="anchor" id="autotoc_md715"></a>
+uses.</h1>
+<h1><a class="anchor" id="autotoc_md716"></a>
+Note: The header is subject to change so you typically have to regenerate the</h1>
+<h1><a class="anchor" id="autotoc_md717"></a>
+default header when upgrading to a newer version of doxygen. For a description</h1>
+<h1><a class="anchor" id="autotoc_md718"></a>
+of the possible markers and block names see the documentation.</h1>
+<h1><a class="anchor" id="autotoc_md719"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>HTML_HEADER =</p>
+<h1><a class="anchor" id="autotoc_md720"></a>
+The HTML_FOOTER tag can be used to specify a user-defined HTML footer for each</h1>
+<h1><a class="anchor" id="autotoc_md721"></a>
+generated HTML page. If the tag is left blank doxygen will generate a standard</h1>
+<h1><a class="anchor" id="autotoc_md722"></a>
+footer. See HTML_HEADER for more information on how to generate a default</h1>
+<h1><a class="anchor" id="autotoc_md723"></a>
+footer and what special commands can be used inside the footer. See also</h1>
+<h1><a class="anchor" id="autotoc_md724"></a>
+section "Doxygen usage" for information on how to generate the default footer</h1>
+<h1><a class="anchor" id="autotoc_md725"></a>
+that doxygen normally uses.</h1>
+<h1><a class="anchor" id="autotoc_md726"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>HTML_FOOTER =</p>
+<h1><a class="anchor" id="autotoc_md727"></a>
+The HTML_STYLESHEET tag can be used to specify a user-defined cascading style</h1>
+<h1><a class="anchor" id="autotoc_md728"></a>
+sheet that is used by each HTML page. It can be used to fine-tune the look of</h1>
+<h1><a class="anchor" id="autotoc_md729"></a>
+the HTML output. If left blank doxygen will generate a default style sheet.</h1>
+<h1><a class="anchor" id="autotoc_md730"></a>
+See also section "Doxygen usage" for information on how to generate the style</h1>
+<h1><a class="anchor" id="autotoc_md731"></a>
+sheet that doxygen normally uses.</h1>
+<h1><a class="anchor" id="autotoc_md732"></a>
+Note: It is recommended to use HTML_EXTRA_STYLESHEET instead of this tag, as</h1>
+<h1><a class="anchor" id="autotoc_md733"></a>
+it is more robust and this tag (HTML_STYLESHEET) will in the future become</h1>
+<h1><a class="anchor" id="autotoc_md734"></a>
+obsolete.</h1>
+<h1><a class="anchor" id="autotoc_md735"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>HTML_STYLESHEET =</p>
+<h1><a class="anchor" id="autotoc_md736"></a>
+The HTML_EXTRA_STYLESHEET tag can be used to specify additional user-defined</h1>
+<h1><a class="anchor" id="autotoc_md737"></a>
+cascading style sheets that are included after the standard style sheets</h1>
+<h1><a class="anchor" id="autotoc_md738"></a>
+created by doxygen. Using this option one can overrule certain style aspects.</h1>
+<h1><a class="anchor" id="autotoc_md739"></a>
+This is preferred over using HTML_STYLESHEET since it does not replace the</h1>
+<h1><a class="anchor" id="autotoc_md740"></a>
+standard style sheet and is therefore more robust against future updates.</h1>
+<h1><a class="anchor" id="autotoc_md741"></a>
+Doxygen will copy the style sheet files to the output directory.</h1>
+<h1><a class="anchor" id="autotoc_md742"></a>
+Note: The order of the extra style sheet files is of importance (e.g. the last</h1>
+<h1><a class="anchor" id="autotoc_md743"></a>
+style sheet in the list overrules the setting of the previous ones in the</h1>
+<h1><a class="anchor" id="autotoc_md744"></a>
+list). For an example see the documentation.</h1>
+<h1><a class="anchor" id="autotoc_md745"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>HTML_EXTRA_STYLESHEET =</p>
+<h1><a class="anchor" id="autotoc_md746"></a>
+The HTML_EXTRA_FILES tag can be used to specify one or more extra images or</h1>
+<h1><a class="anchor" id="autotoc_md747"></a>
+other source files which should be copied to the HTML output directory. Note</h1>
+<h1><a class="anchor" id="autotoc_md748"></a>
+that these files will be copied to the base HTML output directory. Use the</h1>
+<h1><a class="anchor" id="autotoc_md749"></a>
+$relpath^ marker in the HTML_HEADER and/or HTML_FOOTER files to load these</h1>
+<h1><a class="anchor" id="autotoc_md750"></a>
+files. In the HTML_STYLESHEET file, use the file name only. Also note that the</h1>
+<h1><a class="anchor" id="autotoc_md751"></a>
+files will be copied as-is; there are no commands or markers available.</h1>
+<h1><a class="anchor" id="autotoc_md752"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>HTML_EXTRA_FILES =</p>
+<h1><a class="anchor" id="autotoc_md753"></a>
+The HTML_COLORSTYLE_HUE tag controls the color of the HTML output. Doxygen</h1>
+<h1><a class="anchor" id="autotoc_md754"></a>
+will adjust the colors in the style sheet and background images according to</h1>
+<h1><a class="anchor" id="autotoc_md755"></a>
+this color. Hue is specified as an angle on a colorwheel, see</h1>
+<h1><a class="anchor" id="autotoc_md756"></a>
+https://en.wikipedia.org/wiki/Hue for more information. For instance the value</h1>
+<h1><a class="anchor" id="autotoc_md757"></a>
+0 represents red, 60 is yellow, 120 is green, 180 is cyan, 240 is blue, 300</h1>
+<h1><a class="anchor" id="autotoc_md758"></a>
+purple, and 360 is red again.</h1>
+<h1><a class="anchor" id="autotoc_md759"></a>
+Minimum value: 0, maximum value: 359, default value: 220.</h1>
+<h1><a class="anchor" id="autotoc_md760"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>HTML_COLORSTYLE_HUE = 220</p>
+<h1><a class="anchor" id="autotoc_md761"></a>
+The HTML_COLORSTYLE_SAT tag controls the purity (or saturation) of the colors</h1>
+<h1><a class="anchor" id="autotoc_md762"></a>
+in the HTML output. For a value of 0 the output will use grayscales only. A</h1>
+<h1><a class="anchor" id="autotoc_md763"></a>
+value of 255 will produce the most vivid colors.</h1>
+<h1><a class="anchor" id="autotoc_md764"></a>
+Minimum value: 0, maximum value: 255, default value: 100.</h1>
+<h1><a class="anchor" id="autotoc_md765"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>HTML_COLORSTYLE_SAT = 100</p>
+<h1><a class="anchor" id="autotoc_md766"></a>
+The HTML_COLORSTYLE_GAMMA tag controls the gamma correction applied to the</h1>
+<h1><a class="anchor" id="autotoc_md767"></a>
+luminance component of the colors in the HTML output. Values below 100</h1>
+<h1><a class="anchor" id="autotoc_md768"></a>
+gradually make the output lighter, whereas values above 100 make the output</h1>
+<h1><a class="anchor" id="autotoc_md769"></a>
+darker. The value divided by 100 is the actual gamma applied, so 80 represents</h1>
+<h1><a class="anchor" id="autotoc_md770"></a>
+a gamma of 0.8, The value 220 represents a gamma of 2.2, and 100 does not</h1>
+<h1><a class="anchor" id="autotoc_md771"></a>
+change the gamma.</h1>
+<h1><a class="anchor" id="autotoc_md772"></a>
+Minimum value: 40, maximum value: 240, default value: 80.</h1>
+<h1><a class="anchor" id="autotoc_md773"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>HTML_COLORSTYLE_GAMMA = 80</p>
+<h1><a class="anchor" id="autotoc_md774"></a>
+If the HTML_TIMESTAMP tag is set to YES then the footer of each generated HTML</h1>
+<h1><a class="anchor" id="autotoc_md775"></a>
+page will contain the date and time when the page was generated. Setting this</h1>
+<h1><a class="anchor" id="autotoc_md776"></a>
+to YES can help to show when doxygen was last run and thus if the</h1>
+<h1><a class="anchor" id="autotoc_md777"></a>
+documentation is up to date.</h1>
+<h1><a class="anchor" id="autotoc_md778"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md779"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>HTML_TIMESTAMP = NO</p>
+<h1><a class="anchor" id="autotoc_md780"></a>
+If the HTML_DYNAMIC_MENUS tag is set to YES then the generated HTML</h1>
+<h1><a class="anchor" id="autotoc_md781"></a>
+documentation will contain a main index with vertical navigation menus that</h1>
+<h1><a class="anchor" id="autotoc_md782"></a>
+are dynamically created via JavaScript. If disabled, the navigation index will</h1>
+<h1><a class="anchor" id="autotoc_md783"></a>
+consists of multiple levels of tabs that are statically embedded in every HTML</h1>
+<h1><a class="anchor" id="autotoc_md784"></a>
+page. Disable this option to support browsers that do not have JavaScript,</h1>
+<h1><a class="anchor" id="autotoc_md785"></a>
+like the Qt help browser.</h1>
+<h1><a class="anchor" id="autotoc_md786"></a>
+The default value is: YES.</h1>
+<h1><a class="anchor" id="autotoc_md787"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>HTML_DYNAMIC_MENUS = YES</p>
+<h1><a class="anchor" id="autotoc_md788"></a>
+If the HTML_DYNAMIC_SECTIONS tag is set to YES then the generated HTML</h1>
+<h1><a class="anchor" id="autotoc_md789"></a>
+documentation will contain sections that can be hidden and shown after the</h1>
+<h1><a class="anchor" id="autotoc_md790"></a>
+page has loaded.</h1>
+<h1><a class="anchor" id="autotoc_md791"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md792"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>HTML_DYNAMIC_SECTIONS = NO</p>
+<h1><a class="anchor" id="autotoc_md793"></a>
+With HTML_INDEX_NUM_ENTRIES one can control the preferred number of entries</h1>
+<h1><a class="anchor" id="autotoc_md794"></a>
+shown in the various tree structured indices initially; the user can expand</h1>
+<h1><a class="anchor" id="autotoc_md795"></a>
+and collapse entries dynamically later on. Doxygen will expand the tree to</h1>
+<h1><a class="anchor" id="autotoc_md796"></a>
+such a level that at most the specified number of entries are visible (unless</h1>
+<h1><a class="anchor" id="autotoc_md797"></a>
+a fully collapsed tree already exceeds this amount). So setting the number of</h1>
+<h1><a class="anchor" id="autotoc_md798"></a>
+entries 1 will produce a full collapsed tree by default. 0 is a special value</h1>
+<h1><a class="anchor" id="autotoc_md799"></a>
+representing an infinite number of entries and will result in a full expanded</h1>
+<h1><a class="anchor" id="autotoc_md800"></a>
+tree by default.</h1>
+<h1><a class="anchor" id="autotoc_md801"></a>
+Minimum value: 0, maximum value: 9999, default value: 100.</h1>
+<h1><a class="anchor" id="autotoc_md802"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>HTML_INDEX_NUM_ENTRIES = 100</p>
+<h1><a class="anchor" id="autotoc_md803"></a>
+If the GENERATE_DOCSET tag is set to YES, additional index files will be</h1>
+<h1><a class="anchor" id="autotoc_md804"></a>
+generated that can be used as input for Apple's Xcode 3 integrated development</h1>
+<h1><a class="anchor" id="autotoc_md805"></a>
+environment (see: https://developer.apple.com/xcode/), introduced with OSX</h1>
+<h1><a class="anchor" id="autotoc_md806"></a>
+10.5 (Leopard). To create a documentation set, doxygen will generate a</h1>
+<h1><a class="anchor" id="autotoc_md807"></a>
+Makefile in the HTML output directory. Running make will produce the docset in</h1>
+<h1><a class="anchor" id="autotoc_md808"></a>
+that directory and running make install will install the docset in</h1>
+<h1><a class="anchor" id="autotoc_md809"></a>
+~/Library/Developer/Shared/Documentation/DocSets so that Xcode will find it at</h1>
+<h1><a class="anchor" id="autotoc_md810"></a>
+startup. See https://developer.apple.com/library/archive/featuredarticles/Doxy</h1>
+<h1><a class="anchor" id="autotoc_md811"></a>
+genXcode/_index.html for more information.</h1>
+<h1><a class="anchor" id="autotoc_md812"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md813"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>GENERATE_DOCSET = NO</p>
+<h1><a class="anchor" id="autotoc_md814"></a>
+This tag determines the name of the docset feed. A documentation feed provides</h1>
+<h1><a class="anchor" id="autotoc_md815"></a>
+an umbrella under which multiple documentation sets from a single provider</h1>
+<h1><a class="anchor" id="autotoc_md816"></a>
+(such as a company or product suite) can be grouped.</h1>
+<h1><a class="anchor" id="autotoc_md817"></a>
+The default value is: Doxygen generated docs.</h1>
+<h1><a class="anchor" id="autotoc_md818"></a>
+This tag requires that the tag GENERATE_DOCSET is set to YES.</h1>
+<p>DOCSET_FEEDNAME = "Doxygen generated docs"</p>
+<h1><a class="anchor" id="autotoc_md819"></a>
+This tag specifies a string that should uniquely identify the documentation</h1>
+<h1><a class="anchor" id="autotoc_md820"></a>
+set bundle. This should be a reverse domain-name style string, e.g.</h1>
+<h1><a class="anchor" id="autotoc_md821"></a>
+com.mycompany.MyDocSet. Doxygen will append .docset to the name.</h1>
+<h1><a class="anchor" id="autotoc_md822"></a>
+The default value is: org.doxygen.Project.</h1>
+<h1><a class="anchor" id="autotoc_md823"></a>
+This tag requires that the tag GENERATE_DOCSET is set to YES.</h1>
+<p>DOCSET_BUNDLE_ID = org.doxygen.Project</p>
+<h1><a class="anchor" id="autotoc_md824"></a>
+The DOCSET_PUBLISHER_ID tag specifies a string that should uniquely identify</h1>
+<h1><a class="anchor" id="autotoc_md825"></a>
+the documentation publisher. This should be a reverse domain-name style</h1>
+<h1><a class="anchor" id="autotoc_md826"></a>
+string, e.g. com.mycompany.MyDocSet.documentation.</h1>
+<h1><a class="anchor" id="autotoc_md827"></a>
+The default value is: org.doxygen.Publisher.</h1>
+<h1><a class="anchor" id="autotoc_md828"></a>
+This tag requires that the tag GENERATE_DOCSET is set to YES.</h1>
+<p>DOCSET_PUBLISHER_ID = org.doxygen.Publisher</p>
+<h1><a class="anchor" id="autotoc_md829"></a>
+The DOCSET_PUBLISHER_NAME tag identifies the documentation publisher.</h1>
+<h1><a class="anchor" id="autotoc_md830"></a>
+The default value is: Publisher.</h1>
+<h1><a class="anchor" id="autotoc_md831"></a>
+This tag requires that the tag GENERATE_DOCSET is set to YES.</h1>
+<p>DOCSET_PUBLISHER_NAME = Publisher</p>
+<h1><a class="anchor" id="autotoc_md832"></a>
+If the GENERATE_HTMLHELP tag is set to YES then doxygen generates three</h1>
+<h1><a class="anchor" id="autotoc_md833"></a>
+additional HTML index files: index.hhp, index.hhc, and index.hhk. The</h1>
+<h1><a class="anchor" id="autotoc_md834"></a>
+index.hhp is a project file that can be read by Microsoft's HTML Help Workshop</h1>
+<h1><a class="anchor" id="autotoc_md835"></a>
+(see: https://www.microsoft.com/en-us/download/details.aspx?id=21138) on</h1>
+<h1><a class="anchor" id="autotoc_md836"></a>
+Windows.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md837"></a>
+The HTML Help Workshop contains a compiler that can convert all HTML output</h1>
+<h1><a class="anchor" id="autotoc_md838"></a>
+generated by doxygen into a single compiled HTML file (.chm). Compiled HTML</h1>
+<h1><a class="anchor" id="autotoc_md839"></a>
+files are now used as the Windows 98 help format, and will replace the old</h1>
+<h1><a class="anchor" id="autotoc_md840"></a>
+Windows help format (.hlp) on all Windows platforms in the future. Compressed</h1>
+<h1><a class="anchor" id="autotoc_md841"></a>
+HTML files also contain an index, a table of contents, and you can search for</h1>
+<h1><a class="anchor" id="autotoc_md842"></a>
+words in the documentation. The HTML workshop also contains a viewer for</h1>
+<h1><a class="anchor" id="autotoc_md843"></a>
+compressed HTML files.</h1>
+<h1><a class="anchor" id="autotoc_md844"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md845"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>GENERATE_HTMLHELP = NO</p>
+<h1><a class="anchor" id="autotoc_md846"></a>
+The CHM_FILE tag can be used to specify the file name of the resulting .chm</h1>
+<h1><a class="anchor" id="autotoc_md847"></a>
+file. You can add a path in front of the file if the result should not be</h1>
+<h1><a class="anchor" id="autotoc_md848"></a>
+written to the html output directory.</h1>
+<h1><a class="anchor" id="autotoc_md849"></a>
+This tag requires that the tag GENERATE_HTMLHELP is set to YES.</h1>
+<p>CHM_FILE =</p>
+<h1><a class="anchor" id="autotoc_md850"></a>
+The HHC_LOCATION tag can be used to specify the location (absolute path</h1>
+<h1><a class="anchor" id="autotoc_md851"></a>
+including file name) of the HTML help compiler (hhc.exe). If non-empty,</h1>
+<h1><a class="anchor" id="autotoc_md852"></a>
+doxygen will try to run the HTML help compiler on the generated index.hhp.</h1>
+<h1><a class="anchor" id="autotoc_md853"></a>
+The file has to be specified with full path.</h1>
+<h1><a class="anchor" id="autotoc_md854"></a>
+This tag requires that the tag GENERATE_HTMLHELP is set to YES.</h1>
+<p>HHC_LOCATION =</p>
+<h1><a class="anchor" id="autotoc_md855"></a>
+The GENERATE_CHI flag controls if a separate .chi index file is generated</h1>
+<h1><a class="anchor" id="autotoc_md856"></a>
+(YES) or that it should be included in the master .chm file (NO).</h1>
+<h1><a class="anchor" id="autotoc_md857"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md858"></a>
+This tag requires that the tag GENERATE_HTMLHELP is set to YES.</h1>
+<p>GENERATE_CHI = NO</p>
+<h1><a class="anchor" id="autotoc_md859"></a>
+The CHM_INDEX_ENCODING is used to encode HtmlHelp index (hhk), content (hhc)</h1>
+<h1><a class="anchor" id="autotoc_md860"></a>
+and project file content.</h1>
+<h1><a class="anchor" id="autotoc_md861"></a>
+This tag requires that the tag GENERATE_HTMLHELP is set to YES.</h1>
+<p>CHM_INDEX_ENCODING =</p>
+<h1><a class="anchor" id="autotoc_md862"></a>
+The BINARY_TOC flag controls whether a binary table of contents is generated</h1>
+<h1><a class="anchor" id="autotoc_md863"></a>
+(YES) or a normal table of contents (NO) in the .chm file. Furthermore it</h1>
+<h1><a class="anchor" id="autotoc_md864"></a>
+enables the Previous and Next buttons.</h1>
+<h1><a class="anchor" id="autotoc_md865"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md866"></a>
+This tag requires that the tag GENERATE_HTMLHELP is set to YES.</h1>
+<p>BINARY_TOC = NO</p>
+<h1><a class="anchor" id="autotoc_md867"></a>
+The TOC_EXPAND flag can be set to YES to add extra items for group members to</h1>
+<h1><a class="anchor" id="autotoc_md868"></a>
+the table of contents of the HTML help documentation and to the tree view.</h1>
+<h1><a class="anchor" id="autotoc_md869"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md870"></a>
+This tag requires that the tag GENERATE_HTMLHELP is set to YES.</h1>
+<p>TOC_EXPAND = NO</p>
+<h1><a class="anchor" id="autotoc_md871"></a>
+If the GENERATE_QHP tag is set to YES and both QHP_NAMESPACE and</h1>
+<h1><a class="anchor" id="autotoc_md872"></a>
+QHP_VIRTUAL_FOLDER are set, an additional index file will be generated that</h1>
+<h1><a class="anchor" id="autotoc_md873"></a>
+can be used as input for Qt's qhelpgenerator to generate a Qt Compressed Help</h1>
+<h1><a class="anchor" id="autotoc_md874"></a>
+(.qch) of the generated HTML documentation.</h1>
+<h1><a class="anchor" id="autotoc_md875"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md876"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>GENERATE_QHP = NO</p>
+<h1><a class="anchor" id="autotoc_md877"></a>
+If the QHG_LOCATION tag is specified, the QCH_FILE tag can be used to specify</h1>
+<h1><a class="anchor" id="autotoc_md878"></a>
+the file name of the resulting .qch file. The path specified is relative to</h1>
+<h1><a class="anchor" id="autotoc_md879"></a>
+the HTML output folder.</h1>
+<h1><a class="anchor" id="autotoc_md880"></a>
+This tag requires that the tag GENERATE_QHP is set to YES.</h1>
+<p>QCH_FILE =</p>
+<h1><a class="anchor" id="autotoc_md881"></a>
+The QHP_NAMESPACE tag specifies the namespace to use when generating Qt Help</h1>
+<h1><a class="anchor" id="autotoc_md882"></a>
+Project output. For more information please see Qt Help Project / Namespace</h1>
+<h1><a class="anchor" id="autotoc_md883"></a>
+(see: https://doc.qt.io/archives/qt-4.8/qthelpproject.html#namespace).</h1>
+<h1><a class="anchor" id="autotoc_md884"></a>
+The default value is: org.doxygen.Project.</h1>
+<h1><a class="anchor" id="autotoc_md885"></a>
+This tag requires that the tag GENERATE_QHP is set to YES.</h1>
+<p>QHP_NAMESPACE = org.doxygen.Project</p>
+<h1><a class="anchor" id="autotoc_md886"></a>
+The QHP_VIRTUAL_FOLDER tag specifies the namespace to use when generating Qt</h1>
+<h1><a class="anchor" id="autotoc_md887"></a>
+Help Project output. For more information please see Qt Help Project / Virtual</h1>
+<h1><a class="anchor" id="autotoc_md888"></a>
+Folders (see: https://doc.qt.io/archives/qt-4.8/qthelpproject.html#virtual-</h1>
+<h1><a class="anchor" id="autotoc_md889"></a>
+folders).</h1>
+<h1><a class="anchor" id="autotoc_md890"></a>
+The default value is: doc.</h1>
+<h1><a class="anchor" id="autotoc_md891"></a>
+This tag requires that the tag GENERATE_QHP is set to YES.</h1>
+<p>QHP_VIRTUAL_FOLDER = doc</p>
+<h1><a class="anchor" id="autotoc_md892"></a>
+If the QHP_CUST_FILTER_NAME tag is set, it specifies the name of a custom</h1>
+<h1><a class="anchor" id="autotoc_md893"></a>
+filter to add. For more information please see Qt Help Project / Custom</h1>
+<h1><a class="anchor" id="autotoc_md894"></a>
+Filters (see: https://doc.qt.io/archives/qt-4.8/qthelpproject.html#custom-</h1>
+<h1><a class="anchor" id="autotoc_md895"></a>
+filters).</h1>
+<h1><a class="anchor" id="autotoc_md896"></a>
+This tag requires that the tag GENERATE_QHP is set to YES.</h1>
+<p>QHP_CUST_FILTER_NAME =</p>
+<h1><a class="anchor" id="autotoc_md897"></a>
+The QHP_CUST_FILTER_ATTRS tag specifies the list of the attributes of the</h1>
+<h1><a class="anchor" id="autotoc_md898"></a>
+custom filter to add. For more information please see Qt Help Project / Custom</h1>
+<h1><a class="anchor" id="autotoc_md899"></a>
+Filters (see: https://doc.qt.io/archives/qt-4.8/qthelpproject.html#custom-</h1>
+<h1><a class="anchor" id="autotoc_md900"></a>
+filters).</h1>
+<h1><a class="anchor" id="autotoc_md901"></a>
+This tag requires that the tag GENERATE_QHP is set to YES.</h1>
+<p>QHP_CUST_FILTER_ATTRS =</p>
+<h1><a class="anchor" id="autotoc_md902"></a>
+The QHP_SECT_FILTER_ATTRS tag specifies the list of the attributes this</h1>
+<h1><a class="anchor" id="autotoc_md903"></a>
+project's filter section matches. Qt Help Project / Filter Attributes (see:</h1>
+<h1><a class="anchor" id="autotoc_md904"></a>
+https://doc.qt.io/archives/qt-4.8/qthelpproject.html#filter-attributes).</h1>
+<h1><a class="anchor" id="autotoc_md905"></a>
+This tag requires that the tag GENERATE_QHP is set to YES.</h1>
+<p>QHP_SECT_FILTER_ATTRS =</p>
+<h1><a class="anchor" id="autotoc_md906"></a>
+The QHG_LOCATION tag can be used to specify the location of Qt's</h1>
+<h1><a class="anchor" id="autotoc_md907"></a>
+qhelpgenerator. If non-empty doxygen will try to run qhelpgenerator on the</h1>
+<h1><a class="anchor" id="autotoc_md908"></a>
+generated .qhp file.</h1>
+<h1><a class="anchor" id="autotoc_md909"></a>
+This tag requires that the tag GENERATE_QHP is set to YES.</h1>
+<p>QHG_LOCATION =</p>
+<h1><a class="anchor" id="autotoc_md910"></a>
+If the GENERATE_ECLIPSEHELP tag is set to YES, additional index files will be</h1>
+<h1><a class="anchor" id="autotoc_md911"></a>
+generated, together with the HTML files, they form an Eclipse help plugin. To</h1>
+<h1><a class="anchor" id="autotoc_md912"></a>
+install this plugin and make it available under the help contents menu in</h1>
+<h1><a class="anchor" id="autotoc_md913"></a>
+Eclipse, the contents of the directory containing the HTML and XML files needs</h1>
+<h1><a class="anchor" id="autotoc_md914"></a>
+to be copied into the plugins directory of eclipse. The name of the directory</h1>
+<h1><a class="anchor" id="autotoc_md915"></a>
+within the plugins directory should be the same as the ECLIPSE_DOC_ID value.</h1>
+<h1><a class="anchor" id="autotoc_md916"></a>
+After copying Eclipse needs to be restarted before the help appears.</h1>
+<h1><a class="anchor" id="autotoc_md917"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md918"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>GENERATE_ECLIPSEHELP = NO</p>
+<h1><a class="anchor" id="autotoc_md919"></a>
+A unique identifier for the Eclipse help plugin. When installing the plugin</h1>
+<h1><a class="anchor" id="autotoc_md920"></a>
+the directory name containing the HTML and XML files should also have this</h1>
+<h1><a class="anchor" id="autotoc_md921"></a>
+name. Each documentation set should have its own identifier.</h1>
+<h1><a class="anchor" id="autotoc_md922"></a>
+The default value is: org.doxygen.Project.</h1>
+<h1><a class="anchor" id="autotoc_md923"></a>
+This tag requires that the tag GENERATE_ECLIPSEHELP is set to YES.</h1>
+<p>ECLIPSE_DOC_ID = org.doxygen.Project</p>
+<h1><a class="anchor" id="autotoc_md924"></a>
+If you want full control over the layout of the generated HTML pages it might</h1>
+<h1><a class="anchor" id="autotoc_md925"></a>
+be necessary to disable the index and replace it with your own. The</h1>
+<h1><a class="anchor" id="autotoc_md926"></a>
+DISABLE_INDEX tag can be used to turn on/off the condensed index (tabs) at top</h1>
+<h1><a class="anchor" id="autotoc_md927"></a>
+of each HTML page. A value of NO enables the index and the value YES disables</h1>
+<h1><a class="anchor" id="autotoc_md928"></a>
+it. Since the tabs in the index contain the same information as the navigation</h1>
+<h1><a class="anchor" id="autotoc_md929"></a>
+tree, you can set this option to YES if you also set GENERATE_TREEVIEW to YES.</h1>
+<h1><a class="anchor" id="autotoc_md930"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md931"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>DISABLE_INDEX = NO</p>
+<h1><a class="anchor" id="autotoc_md932"></a>
+The GENERATE_TREEVIEW tag is used to specify whether a tree-like index</h1>
+<h1><a class="anchor" id="autotoc_md933"></a>
+structure should be generated to display hierarchical information. If the tag</h1>
+<h1><a class="anchor" id="autotoc_md934"></a>
+value is set to YES, a side panel will be generated containing a tree-like</h1>
+<h1><a class="anchor" id="autotoc_md935"></a>
+index structure (just like the one that is generated for HTML Help). For this</h1>
+<h1><a class="anchor" id="autotoc_md936"></a>
+to work a browser that supports JavaScript, DHTML, CSS and frames is required</h1>
+<h1><a class="anchor" id="autotoc_md937"></a>
+(i.e. any modern browser). Windows users are probably better off using the</h1>
+<h1><a class="anchor" id="autotoc_md938"></a>
+HTML help feature. Via custom style sheets (see HTML_EXTRA_STYLESHEET) one can</h1>
+<h1><a class="anchor" id="autotoc_md939"></a>
+further fine-tune the look of the index. As an example, the default style</h1>
+<h1><a class="anchor" id="autotoc_md940"></a>
+sheet generated by doxygen has an example that shows how to put an image at</h1>
+<h1><a class="anchor" id="autotoc_md941"></a>
+the root of the tree instead of the PROJECT_NAME. Since the tree basically has</h1>
+<h1><a class="anchor" id="autotoc_md942"></a>
+the same information as the tab index, you could consider setting</h1>
+<h1><a class="anchor" id="autotoc_md943"></a>
+DISABLE_INDEX to YES when enabling this option.</h1>
+<h1><a class="anchor" id="autotoc_md944"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md945"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>GENERATE_TREEVIEW = NO</p>
+<h1><a class="anchor" id="autotoc_md946"></a>
+The ENUM_VALUES_PER_LINE tag can be used to set the number of enum values that</h1>
+<h1><a class="anchor" id="autotoc_md947"></a>
+doxygen will group on one line in the generated HTML documentation.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md948"></a>
+Note that a value of 0 will completely suppress the enum values from appearing</h1>
+<h1><a class="anchor" id="autotoc_md949"></a>
+in the overview section.</h1>
+<h1><a class="anchor" id="autotoc_md950"></a>
+Minimum value: 0, maximum value: 20, default value: 4.</h1>
+<h1><a class="anchor" id="autotoc_md951"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>ENUM_VALUES_PER_LINE = 4</p>
+<h1><a class="anchor" id="autotoc_md952"></a>
+If the treeview is enabled (see GENERATE_TREEVIEW) then this tag can be used</h1>
+<h1><a class="anchor" id="autotoc_md953"></a>
+to set the initial width (in pixels) of the frame in which the tree is shown.</h1>
+<h1><a class="anchor" id="autotoc_md954"></a>
+Minimum value: 0, maximum value: 1500, default value: 250.</h1>
+<h1><a class="anchor" id="autotoc_md955"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>TREEVIEW_WIDTH = 250</p>
+<h1><a class="anchor" id="autotoc_md956"></a>
+If the EXT_LINKS_IN_WINDOW option is set to YES, doxygen will open links to</h1>
+<h1><a class="anchor" id="autotoc_md957"></a>
+external symbols imported via tag files in a separate window.</h1>
+<h1><a class="anchor" id="autotoc_md958"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md959"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>EXT_LINKS_IN_WINDOW = NO</p>
+<h1><a class="anchor" id="autotoc_md960"></a>
+Use this tag to change the font size of LaTeX formulas included as images in</h1>
+<h1><a class="anchor" id="autotoc_md961"></a>
+the HTML documentation. When you change the font size after a successful</h1>
+<h1><a class="anchor" id="autotoc_md962"></a>
+doxygen run you need to manually remove any form_*.png images from the HTML</h1>
+<h1><a class="anchor" id="autotoc_md963"></a>
+output directory to force them to be regenerated.</h1>
+<h1><a class="anchor" id="autotoc_md964"></a>
+Minimum value: 8, maximum value: 50, default value: 10.</h1>
+<h1><a class="anchor" id="autotoc_md965"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>FORMULA_FONTSIZE = 10</p>
+<h1><a class="anchor" id="autotoc_md966"></a>
+Use the FORMULA_TRANSPARENT tag to determine whether or not the images</h1>
+<h1><a class="anchor" id="autotoc_md967"></a>
+generated for formulas are transparent PNGs. Transparent PNGs are not</h1>
+<h1><a class="anchor" id="autotoc_md968"></a>
+supported properly for IE 6.0, but are supported on all modern browsers.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md969"></a>
+Note that when changing this option you need to delete any form_*.png files in</h1>
+<h1><a class="anchor" id="autotoc_md970"></a>
+the HTML output directory before the changes have effect.</h1>
+<h1><a class="anchor" id="autotoc_md971"></a>
+The default value is: YES.</h1>
+<h1><a class="anchor" id="autotoc_md972"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>FORMULA_TRANSPARENT = YES</p>
+<h1><a class="anchor" id="autotoc_md973"></a>
+The FORMULA_MACROFILE can contain LaTeX \newcommand and \renewcommand commands</h1>
+<h1><a class="anchor" id="autotoc_md974"></a>
+to create new LaTeX commands to be used in formulas as building blocks. See</h1>
+<h1><a class="anchor" id="autotoc_md975"></a>
+the section "Including formulas" for details.</h1>
+<p>FORMULA_MACROFILE =</p>
+<h1><a class="anchor" id="autotoc_md976"></a>
+Enable the USE_MATHJAX option to render LaTeX formulas using MathJax (see</h1>
+<h1><a class="anchor" id="autotoc_md977"></a>
+https://www.mathjax.org) which uses client side JavaScript for the rendering</h1>
+<h1><a class="anchor" id="autotoc_md978"></a>
+instead of using pre-rendered bitmaps. Use this if you do not have LaTeX</h1>
+<h1><a class="anchor" id="autotoc_md979"></a>
+installed or if you want to formulas look prettier in the HTML output. When</h1>
+<h1><a class="anchor" id="autotoc_md980"></a>
+enabled you may also need to install MathJax separately and configure the path</h1>
+<h1><a class="anchor" id="autotoc_md981"></a>
+to it using the MATHJAX_RELPATH option.</h1>
+<h1><a class="anchor" id="autotoc_md982"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md983"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>USE_MATHJAX = NO</p>
+<h1><a class="anchor" id="autotoc_md984"></a>
+When MathJax is enabled you can set the default output format to be used for</h1>
+<h1><a class="anchor" id="autotoc_md985"></a>
+the MathJax output. See the MathJax site (see:</h1>
+<h1><a class="anchor" id="autotoc_md986"></a>
+http://docs.mathjax.org/en/latest/output.html) for more details.</h1>
+<h1><a class="anchor" id="autotoc_md987"></a>
+Possible values are: HTML-CSS (which is slower, but has the best</h1>
+<h1><a class="anchor" id="autotoc_md988"></a>
+compatibility), NativeMML (i.e. MathML) and SVG.</h1>
+<h1><a class="anchor" id="autotoc_md989"></a>
+The default value is: HTML-CSS.</h1>
+<h1><a class="anchor" id="autotoc_md990"></a>
+This tag requires that the tag USE_MATHJAX is set to YES.</h1>
+<p>MATHJAX_FORMAT = HTML-CSS</p>
+<h1><a class="anchor" id="autotoc_md991"></a>
+When MathJax is enabled you need to specify the location relative to the HTML</h1>
+<h1><a class="anchor" id="autotoc_md992"></a>
+output directory using the MATHJAX_RELPATH option. The destination directory</h1>
+<h1><a class="anchor" id="autotoc_md993"></a>
+should contain the MathJax.js script. For instance, if the mathjax directory</h1>
+<h1><a class="anchor" id="autotoc_md994"></a>
+is located at the same level as the HTML output directory, then</h1>
+<h1><a class="anchor" id="autotoc_md995"></a>
+MATHJAX_RELPATH should be ../mathjax. The default value points to the MathJax</h1>
+<h1><a class="anchor" id="autotoc_md996"></a>
+Content Delivery Network so you can quickly see the result without installing</h1>
+<h1><a class="anchor" id="autotoc_md997"></a>
+MathJax. However, it is strongly recommended to install a local copy of</h1>
+<h1><a class="anchor" id="autotoc_md998"></a>
+MathJax from https://www.mathjax.org before deployment.</h1>
+<h1><a class="anchor" id="autotoc_md999"></a>
+The default value is: https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/.</h1>
+<h1><a class="anchor" id="autotoc_md1000"></a>
+This tag requires that the tag USE_MATHJAX is set to YES.</h1>
+<p>MATHJAX_RELPATH = <a href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/">https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/</a></p>
+<h1><a class="anchor" id="autotoc_md1001"></a>
+The MATHJAX_EXTENSIONS tag can be used to specify one or more MathJax</h1>
+<h1><a class="anchor" id="autotoc_md1002"></a>
+extension names that should be enabled during MathJax rendering. For example</h1>
+<h1><a class="anchor" id="autotoc_md1003"></a>
+MATHJAX_EXTENSIONS = TeX/AMSmath TeX/AMSsymbols</h1>
+<h1><a class="anchor" id="autotoc_md1004"></a>
+This tag requires that the tag USE_MATHJAX is set to YES.</h1>
+<p>MATHJAX_EXTENSIONS =</p>
+<h1><a class="anchor" id="autotoc_md1005"></a>
+The MATHJAX_CODEFILE tag can be used to specify a file with javascript pieces</h1>
+<h1><a class="anchor" id="autotoc_md1006"></a>
+of code that will be used on startup of the MathJax code. See the MathJax site</h1>
+<h1><a class="anchor" id="autotoc_md1007"></a>
+(see: http://docs.mathjax.org/en/latest/output.html) for more details. For an</h1>
+<h1><a class="anchor" id="autotoc_md1008"></a>
+example see the documentation.</h1>
+<h1><a class="anchor" id="autotoc_md1009"></a>
+This tag requires that the tag USE_MATHJAX is set to YES.</h1>
+<p>MATHJAX_CODEFILE =</p>
+<h1><a class="anchor" id="autotoc_md1010"></a>
+When the SEARCHENGINE tag is enabled doxygen will generate a search box for</h1>
+<h1><a class="anchor" id="autotoc_md1011"></a>
+the HTML output. The underlying search engine uses javascript and DHTML and</h1>
+<h1><a class="anchor" id="autotoc_md1012"></a>
+should work on any modern browser. Note that when using HTML help</h1>
+<h1><a class="anchor" id="autotoc_md1013"></a>
+(GENERATE_HTMLHELP), Qt help (GENERATE_QHP), or docsets (GENERATE_DOCSET)</h1>
+<h1><a class="anchor" id="autotoc_md1014"></a>
+there is already a search function so this one should typically be disabled.</h1>
+<h1><a class="anchor" id="autotoc_md1015"></a>
+For large projects the javascript based search engine can be slow, then</h1>
+<h1><a class="anchor" id="autotoc_md1016"></a>
+enabling SERVER_BASED_SEARCH may provide a better solution. It is possible to</h1>
+<h1><a class="anchor" id="autotoc_md1017"></a>
+search using the keyboard; to jump to the search box use &lt;access key&gt; + S</h1>
+<h1><a class="anchor" id="autotoc_md1018"></a>
+(what the &lt;access key&gt; is depends on the OS and browser, but it is typically</h1>
+<h1><a class="anchor" id="autotoc_md1019"></a>
+&lt;CTRL&gt;, &lt;ALT&gt;/&lt;option&gt;, or both). Inside the search box use the &lt;cursor down</h1>
+<h1><a class="anchor" id="autotoc_md1020"></a>
+key&gt; to jump into the search results window, the results can be navigated</h1>
+<h1><a class="anchor" id="autotoc_md1021"></a>
+using the &lt;cursor keys&gt;. Press &lt;Enter&gt; to select an item or &lt;escape&gt; to cancel</h1>
+<h1><a class="anchor" id="autotoc_md1022"></a>
+the search. The filter options can be selected when the cursor is inside the</h1>
+<h1><a class="anchor" id="autotoc_md1023"></a>
+search box by pressing &lt;Shift&gt;+&lt;cursor down&gt;. Also here use the &lt;cursor keys&gt;</h1>
+<h1><a class="anchor" id="autotoc_md1024"></a>
+to select a filter and &lt;Enter&gt; or &lt;escape&gt; to activate or cancel the filter</h1>
+<h1><a class="anchor" id="autotoc_md1025"></a>
+option.</h1>
+<h1><a class="anchor" id="autotoc_md1026"></a>
+The default value is: YES.</h1>
+<h1><a class="anchor" id="autotoc_md1027"></a>
+This tag requires that the tag GENERATE_HTML is set to YES.</h1>
+<p>SEARCHENGINE = YES</p>
+<h1><a class="anchor" id="autotoc_md1028"></a>
+When the SERVER_BASED_SEARCH tag is enabled the search engine will be</h1>
+<h1><a class="anchor" id="autotoc_md1029"></a>
+implemented using a web server instead of a web client using JavaScript. There</h1>
+<h1><a class="anchor" id="autotoc_md1030"></a>
+are two flavors of web server based searching depending on the EXTERNAL_SEARCH</h1>
+<h1><a class="anchor" id="autotoc_md1031"></a>
+setting. When disabled, doxygen will generate a PHP script for searching and</h1>
+<h1><a class="anchor" id="autotoc_md1032"></a>
+an index file used by the script. When EXTERNAL_SEARCH is enabled the indexing</h1>
+<h1><a class="anchor" id="autotoc_md1033"></a>
+and searching needs to be provided by external tools. See the section</h1>
+<h1><a class="anchor" id="autotoc_md1034"></a>
+"External Indexing and Searching" for details.</h1>
+<h1><a class="anchor" id="autotoc_md1035"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md1036"></a>
+This tag requires that the tag SEARCHENGINE is set to YES.</h1>
+<p>SERVER_BASED_SEARCH = NO</p>
+<h1><a class="anchor" id="autotoc_md1037"></a>
+When EXTERNAL_SEARCH tag is enabled doxygen will no longer generate the PHP</h1>
+<h1><a class="anchor" id="autotoc_md1038"></a>
+script for searching. Instead the search results are written to an XML file</h1>
+<h1><a class="anchor" id="autotoc_md1039"></a>
+which needs to be processed by an external indexer. Doxygen will invoke an</h1>
+<h1><a class="anchor" id="autotoc_md1040"></a>
+external search engine pointed to by the SEARCHENGINE_URL option to obtain the</h1>
+<h1><a class="anchor" id="autotoc_md1041"></a>
+search results.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md1042"></a>
+Doxygen ships with an example indexer (doxyindexer) and search engine</h1>
+<h1><a class="anchor" id="autotoc_md1043"></a>
+(doxysearch.cgi) which are based on the open source search engine library</h1>
+<h1><a class="anchor" id="autotoc_md1044"></a>
+Xapian (see: https://xapian.org/).</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md1045"></a>
+See the section "External Indexing and Searching" for details.</h1>
+<h1><a class="anchor" id="autotoc_md1046"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md1047"></a>
+This tag requires that the tag SEARCHENGINE is set to YES.</h1>
+<p>EXTERNAL_SEARCH = NO</p>
+<h1><a class="anchor" id="autotoc_md1048"></a>
+The SEARCHENGINE_URL should point to a search engine hosted by a web server</h1>
+<h1><a class="anchor" id="autotoc_md1049"></a>
+which will return the search results when EXTERNAL_SEARCH is enabled.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md1050"></a>
+Doxygen ships with an example indexer (doxyindexer) and search engine</h1>
+<h1><a class="anchor" id="autotoc_md1051"></a>
+(doxysearch.cgi) which are based on the open source search engine library</h1>
+<h1><a class="anchor" id="autotoc_md1052"></a>
+Xapian (see: https://xapian.org/). See the section "External Indexing and</h1>
+<h1><a class="anchor" id="autotoc_md1053"></a>
+Searching" for details.</h1>
+<h1><a class="anchor" id="autotoc_md1054"></a>
+This tag requires that the tag SEARCHENGINE is set to YES.</h1>
+<p>SEARCHENGINE_URL =</p>
+<h1><a class="anchor" id="autotoc_md1055"></a>
+When SERVER_BASED_SEARCH and EXTERNAL_SEARCH are both enabled the unindexed</h1>
+<h1><a class="anchor" id="autotoc_md1056"></a>
+search data is written to a file for indexing by an external tool. With the</h1>
+<h1><a class="anchor" id="autotoc_md1057"></a>
+SEARCHDATA_FILE tag the name of this file can be specified.</h1>
+<h1><a class="anchor" id="autotoc_md1058"></a>
+The default file is: searchdata.xml.</h1>
+<h1><a class="anchor" id="autotoc_md1059"></a>
+This tag requires that the tag SEARCHENGINE is set to YES.</h1>
+<p>SEARCHDATA_FILE = searchdata.xml</p>
+<h1><a class="anchor" id="autotoc_md1060"></a>
+When SERVER_BASED_SEARCH and EXTERNAL_SEARCH are both enabled the</h1>
+<h1><a class="anchor" id="autotoc_md1061"></a>
+EXTERNAL_SEARCH_ID tag can be used as an identifier for the project. This is</h1>
+<h1><a class="anchor" id="autotoc_md1062"></a>
+useful in combination with EXTRA_SEARCH_MAPPINGS to search through multiple</h1>
+<h1><a class="anchor" id="autotoc_md1063"></a>
+projects and redirect the results back to the right project.</h1>
+<h1><a class="anchor" id="autotoc_md1064"></a>
+This tag requires that the tag SEARCHENGINE is set to YES.</h1>
+<p>EXTERNAL_SEARCH_ID =</p>
+<h1><a class="anchor" id="autotoc_md1065"></a>
+The EXTRA_SEARCH_MAPPINGS tag can be used to enable searching through doxygen</h1>
+<h1><a class="anchor" id="autotoc_md1066"></a>
+projects other than the one defined by this configuration file, but that are</h1>
+<h1><a class="anchor" id="autotoc_md1067"></a>
+all added to the same external search index. Each project needs to have a</h1>
+<h1><a class="anchor" id="autotoc_md1068"></a>
+unique id set via EXTERNAL_SEARCH_ID. The search mapping then maps the id of</h1>
+<h1><a class="anchor" id="autotoc_md1069"></a>
+to a relative location where the documentation can be found. The format is:</h1>
+<h1><a class="anchor" id="autotoc_md1070"></a>
+EXTRA_SEARCH_MAPPINGS = tagname1=loc1 tagname2=loc2 ...</h1>
+<h1><a class="anchor" id="autotoc_md1071"></a>
+This tag requires that the tag SEARCHENGINE is set to YES.</h1>
+<p>EXTRA_SEARCH_MAPPINGS =</p>
+<p>#------------------------------------------------------------------------&mdash; </p>
+<h1><a class="anchor" id="autotoc_md1072"></a>
+Configuration options related to the LaTeX output</h1>
+<p>#------------------------------------------------------------------------&mdash;</p>
+<h1><a class="anchor" id="autotoc_md1073"></a>
+If the GENERATE_LATEX tag is set to YES, doxygen will generate LaTeX output.</h1>
+<h1><a class="anchor" id="autotoc_md1074"></a>
+The default value is: YES.</h1>
+<p>GENERATE_LATEX = NO</p>
+<h1><a class="anchor" id="autotoc_md1075"></a>
+The LATEX_OUTPUT tag is used to specify where the LaTeX docs will be put. If a</h1>
+<h1><a class="anchor" id="autotoc_md1076"></a>
+relative path is entered the value of OUTPUT_DIRECTORY will be put in front of</h1>
+<h1><a class="anchor" id="autotoc_md1077"></a>
+it.</h1>
+<h1><a class="anchor" id="autotoc_md1078"></a>
+The default directory is: latex.</h1>
+<h1><a class="anchor" id="autotoc_md1079"></a>
+This tag requires that the tag GENERATE_LATEX is set to YES.</h1>
+<p>LATEX_OUTPUT = latex</p>
+<h1><a class="anchor" id="autotoc_md1080"></a>
+The LATEX_CMD_NAME tag can be used to specify the LaTeX command name to be</h1>
+<h1><a class="anchor" id="autotoc_md1081"></a>
+invoked.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md1082"></a>
+Note that when not enabling USE_PDFLATEX the default is latex when enabling</h1>
+<h1><a class="anchor" id="autotoc_md1083"></a>
+USE_PDFLATEX the default is pdflatex and when in the later case latex is</h1>
+<h1><a class="anchor" id="autotoc_md1084"></a>
+chosen this is overwritten by pdflatex. For specific output languages the</h1>
+<h1><a class="anchor" id="autotoc_md1085"></a>
+default can have been set differently, this depends on the implementation of</h1>
+<h1><a class="anchor" id="autotoc_md1086"></a>
+the output language.</h1>
+<h1><a class="anchor" id="autotoc_md1087"></a>
+This tag requires that the tag GENERATE_LATEX is set to YES.</h1>
+<p>LATEX_CMD_NAME =</p>
+<h1><a class="anchor" id="autotoc_md1088"></a>
+The MAKEINDEX_CMD_NAME tag can be used to specify the command name to generate</h1>
+<h1><a class="anchor" id="autotoc_md1089"></a>
+index for LaTeX.</h1>
+<h1><a class="anchor" id="autotoc_md1090"></a>
+Note: This tag is used in the Makefile / make.bat.</h1>
+<h1><a class="anchor" id="autotoc_md1091"></a>
+See also: LATEX_MAKEINDEX_CMD for the part in the generated output file</h1>
+<h1><a class="anchor" id="autotoc_md1092"></a>
+(.tex).</h1>
+<h1><a class="anchor" id="autotoc_md1093"></a>
+The default file is: makeindex.</h1>
+<h1><a class="anchor" id="autotoc_md1094"></a>
+This tag requires that the tag GENERATE_LATEX is set to YES.</h1>
+<p>MAKEINDEX_CMD_NAME = makeindex</p>
+<h1><a class="anchor" id="autotoc_md1095"></a>
+The LATEX_MAKEINDEX_CMD tag can be used to specify the command name to</h1>
+<h1><a class="anchor" id="autotoc_md1096"></a>
+generate index for LaTeX. In case there is no backslash () as first character</h1>
+<h1><a class="anchor" id="autotoc_md1097"></a>
+it will be automatically added in the LaTeX code.</h1>
+<h1><a class="anchor" id="autotoc_md1098"></a>
+Note: This tag is used in the generated output file (.tex).</h1>
+<h1><a class="anchor" id="autotoc_md1099"></a>
+See also: MAKEINDEX_CMD_NAME for the part in the Makefile / make.bat.</h1>
+<h1><a class="anchor" id="autotoc_md1100"></a>
+The default value is: makeindex.</h1>
+<h1><a class="anchor" id="autotoc_md1101"></a>
+This tag requires that the tag GENERATE_LATEX is set to YES.</h1>
+<p>LATEX_MAKEINDEX_CMD = makeindex</p>
+<h1><a class="anchor" id="autotoc_md1102"></a>
+If the COMPACT_LATEX tag is set to YES, doxygen generates more compact LaTeX</h1>
+<h1><a class="anchor" id="autotoc_md1103"></a>
+documents. This may be useful for small projects and may help to save some</h1>
+<h1><a class="anchor" id="autotoc_md1104"></a>
+trees in general.</h1>
+<h1><a class="anchor" id="autotoc_md1105"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md1106"></a>
+This tag requires that the tag GENERATE_LATEX is set to YES.</h1>
+<p>COMPACT_LATEX = NO</p>
+<h1><a class="anchor" id="autotoc_md1107"></a>
+The PAPER_TYPE tag can be used to set the paper type that is used by the</h1>
+<h1><a class="anchor" id="autotoc_md1108"></a>
+printer.</h1>
+<h1><a class="anchor" id="autotoc_md1109"></a>
+Possible values are: a4 (210 x 297 mm), letter (8.5 x 11 inches), legal (8.5 x</h1>
+<h1><a class="anchor" id="autotoc_md1110"></a>
+14 inches) and executive (7.25 x 10.5 inches).</h1>
+<h1><a class="anchor" id="autotoc_md1111"></a>
+The default value is: a4.</h1>
+<h1><a class="anchor" id="autotoc_md1112"></a>
+This tag requires that the tag GENERATE_LATEX is set to YES.</h1>
+<p>PAPER_TYPE = a4</p>
+<h1><a class="anchor" id="autotoc_md1113"></a>
+The EXTRA_PACKAGES tag can be used to specify one or more LaTeX package names</h1>
+<h1><a class="anchor" id="autotoc_md1114"></a>
+that should be included in the LaTeX output. The package can be specified just</h1>
+<h1><a class="anchor" id="autotoc_md1115"></a>
+by its name or with the correct syntax as to be used with the LaTeX</h1>
+<h1><a class="anchor" id="autotoc_md1116"></a>
+\usepackage command. To get the times font for instance you can specify :</h1>
+<h1><a class="anchor" id="autotoc_md1117"></a>
+EXTRA_PACKAGES=times or EXTRA_PACKAGES={times}</h1>
+<h1><a class="anchor" id="autotoc_md1118"></a>
+To use the option intlimits with the amsmath package you can specify:</h1>
+<h1><a class="anchor" id="autotoc_md1119"></a>
+EXTRA_PACKAGES=[intlimits]{amsmath}</h1>
+<h1><a class="anchor" id="autotoc_md1120"></a>
+If left blank no extra packages will be included.</h1>
+<h1><a class="anchor" id="autotoc_md1121"></a>
+This tag requires that the tag GENERATE_LATEX is set to YES.</h1>
+<p>EXTRA_PACKAGES =</p>
+<h1><a class="anchor" id="autotoc_md1122"></a>
+The LATEX_HEADER tag can be used to specify a personal LaTeX header for the</h1>
+<h1><a class="anchor" id="autotoc_md1123"></a>
+generated LaTeX document. The header should contain everything until the first</h1>
+<h1><a class="anchor" id="autotoc_md1124"></a>
+chapter. If it is left blank doxygen will generate a standard header. See</h1>
+<h1><a class="anchor" id="autotoc_md1125"></a>
+section "Doxygen usage" for information on how to let doxygen write the</h1>
+<h1><a class="anchor" id="autotoc_md1126"></a>
+default header to a separate file.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md1127"></a>
+Note: Only use a user-defined header if you know what you are doing! The</h1>
+<h1><a class="anchor" id="autotoc_md1128"></a>
+following commands have a special meaning inside the header: $title,</h1>
+<h1><a class="anchor" id="autotoc_md1129"></a>
+$datetime, $date, $doxygenversion, $projectname, $projectnumber,</h1>
+<h1><a class="anchor" id="autotoc_md1130"></a>
+$projectbrief, $projectlogo. Doxygen will replace $title with the empty</h1>
+<h1><a class="anchor" id="autotoc_md1131"></a>
+string, for the replacement values of the other commands the user is referred</h1>
+<h1><a class="anchor" id="autotoc_md1132"></a>
+to HTML_HEADER.</h1>
+<h1><a class="anchor" id="autotoc_md1133"></a>
+This tag requires that the tag GENERATE_LATEX is set to YES.</h1>
+<p>LATEX_HEADER =</p>
+<h1><a class="anchor" id="autotoc_md1134"></a>
+The LATEX_FOOTER tag can be used to specify a personal LaTeX footer for the</h1>
+<h1><a class="anchor" id="autotoc_md1135"></a>
+generated LaTeX document. The footer should contain everything after the last</h1>
+<h1><a class="anchor" id="autotoc_md1136"></a>
+chapter. If it is left blank doxygen will generate a standard footer. See</h1>
+<h1><a class="anchor" id="autotoc_md1137"></a>
+LATEX_HEADER for more information on how to generate a default footer and what</h1>
+<h1><a class="anchor" id="autotoc_md1138"></a>
+special commands can be used inside the footer.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md1139"></a>
+Note: Only use a user-defined footer if you know what you are doing!</h1>
+<h1><a class="anchor" id="autotoc_md1140"></a>
+This tag requires that the tag GENERATE_LATEX is set to YES.</h1>
+<p>LATEX_FOOTER =</p>
+<h1><a class="anchor" id="autotoc_md1141"></a>
+The LATEX_EXTRA_STYLESHEET tag can be used to specify additional user-defined</h1>
+<h1><a class="anchor" id="autotoc_md1142"></a>
+LaTeX style sheets that are included after the standard style sheets created</h1>
+<h1><a class="anchor" id="autotoc_md1143"></a>
+by doxygen. Using this option one can overrule certain style aspects. Doxygen</h1>
+<h1><a class="anchor" id="autotoc_md1144"></a>
+will copy the style sheet files to the output directory.</h1>
+<h1><a class="anchor" id="autotoc_md1145"></a>
+Note: The order of the extra style sheet files is of importance (e.g. the last</h1>
+<h1><a class="anchor" id="autotoc_md1146"></a>
+style sheet in the list overrules the setting of the previous ones in the</h1>
+<h1><a class="anchor" id="autotoc_md1147"></a>
+list).</h1>
+<h1><a class="anchor" id="autotoc_md1148"></a>
+This tag requires that the tag GENERATE_LATEX is set to YES.</h1>
+<p>LATEX_EXTRA_STYLESHEET =</p>
+<h1><a class="anchor" id="autotoc_md1149"></a>
+The LATEX_EXTRA_FILES tag can be used to specify one or more extra images or</h1>
+<h1><a class="anchor" id="autotoc_md1150"></a>
+other source files which should be copied to the LATEX_OUTPUT output</h1>
+<h1><a class="anchor" id="autotoc_md1151"></a>
+directory. Note that the files will be copied as-is; there are no commands or</h1>
+<h1><a class="anchor" id="autotoc_md1152"></a>
+markers available.</h1>
+<h1><a class="anchor" id="autotoc_md1153"></a>
+This tag requires that the tag GENERATE_LATEX is set to YES.</h1>
+<p>LATEX_EXTRA_FILES =</p>
+<h1><a class="anchor" id="autotoc_md1154"></a>
+If the PDF_HYPERLINKS tag is set to YES, the LaTeX that is generated is</h1>
+<h1><a class="anchor" id="autotoc_md1155"></a>
+prepared for conversion to PDF (using ps2pdf or pdflatex). The PDF file will</h1>
+<h1><a class="anchor" id="autotoc_md1156"></a>
+contain links (just like the HTML output) instead of page references. This</h1>
+<h1><a class="anchor" id="autotoc_md1157"></a>
+makes the output suitable for online browsing using a PDF viewer.</h1>
+<h1><a class="anchor" id="autotoc_md1158"></a>
+The default value is: YES.</h1>
+<h1><a class="anchor" id="autotoc_md1159"></a>
+This tag requires that the tag GENERATE_LATEX is set to YES.</h1>
+<p>PDF_HYPERLINKS = YES</p>
+<h1><a class="anchor" id="autotoc_md1160"></a>
+If the USE_PDFLATEX tag is set to YES, doxygen will use pdflatex to generate</h1>
+<h1><a class="anchor" id="autotoc_md1161"></a>
+the PDF file directly from the LaTeX files. Set this option to YES, to get a</h1>
+<h1><a class="anchor" id="autotoc_md1162"></a>
+higher quality PDF documentation.</h1>
+<h1><a class="anchor" id="autotoc_md1163"></a>
+The default value is: YES.</h1>
+<h1><a class="anchor" id="autotoc_md1164"></a>
+This tag requires that the tag GENERATE_LATEX is set to YES.</h1>
+<p>USE_PDFLATEX = YES</p>
+<h1><a class="anchor" id="autotoc_md1165"></a>
+If the LATEX_BATCHMODE tag is set to YES, doxygen will add the \batchmode</h1>
+<h1><a class="anchor" id="autotoc_md1166"></a>
+command to the generated LaTeX files. This will instruct LaTeX to keep running</h1>
+<h1><a class="anchor" id="autotoc_md1167"></a>
+if errors occur, instead of asking the user for help. This option is also used</h1>
+<h1><a class="anchor" id="autotoc_md1168"></a>
+when generating formulas in HTML.</h1>
+<h1><a class="anchor" id="autotoc_md1169"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md1170"></a>
+This tag requires that the tag GENERATE_LATEX is set to YES.</h1>
+<p>LATEX_BATCHMODE = NO</p>
+<h1><a class="anchor" id="autotoc_md1171"></a>
+If the LATEX_HIDE_INDICES tag is set to YES then doxygen will not include the</h1>
+<h1><a class="anchor" id="autotoc_md1172"></a>
+index chapters (such as File Index, Compound Index, etc.) in the output.</h1>
+<h1><a class="anchor" id="autotoc_md1173"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md1174"></a>
+This tag requires that the tag GENERATE_LATEX is set to YES.</h1>
+<p>LATEX_HIDE_INDICES = NO</p>
+<h1><a class="anchor" id="autotoc_md1175"></a>
+If the LATEX_SOURCE_CODE tag is set to YES then doxygen will include source</h1>
+<h1><a class="anchor" id="autotoc_md1176"></a>
+code with syntax highlighting in the LaTeX output.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md1177"></a>
+Note that which sources are shown also depends on other settings such as</h1>
+<h1><a class="anchor" id="autotoc_md1178"></a>
+SOURCE_BROWSER.</h1>
+<h1><a class="anchor" id="autotoc_md1179"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md1180"></a>
+This tag requires that the tag GENERATE_LATEX is set to YES.</h1>
+<p>LATEX_SOURCE_CODE = NO</p>
+<h1><a class="anchor" id="autotoc_md1181"></a>
+The LATEX_BIB_STYLE tag can be used to specify the style to use for the</h1>
+<h1><a class="anchor" id="autotoc_md1182"></a>
+bibliography, e.g. plainnat, or ieeetr. See</h1>
+<h1><a class="anchor" id="autotoc_md1183"></a>
+https://en.wikipedia.org/wiki/BibTeX and \cite for more info.</h1>
+<h1><a class="anchor" id="autotoc_md1184"></a>
+The default value is: plain.</h1>
+<h1><a class="anchor" id="autotoc_md1185"></a>
+This tag requires that the tag GENERATE_LATEX is set to YES.</h1>
+<p>LATEX_BIB_STYLE = plain</p>
+<h1><a class="anchor" id="autotoc_md1186"></a>
+If the LATEX_TIMESTAMP tag is set to YES then the footer of each generated</h1>
+<h1><a class="anchor" id="autotoc_md1187"></a>
+page will contain the date and time when the page was generated. Setting this</h1>
+<h1><a class="anchor" id="autotoc_md1188"></a>
+to NO can help when comparing the output of multiple runs.</h1>
+<h1><a class="anchor" id="autotoc_md1189"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md1190"></a>
+This tag requires that the tag GENERATE_LATEX is set to YES.</h1>
+<p>LATEX_TIMESTAMP = NO</p>
+<h1><a class="anchor" id="autotoc_md1191"></a>
+The LATEX_EMOJI_DIRECTORY tag is used to specify the (relative or absolute)</h1>
+<h1><a class="anchor" id="autotoc_md1192"></a>
+path from which the emoji images will be read. If a relative path is entered,</h1>
+<h1><a class="anchor" id="autotoc_md1193"></a>
+it will be relative to the LATEX_OUTPUT directory. If left blank the</h1>
+<h1><a class="anchor" id="autotoc_md1194"></a>
+LATEX_OUTPUT directory will be used.</h1>
+<h1><a class="anchor" id="autotoc_md1195"></a>
+This tag requires that the tag GENERATE_LATEX is set to YES.</h1>
+<p>LATEX_EMOJI_DIRECTORY =</p>
+<p>#------------------------------------------------------------------------&mdash; </p>
+<h1><a class="anchor" id="autotoc_md1196"></a>
+Configuration options related to the RTF output</h1>
+<p>#------------------------------------------------------------------------&mdash;</p>
+<h1><a class="anchor" id="autotoc_md1197"></a>
+If the GENERATE_RTF tag is set to YES, doxygen will generate RTF output. The</h1>
+<h1><a class="anchor" id="autotoc_md1198"></a>
+RTF output is optimized for Word 97 and may not look too pretty with other RTF</h1>
+<h1><a class="anchor" id="autotoc_md1199"></a>
+readers/editors.</h1>
+<h1><a class="anchor" id="autotoc_md1200"></a>
+The default value is: NO.</h1>
+<p>GENERATE_RTF = NO</p>
+<h1><a class="anchor" id="autotoc_md1201"></a>
+The RTF_OUTPUT tag is used to specify where the RTF docs will be put. If a</h1>
+<h1><a class="anchor" id="autotoc_md1202"></a>
+relative path is entered the value of OUTPUT_DIRECTORY will be put in front of</h1>
+<h1><a class="anchor" id="autotoc_md1203"></a>
+it.</h1>
+<h1><a class="anchor" id="autotoc_md1204"></a>
+The default directory is: rtf.</h1>
+<h1><a class="anchor" id="autotoc_md1205"></a>
+This tag requires that the tag GENERATE_RTF is set to YES.</h1>
+<p>RTF_OUTPUT = rtf</p>
+<h1><a class="anchor" id="autotoc_md1206"></a>
+If the COMPACT_RTF tag is set to YES, doxygen generates more compact RTF</h1>
+<h1><a class="anchor" id="autotoc_md1207"></a>
+documents. This may be useful for small projects and may help to save some</h1>
+<h1><a class="anchor" id="autotoc_md1208"></a>
+trees in general.</h1>
+<h1><a class="anchor" id="autotoc_md1209"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md1210"></a>
+This tag requires that the tag GENERATE_RTF is set to YES.</h1>
+<p>COMPACT_RTF = NO</p>
+<h1><a class="anchor" id="autotoc_md1211"></a>
+If the RTF_HYPERLINKS tag is set to YES, the RTF that is generated will</h1>
+<h1><a class="anchor" id="autotoc_md1212"></a>
+contain hyperlink fields. The RTF file will contain links (just like the HTML</h1>
+<h1><a class="anchor" id="autotoc_md1213"></a>
+output) instead of page references. This makes the output suitable for online</h1>
+<h1><a class="anchor" id="autotoc_md1214"></a>
+browsing using Word or some other Word compatible readers that support those</h1>
+<h1><a class="anchor" id="autotoc_md1215"></a>
+fields.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md1216"></a>
+Note: WordPad (write) and others do not support links.</h1>
+<h1><a class="anchor" id="autotoc_md1217"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md1218"></a>
+This tag requires that the tag GENERATE_RTF is set to YES.</h1>
+<p>RTF_HYPERLINKS = NO</p>
+<h1><a class="anchor" id="autotoc_md1219"></a>
+Load stylesheet definitions from file. Syntax is similar to doxygen's</h1>
+<h1><a class="anchor" id="autotoc_md1220"></a>
+configuration file, i.e. a series of assignments. You only have to provide</h1>
+<h1><a class="anchor" id="autotoc_md1221"></a>
+replacements, missing definitions are set to their default value.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md1222"></a>
+See also section "Doxygen usage" for information on how to generate the</h1>
+<h1><a class="anchor" id="autotoc_md1223"></a>
+default style sheet that doxygen normally uses.</h1>
+<h1><a class="anchor" id="autotoc_md1224"></a>
+This tag requires that the tag GENERATE_RTF is set to YES.</h1>
+<p>RTF_STYLESHEET_FILE =</p>
+<h1><a class="anchor" id="autotoc_md1225"></a>
+Set optional variables used in the generation of an RTF document. Syntax is</h1>
+<h1><a class="anchor" id="autotoc_md1226"></a>
+similar to doxygen's configuration file. A template extensions file can be</h1>
+<h1><a class="anchor" id="autotoc_md1227"></a>
+generated using doxygen -e rtf extensionFile.</h1>
+<h1><a class="anchor" id="autotoc_md1228"></a>
+This tag requires that the tag GENERATE_RTF is set to YES.</h1>
+<p>RTF_EXTENSIONS_FILE =</p>
+<h1><a class="anchor" id="autotoc_md1229"></a>
+If the RTF_SOURCE_CODE tag is set to YES then doxygen will include source code</h1>
+<h1><a class="anchor" id="autotoc_md1230"></a>
+with syntax highlighting in the RTF output.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md1231"></a>
+Note that which sources are shown also depends on other settings such as</h1>
+<h1><a class="anchor" id="autotoc_md1232"></a>
+SOURCE_BROWSER.</h1>
+<h1><a class="anchor" id="autotoc_md1233"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md1234"></a>
+This tag requires that the tag GENERATE_RTF is set to YES.</h1>
+<p>RTF_SOURCE_CODE = NO</p>
+<p>#------------------------------------------------------------------------&mdash; </p>
+<h1><a class="anchor" id="autotoc_md1235"></a>
+Configuration options related to the man page output</h1>
+<p>#------------------------------------------------------------------------&mdash;</p>
+<h1><a class="anchor" id="autotoc_md1236"></a>
+If the GENERATE_MAN tag is set to YES, doxygen will generate man pages for</h1>
+<h1><a class="anchor" id="autotoc_md1237"></a>
+classes and files.</h1>
+<h1><a class="anchor" id="autotoc_md1238"></a>
+The default value is: NO.</h1>
+<p>GENERATE_MAN = NO</p>
+<h1><a class="anchor" id="autotoc_md1239"></a>
+The MAN_OUTPUT tag is used to specify where the man pages will be put. If a</h1>
+<h1><a class="anchor" id="autotoc_md1240"></a>
+relative path is entered the value of OUTPUT_DIRECTORY will be put in front of</h1>
+<h1><a class="anchor" id="autotoc_md1241"></a>
+it. A directory man3 will be created inside the directory specified by</h1>
+<h1><a class="anchor" id="autotoc_md1242"></a>
+MAN_OUTPUT.</h1>
+<h1><a class="anchor" id="autotoc_md1243"></a>
+The default directory is: man.</h1>
+<h1><a class="anchor" id="autotoc_md1244"></a>
+This tag requires that the tag GENERATE_MAN is set to YES.</h1>
+<p>MAN_OUTPUT = man</p>
+<h1><a class="anchor" id="autotoc_md1245"></a>
+The MAN_EXTENSION tag determines the extension that is added to the generated</h1>
+<h1><a class="anchor" id="autotoc_md1246"></a>
+man pages. In case the manual section does not start with a number, the number</h1>
+<h1><a class="anchor" id="autotoc_md1247"></a>
+3 is prepended. The dot (.) at the beginning of the MAN_EXTENSION tag is</h1>
+<h1><a class="anchor" id="autotoc_md1248"></a>
+optional.</h1>
+<h1><a class="anchor" id="autotoc_md1249"></a>
+The default value is: .3.</h1>
+<h1><a class="anchor" id="autotoc_md1250"></a>
+This tag requires that the tag GENERATE_MAN is set to YES.</h1>
+<p>MAN_EXTENSION = .3</p>
+<h1><a class="anchor" id="autotoc_md1251"></a>
+The MAN_SUBDIR tag determines the name of the directory created within</h1>
+<h1><a class="anchor" id="autotoc_md1252"></a>
+MAN_OUTPUT in which the man pages are placed. If defaults to man followed by</h1>
+<h1><a class="anchor" id="autotoc_md1253"></a>
+MAN_EXTENSION with the initial . removed.</h1>
+<h1><a class="anchor" id="autotoc_md1254"></a>
+This tag requires that the tag GENERATE_MAN is set to YES.</h1>
+<p>MAN_SUBDIR =</p>
+<h1><a class="anchor" id="autotoc_md1255"></a>
+If the MAN_LINKS tag is set to YES and doxygen generates man output, then it</h1>
+<h1><a class="anchor" id="autotoc_md1256"></a>
+will generate one additional man file for each entity documented in the real</h1>
+<h1><a class="anchor" id="autotoc_md1257"></a>
+man page(s). These additional files only source the real man page, but without</h1>
+<h1><a class="anchor" id="autotoc_md1258"></a>
+them the man command would be unable to find the correct page.</h1>
+<h1><a class="anchor" id="autotoc_md1259"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md1260"></a>
+This tag requires that the tag GENERATE_MAN is set to YES.</h1>
+<p>MAN_LINKS = NO</p>
+<p>#------------------------------------------------------------------------&mdash; </p>
+<h1><a class="anchor" id="autotoc_md1261"></a>
+Configuration options related to the XML output</h1>
+<p>#------------------------------------------------------------------------&mdash;</p>
+<h1><a class="anchor" id="autotoc_md1262"></a>
+If the GENERATE_XML tag is set to YES, doxygen will generate an XML file that</h1>
+<h1><a class="anchor" id="autotoc_md1263"></a>
+captures the structure of the code including all documentation.</h1>
+<h1><a class="anchor" id="autotoc_md1264"></a>
+The default value is: NO.</h1>
+<p>GENERATE_XML = NO</p>
+<h1><a class="anchor" id="autotoc_md1265"></a>
+The XML_OUTPUT tag is used to specify where the XML pages will be put. If a</h1>
+<h1><a class="anchor" id="autotoc_md1266"></a>
+relative path is entered the value of OUTPUT_DIRECTORY will be put in front of</h1>
+<h1><a class="anchor" id="autotoc_md1267"></a>
+it.</h1>
+<h1><a class="anchor" id="autotoc_md1268"></a>
+The default directory is: xml.</h1>
+<h1><a class="anchor" id="autotoc_md1269"></a>
+This tag requires that the tag GENERATE_XML is set to YES.</h1>
+<p>XML_OUTPUT = xml</p>
+<h1><a class="anchor" id="autotoc_md1270"></a>
+If the XML_PROGRAMLISTING tag is set to YES, doxygen will dump the program</h1>
+<h1><a class="anchor" id="autotoc_md1271"></a>
+listings (including syntax highlighting and cross-referencing information) to</h1>
+<h1><a class="anchor" id="autotoc_md1272"></a>
+the XML output. Note that enabling this will significantly increase the size</h1>
+<h1><a class="anchor" id="autotoc_md1273"></a>
+of the XML output.</h1>
+<h1><a class="anchor" id="autotoc_md1274"></a>
+The default value is: YES.</h1>
+<h1><a class="anchor" id="autotoc_md1275"></a>
+This tag requires that the tag GENERATE_XML is set to YES.</h1>
+<p>XML_PROGRAMLISTING = YES</p>
+<h1><a class="anchor" id="autotoc_md1276"></a>
+If the XML_NS_MEMB_FILE_SCOPE tag is set to YES, doxygen will include</h1>
+<h1><a class="anchor" id="autotoc_md1277"></a>
+namespace members in file scope as well, matching the HTML output.</h1>
+<h1><a class="anchor" id="autotoc_md1278"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md1279"></a>
+This tag requires that the tag GENERATE_XML is set to YES.</h1>
+<p>XML_NS_MEMB_FILE_SCOPE = NO</p>
+<p>#------------------------------------------------------------------------&mdash; </p>
+<h1><a class="anchor" id="autotoc_md1280"></a>
+Configuration options related to the DOCBOOK output</h1>
+<p>#------------------------------------------------------------------------&mdash;</p>
+<h1><a class="anchor" id="autotoc_md1281"></a>
+If the GENERATE_DOCBOOK tag is set to YES, doxygen will generate Docbook files</h1>
+<h1><a class="anchor" id="autotoc_md1282"></a>
+that can be used to generate PDF.</h1>
+<h1><a class="anchor" id="autotoc_md1283"></a>
+The default value is: NO.</h1>
+<p>GENERATE_DOCBOOK = NO</p>
+<h1><a class="anchor" id="autotoc_md1284"></a>
+The DOCBOOK_OUTPUT tag is used to specify where the Docbook pages will be put.</h1>
+<h1><a class="anchor" id="autotoc_md1285"></a>
+If a relative path is entered the value of OUTPUT_DIRECTORY will be put in</h1>
+<h1><a class="anchor" id="autotoc_md1286"></a>
+front of it.</h1>
+<h1><a class="anchor" id="autotoc_md1287"></a>
+The default directory is: docbook.</h1>
+<h1><a class="anchor" id="autotoc_md1288"></a>
+This tag requires that the tag GENERATE_DOCBOOK is set to YES.</h1>
+<p>DOCBOOK_OUTPUT = docbook</p>
+<h1><a class="anchor" id="autotoc_md1289"></a>
+If the DOCBOOK_PROGRAMLISTING tag is set to YES, doxygen will include the</h1>
+<h1><a class="anchor" id="autotoc_md1290"></a>
+program listings (including syntax highlighting and cross-referencing</h1>
+<h1><a class="anchor" id="autotoc_md1291"></a>
+information) to the DOCBOOK output. Note that enabling this will significantly</h1>
+<h1><a class="anchor" id="autotoc_md1292"></a>
+increase the size of the DOCBOOK output.</h1>
+<h1><a class="anchor" id="autotoc_md1293"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md1294"></a>
+This tag requires that the tag GENERATE_DOCBOOK is set to YES.</h1>
+<p>DOCBOOK_PROGRAMLISTING = NO</p>
+<p>#------------------------------------------------------------------------&mdash; </p>
+<h1><a class="anchor" id="autotoc_md1295"></a>
+Configuration options for the AutoGen Definitions output</h1>
+<p>#------------------------------------------------------------------------&mdash;</p>
+<h1><a class="anchor" id="autotoc_md1296"></a>
+If the GENERATE_AUTOGEN_DEF tag is set to YES, doxygen will generate an</h1>
+<h1><a class="anchor" id="autotoc_md1297"></a>
+AutoGen Definitions (see http://autogen.sourceforge.net/) file that captures</h1>
+<h1><a class="anchor" id="autotoc_md1298"></a>
+the structure of the code including all documentation. Note that this feature</h1>
+<h1><a class="anchor" id="autotoc_md1299"></a>
+is still experimental and incomplete at the moment.</h1>
+<h1><a class="anchor" id="autotoc_md1300"></a>
+The default value is: NO.</h1>
+<p>GENERATE_AUTOGEN_DEF = NO</p>
+<p>#------------------------------------------------------------------------&mdash; </p>
+<h1><a class="anchor" id="autotoc_md1301"></a>
+Configuration options related to the Perl module output</h1>
+<p>#------------------------------------------------------------------------&mdash;</p>
+<h1><a class="anchor" id="autotoc_md1302"></a>
+If the GENERATE_PERLMOD tag is set to YES, doxygen will generate a Perl module</h1>
+<h1><a class="anchor" id="autotoc_md1303"></a>
+file that captures the structure of the code including all documentation.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md1304"></a>
+Note that this feature is still experimental and incomplete at the moment.</h1>
+<h1><a class="anchor" id="autotoc_md1305"></a>
+The default value is: NO.</h1>
+<p>GENERATE_PERLMOD = NO</p>
+<h1><a class="anchor" id="autotoc_md1306"></a>
+If the PERLMOD_LATEX tag is set to YES, doxygen will generate the necessary</h1>
+<h1><a class="anchor" id="autotoc_md1307"></a>
+Makefile rules, Perl scripts and LaTeX code to be able to generate PDF and DVI</h1>
+<h1><a class="anchor" id="autotoc_md1308"></a>
+output from the Perl module output.</h1>
+<h1><a class="anchor" id="autotoc_md1309"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md1310"></a>
+This tag requires that the tag GENERATE_PERLMOD is set to YES.</h1>
+<p>PERLMOD_LATEX = NO</p>
+<h1><a class="anchor" id="autotoc_md1311"></a>
+If the PERLMOD_PRETTY tag is set to YES, the Perl module output will be nicely</h1>
+<h1><a class="anchor" id="autotoc_md1312"></a>
+formatted so it can be parsed by a human reader. This is useful if you want to</h1>
+<h1><a class="anchor" id="autotoc_md1313"></a>
+understand what is going on. On the other hand, if this tag is set to NO, the</h1>
+<h1><a class="anchor" id="autotoc_md1314"></a>
+size of the Perl module output will be much smaller and Perl will parse it</h1>
+<h1><a class="anchor" id="autotoc_md1315"></a>
+just the same.</h1>
+<h1><a class="anchor" id="autotoc_md1316"></a>
+The default value is: YES.</h1>
+<h1><a class="anchor" id="autotoc_md1317"></a>
+This tag requires that the tag GENERATE_PERLMOD is set to YES.</h1>
+<p>PERLMOD_PRETTY = YES</p>
+<h1><a class="anchor" id="autotoc_md1318"></a>
+The names of the make variables in the generated doxyrules.make file are</h1>
+<h1><a class="anchor" id="autotoc_md1319"></a>
+prefixed with the string contained in PERLMOD_MAKEVAR_PREFIX. This is useful</h1>
+<h1><a class="anchor" id="autotoc_md1320"></a>
+so different doxyrules.make files included by the same Makefile don't</h1>
+<h1><a class="anchor" id="autotoc_md1321"></a>
+overwrite each other's variables.</h1>
+<h1><a class="anchor" id="autotoc_md1322"></a>
+This tag requires that the tag GENERATE_PERLMOD is set to YES.</h1>
+<p>PERLMOD_MAKEVAR_PREFIX =</p>
+<p>#------------------------------------------------------------------------&mdash; </p>
+<h1><a class="anchor" id="autotoc_md1323"></a>
+Configuration options related to the preprocessor</h1>
+<p>#------------------------------------------------------------------------&mdash;</p>
+<h1><a class="anchor" id="autotoc_md1324"></a>
+If the ENABLE_PREPROCESSING tag is set to YES, doxygen will evaluate all</h1>
+<h1><a class="anchor" id="autotoc_md1325"></a>
+C-preprocessor directives found in the sources and include files.</h1>
+<h1><a class="anchor" id="autotoc_md1326"></a>
+The default value is: YES.</h1>
+<p>ENABLE_PREPROCESSING = YES</p>
+<h1><a class="anchor" id="autotoc_md1327"></a>
+If the MACRO_EXPANSION tag is set to YES, doxygen will expand all macro names</h1>
+<h1><a class="anchor" id="autotoc_md1328"></a>
+in the source code. If set to NO, only conditional compilation will be</h1>
+<h1><a class="anchor" id="autotoc_md1329"></a>
+performed. Macro expansion can be done in a controlled way by setting</h1>
+<h1><a class="anchor" id="autotoc_md1330"></a>
+EXPAND_ONLY_PREDEF to YES.</h1>
+<h1><a class="anchor" id="autotoc_md1331"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md1332"></a>
+This tag requires that the tag ENABLE_PREPROCESSING is set to YES.</h1>
+<p>MACRO_EXPANSION = NO</p>
+<h1><a class="anchor" id="autotoc_md1333"></a>
+If the EXPAND_ONLY_PREDEF and MACRO_EXPANSION tags are both set to YES then</h1>
+<h1><a class="anchor" id="autotoc_md1334"></a>
+the macro expansion is limited to the macros specified with the PREDEFINED and</h1>
+<h1><a class="anchor" id="autotoc_md1335"></a>
+EXPAND_AS_DEFINED tags.</h1>
+<h1><a class="anchor" id="autotoc_md1336"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md1337"></a>
+This tag requires that the tag ENABLE_PREPROCESSING is set to YES.</h1>
+<p>EXPAND_ONLY_PREDEF = NO</p>
+<h1><a class="anchor" id="autotoc_md1338"></a>
+If the SEARCH_INCLUDES tag is set to YES, the include files in the</h1>
+<h1><a class="anchor" id="autotoc_md1339"></a>
+INCLUDE_PATH will be searched if a #include is found.</h1>
+<h1><a class="anchor" id="autotoc_md1340"></a>
+The default value is: YES.</h1>
+<h1><a class="anchor" id="autotoc_md1341"></a>
+This tag requires that the tag ENABLE_PREPROCESSING is set to YES.</h1>
+<p>SEARCH_INCLUDES = YES</p>
+<h1><a class="anchor" id="autotoc_md1342"></a>
+The INCLUDE_PATH tag can be used to specify one or more directories that</h1>
+<h1><a class="anchor" id="autotoc_md1343"></a>
+contain include files that are not input files but should be processed by the</h1>
+<h1><a class="anchor" id="autotoc_md1344"></a>
+preprocessor.</h1>
+<h1><a class="anchor" id="autotoc_md1345"></a>
+This tag requires that the tag SEARCH_INCLUDES is set to YES.</h1>
+<p>INCLUDE_PATH =</p>
+<h1><a class="anchor" id="autotoc_md1346"></a>
+You can use the INCLUDE_FILE_PATTERNS tag to specify one or more wildcard</h1>
+<h1><a class="anchor" id="autotoc_md1347"></a>
+patterns (like *.h and *.hpp) to filter out the header-files in the</h1>
+<h1><a class="anchor" id="autotoc_md1348"></a>
+directories. If left blank, the patterns specified with FILE_PATTERNS will be</h1>
+<h1><a class="anchor" id="autotoc_md1349"></a>
+used.</h1>
+<h1><a class="anchor" id="autotoc_md1350"></a>
+This tag requires that the tag ENABLE_PREPROCESSING is set to YES.</h1>
+<p>INCLUDE_FILE_PATTERNS =</p>
+<h1><a class="anchor" id="autotoc_md1351"></a>
+The PREDEFINED tag can be used to specify one or more macro names that are</h1>
+<h1><a class="anchor" id="autotoc_md1352"></a>
+defined before the preprocessor is started (similar to the -D option of e.g.</h1>
+<h1><a class="anchor" id="autotoc_md1353"></a>
+gcc). The argument of the tag is a list of macros of the form: name or</h1>
+<h1><a class="anchor" id="autotoc_md1354"></a>
+name=definition (no spaces). If the definition and the "=" are omitted, "=1"</h1>
+<h1><a class="anchor" id="autotoc_md1355"></a>
+is assumed. To prevent a macro definition from being undefined via #undef or</h1>
+<h1><a class="anchor" id="autotoc_md1356"></a>
+recursively expanded use the := operator instead of the = operator.</h1>
+<h1><a class="anchor" id="autotoc_md1357"></a>
+This tag requires that the tag ENABLE_PREPROCESSING is set to YES.</h1>
+<p>PREDEFINED =</p>
+<h1><a class="anchor" id="autotoc_md1358"></a>
+If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this</h1>
+<h1><a class="anchor" id="autotoc_md1359"></a>
+tag can be used to specify a list of macro names that should be expanded. The</h1>
+<h1><a class="anchor" id="autotoc_md1360"></a>
+macro definition that is found in the sources will be used. Use the PREDEFINED</h1>
+<h1><a class="anchor" id="autotoc_md1361"></a>
+tag if you want to use a different macro definition that overrules the</h1>
+<h1><a class="anchor" id="autotoc_md1362"></a>
+definition found in the source code.</h1>
+<h1><a class="anchor" id="autotoc_md1363"></a>
+This tag requires that the tag ENABLE_PREPROCESSING is set to YES.</h1>
+<p>EXPAND_AS_DEFINED =</p>
+<h1><a class="anchor" id="autotoc_md1364"></a>
+If the SKIP_FUNCTION_MACROS tag is set to YES then doxygen's preprocessor will</h1>
+<h1><a class="anchor" id="autotoc_md1365"></a>
+remove all references to function-like macros that are alone on a line, have</h1>
+<h1><a class="anchor" id="autotoc_md1366"></a>
+an all uppercase name, and do not end with a semicolon. Such function macros</h1>
+<h1><a class="anchor" id="autotoc_md1367"></a>
+are typically used for boiler-plate code, and will confuse the parser if not</h1>
+<h1><a class="anchor" id="autotoc_md1368"></a>
+removed.</h1>
+<h1><a class="anchor" id="autotoc_md1369"></a>
+The default value is: YES.</h1>
+<h1><a class="anchor" id="autotoc_md1370"></a>
+This tag requires that the tag ENABLE_PREPROCESSING is set to YES.</h1>
+<p>SKIP_FUNCTION_MACROS = YES</p>
+<p>#------------------------------------------------------------------------&mdash; </p>
+<h1><a class="anchor" id="autotoc_md1371"></a>
+Configuration options related to external references</h1>
+<p>#------------------------------------------------------------------------&mdash;</p>
+<h1><a class="anchor" id="autotoc_md1372"></a>
+The TAGFILES tag can be used to specify one or more tag files. For each tag</h1>
+<h1><a class="anchor" id="autotoc_md1373"></a>
+file the location of the external documentation should be added. The format of</h1>
+<h1><a class="anchor" id="autotoc_md1374"></a>
+a tag file without this location is as follows:</h1>
+<h1><a class="anchor" id="autotoc_md1375"></a>
+TAGFILES = file1 file2 ...</h1>
+<h1><a class="anchor" id="autotoc_md1376"></a>
+Adding location for the tag files is done as follows:</h1>
+<h1><a class="anchor" id="autotoc_md1377"></a>
+TAGFILES = file1=loc1 "file2 = loc2" ...</h1>
+<h1><a class="anchor" id="autotoc_md1378"></a>
+where loc1 and loc2 can be relative or absolute paths or URLs. See the</h1>
+<h1><a class="anchor" id="autotoc_md1379"></a>
+section "Linking to external documentation" for more information about the use</h1>
+<h1><a class="anchor" id="autotoc_md1380"></a>
+of tag files.</h1>
+<h1><a class="anchor" id="autotoc_md1381"></a>
+Note: Each tag file must have a unique name (where the name does NOT include</h1>
+<h1><a class="anchor" id="autotoc_md1382"></a>
+the path). If a tag file is not located in the directory in which doxygen is</h1>
+<h1><a class="anchor" id="autotoc_md1383"></a>
+run, you must also specify the path to the tagfile here.</h1>
+<p>TAGFILES =</p>
+<h1><a class="anchor" id="autotoc_md1384"></a>
+When a file name is specified after GENERATE_TAGFILE, doxygen will create a</h1>
+<h1><a class="anchor" id="autotoc_md1385"></a>
+tag file that is based on the input files it reads. See section "Linking to</h1>
+<h1><a class="anchor" id="autotoc_md1386"></a>
+external documentation" for more information about the usage of tag files.</h1>
+<p>GENERATE_TAGFILE =</p>
+<h1><a class="anchor" id="autotoc_md1387"></a>
+If the ALLEXTERNALS tag is set to YES, all external class will be listed in</h1>
+<h1><a class="anchor" id="autotoc_md1388"></a>
+the class index. If set to NO, only the inherited external classes will be</h1>
+<h1><a class="anchor" id="autotoc_md1389"></a>
+listed.</h1>
+<h1><a class="anchor" id="autotoc_md1390"></a>
+The default value is: NO.</h1>
+<p>ALLEXTERNALS = NO</p>
+<h1><a class="anchor" id="autotoc_md1391"></a>
+If the EXTERNAL_GROUPS tag is set to YES, all external groups will be listed</h1>
+<h1><a class="anchor" id="autotoc_md1392"></a>
+in the modules index. If set to NO, only the current project's groups will be</h1>
+<h1><a class="anchor" id="autotoc_md1393"></a>
+listed.</h1>
+<h1><a class="anchor" id="autotoc_md1394"></a>
+The default value is: YES.</h1>
+<p>EXTERNAL_GROUPS = YES</p>
+<h1><a class="anchor" id="autotoc_md1395"></a>
+If the EXTERNAL_PAGES tag is set to YES, all external pages will be listed in</h1>
+<h1><a class="anchor" id="autotoc_md1396"></a>
+the related pages index. If set to NO, only the current project's pages will</h1>
+<h1><a class="anchor" id="autotoc_md1397"></a>
+be listed.</h1>
+<h1><a class="anchor" id="autotoc_md1398"></a>
+The default value is: YES.</h1>
+<p>EXTERNAL_PAGES = YES</p>
+<p>#------------------------------------------------------------------------&mdash; </p>
+<h1><a class="anchor" id="autotoc_md1399"></a>
+Configuration options related to the dot tool</h1>
+<p>#------------------------------------------------------------------------&mdash;</p>
+<h1><a class="anchor" id="autotoc_md1400"></a>
+If the CLASS_DIAGRAMS tag is set to YES, doxygen will generate a class diagram</h1>
+<h1><a class="anchor" id="autotoc_md1401"></a>
+(in HTML and LaTeX) for classes with base or super classes. Setting the tag to</h1>
+<h1><a class="anchor" id="autotoc_md1402"></a>
+NO turns the diagrams off. Note that this option also works with HAVE_DOT</h1>
+<h1><a class="anchor" id="autotoc_md1403"></a>
+disabled, but it is recommended to install and use dot, since it yields more</h1>
+<h1><a class="anchor" id="autotoc_md1404"></a>
+powerful graphs.</h1>
+<h1><a class="anchor" id="autotoc_md1405"></a>
+The default value is: YES.</h1>
+<p>CLASS_DIAGRAMS = YES</p>
+<h1><a class="anchor" id="autotoc_md1406"></a>
+You can include diagrams made with dia in doxygen documentation. Doxygen will</h1>
+<h1><a class="anchor" id="autotoc_md1407"></a>
+then run dia to produce the diagram and insert it in the documentation. The</h1>
+<h1><a class="anchor" id="autotoc_md1408"></a>
+DIA_PATH tag allows you to specify the directory where the dia binary resides.</h1>
+<h1><a class="anchor" id="autotoc_md1409"></a>
+If left empty dia is assumed to be found in the default search path.</h1>
+<p>DIA_PATH =</p>
+<h1><a class="anchor" id="autotoc_md1410"></a>
+If set to YES the inheritance and collaboration graphs will hide inheritance</h1>
+<h1><a class="anchor" id="autotoc_md1411"></a>
+and usage relations if the target is undocumented or is not a class.</h1>
+<h1><a class="anchor" id="autotoc_md1412"></a>
+The default value is: YES.</h1>
+<p>HIDE_UNDOC_RELATIONS = YES</p>
+<h1><a class="anchor" id="autotoc_md1413"></a>
+If you set the HAVE_DOT tag to YES then doxygen will assume the dot tool is</h1>
+<h1><a class="anchor" id="autotoc_md1414"></a>
+available from the path. This tool is part of Graphviz (see:</h1>
+<h1><a class="anchor" id="autotoc_md1415"></a>
+http://www.graphviz.org/), a graph visualization toolkit from AT&amp;T and Lucent</h1>
+<h1><a class="anchor" id="autotoc_md1416"></a>
+Bell Labs. The other options in this section have no effect if this option is</h1>
+<h1><a class="anchor" id="autotoc_md1417"></a>
+set to NO</h1>
+<h1><a class="anchor" id="autotoc_md1418"></a>
+The default value is: NO.</h1>
+<p>HAVE_DOT = NO</p>
+<h1><a class="anchor" id="autotoc_md1419"></a>
+The DOT_NUM_THREADS specifies the number of dot invocations doxygen is allowed</h1>
+<h1><a class="anchor" id="autotoc_md1420"></a>
+to run in parallel. When set to 0 doxygen will base this on the number of</h1>
+<h1><a class="anchor" id="autotoc_md1421"></a>
+processors available in the system. You can set it explicitly to a value</h1>
+<h1><a class="anchor" id="autotoc_md1422"></a>
+larger than 0 to get control over the balance between CPU load and processing</h1>
+<h1><a class="anchor" id="autotoc_md1423"></a>
+speed.</h1>
+<h1><a class="anchor" id="autotoc_md1424"></a>
+Minimum value: 0, maximum value: 32, default value: 0.</h1>
+<h1><a class="anchor" id="autotoc_md1425"></a>
+This tag requires that the tag HAVE_DOT is set to YES.</h1>
+<p>DOT_NUM_THREADS = 0</p>
+<h1><a class="anchor" id="autotoc_md1426"></a>
+When you want a differently looking font in the dot files that doxygen</h1>
+<h1><a class="anchor" id="autotoc_md1427"></a>
+generates you can specify the font name using DOT_FONTNAME. You need to make</h1>
+<h1><a class="anchor" id="autotoc_md1428"></a>
+sure dot is able to find the font, which can be done by putting it in a</h1>
+<h1><a class="anchor" id="autotoc_md1429"></a>
+standard location or by setting the DOTFONTPATH environment variable or by</h1>
+<h1><a class="anchor" id="autotoc_md1430"></a>
+setting DOT_FONTPATH to the directory containing the font.</h1>
+<h1><a class="anchor" id="autotoc_md1431"></a>
+The default value is: Helvetica.</h1>
+<h1><a class="anchor" id="autotoc_md1432"></a>
+This tag requires that the tag HAVE_DOT is set to YES.</h1>
+<p>DOT_FONTNAME = Helvetica</p>
+<h1><a class="anchor" id="autotoc_md1433"></a>
+The DOT_FONTSIZE tag can be used to set the size (in points) of the font of</h1>
+<h1><a class="anchor" id="autotoc_md1434"></a>
+dot graphs.</h1>
+<h1><a class="anchor" id="autotoc_md1435"></a>
+Minimum value: 4, maximum value: 24, default value: 10.</h1>
+<h1><a class="anchor" id="autotoc_md1436"></a>
+This tag requires that the tag HAVE_DOT is set to YES.</h1>
+<p>DOT_FONTSIZE = 10</p>
+<h1><a class="anchor" id="autotoc_md1437"></a>
+By default doxygen will tell dot to use the default font as specified with</h1>
+<h1><a class="anchor" id="autotoc_md1438"></a>
+DOT_FONTNAME. If you specify a different font using DOT_FONTNAME you can set</h1>
+<h1><a class="anchor" id="autotoc_md1439"></a>
+the path where dot can find it using this tag.</h1>
+<h1><a class="anchor" id="autotoc_md1440"></a>
+This tag requires that the tag HAVE_DOT is set to YES.</h1>
+<p>DOT_FONTPATH =</p>
+<h1><a class="anchor" id="autotoc_md1441"></a>
+If the CLASS_GRAPH tag is set to YES then doxygen will generate a graph for</h1>
+<h1><a class="anchor" id="autotoc_md1442"></a>
+each documented class showing the direct and indirect inheritance relations.</h1>
+<h1><a class="anchor" id="autotoc_md1443"></a>
+Setting this tag to YES will force the CLASS_DIAGRAMS tag to NO.</h1>
+<h1><a class="anchor" id="autotoc_md1444"></a>
+The default value is: YES.</h1>
+<h1><a class="anchor" id="autotoc_md1445"></a>
+This tag requires that the tag HAVE_DOT is set to YES.</h1>
+<p>CLASS_GRAPH = YES</p>
+<h1><a class="anchor" id="autotoc_md1446"></a>
+If the COLLABORATION_GRAPH tag is set to YES then doxygen will generate a</h1>
+<h1><a class="anchor" id="autotoc_md1447"></a>
+graph for each documented class showing the direct and indirect implementation</h1>
+<h1><a class="anchor" id="autotoc_md1448"></a>
+dependencies (inheritance, containment, and class references variables) of the</h1>
+<h1><a class="anchor" id="autotoc_md1449"></a>
+class with other documented classes.</h1>
+<h1><a class="anchor" id="autotoc_md1450"></a>
+The default value is: YES.</h1>
+<h1><a class="anchor" id="autotoc_md1451"></a>
+This tag requires that the tag HAVE_DOT is set to YES.</h1>
+<p>COLLABORATION_GRAPH = YES</p>
+<h1><a class="anchor" id="autotoc_md1452"></a>
+If the GROUP_GRAPHS tag is set to YES then doxygen will generate a graph for</h1>
+<h1><a class="anchor" id="autotoc_md1453"></a>
+groups, showing the direct groups dependencies.</h1>
+<h1><a class="anchor" id="autotoc_md1454"></a>
+The default value is: YES.</h1>
+<h1><a class="anchor" id="autotoc_md1455"></a>
+This tag requires that the tag HAVE_DOT is set to YES.</h1>
+<p>GROUP_GRAPHS = YES</p>
+<h1><a class="anchor" id="autotoc_md1456"></a>
+If the UML_LOOK tag is set to YES, doxygen will generate inheritance and</h1>
+<h1><a class="anchor" id="autotoc_md1457"></a>
+collaboration diagrams in a style similar to the OMG's Unified Modeling</h1>
+<h1><a class="anchor" id="autotoc_md1458"></a>
+Language.</h1>
+<h1><a class="anchor" id="autotoc_md1459"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md1460"></a>
+This tag requires that the tag HAVE_DOT is set to YES.</h1>
+<p>UML_LOOK = NO</p>
+<h1><a class="anchor" id="autotoc_md1461"></a>
+If the UML_LOOK tag is enabled, the fields and methods are shown inside the</h1>
+<h1><a class="anchor" id="autotoc_md1462"></a>
+class node. If there are many fields or methods and many nodes the graph may</h1>
+<h1><a class="anchor" id="autotoc_md1463"></a>
+become too big to be useful. The UML_LIMIT_NUM_FIELDS threshold limits the</h1>
+<h1><a class="anchor" id="autotoc_md1464"></a>
+number of items for each type to make the size more manageable. Set this to 0</h1>
+<h1><a class="anchor" id="autotoc_md1465"></a>
+for no limit. Note that the threshold may be exceeded by 50% before the limit</h1>
+<h1><a class="anchor" id="autotoc_md1466"></a>
+is enforced. So when you set the threshold to 10, up to 15 fields may appear,</h1>
+<h1><a class="anchor" id="autotoc_md1467"></a>
+but if the number exceeds 15, the total amount of fields shown is limited to</h1>
+<h1><a class="anchor" id="autotoc_md1468"></a>
+10.</h1>
+<h1><a class="anchor" id="autotoc_md1469"></a>
+Minimum value: 0, maximum value: 100, default value: 10.</h1>
+<h1><a class="anchor" id="autotoc_md1470"></a>
+This tag requires that the tag HAVE_DOT is set to YES.</h1>
+<p>UML_LIMIT_NUM_FIELDS = 10</p>
+<h1><a class="anchor" id="autotoc_md1471"></a>
+If the TEMPLATE_RELATIONS tag is set to YES then the inheritance and</h1>
+<h1><a class="anchor" id="autotoc_md1472"></a>
+collaboration graphs will show the relations between templates and their</h1>
+<h1><a class="anchor" id="autotoc_md1473"></a>
+instances.</h1>
+<h1><a class="anchor" id="autotoc_md1474"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md1475"></a>
+This tag requires that the tag HAVE_DOT is set to YES.</h1>
+<p>TEMPLATE_RELATIONS = NO</p>
+<h1><a class="anchor" id="autotoc_md1476"></a>
+If the INCLUDE_GRAPH, ENABLE_PREPROCESSING and SEARCH_INCLUDES tags are set to</h1>
+<h1><a class="anchor" id="autotoc_md1477"></a>
+YES then doxygen will generate a graph for each documented file showing the</h1>
+<h1><a class="anchor" id="autotoc_md1478"></a>
+direct and indirect include dependencies of the file with other documented</h1>
+<h1><a class="anchor" id="autotoc_md1479"></a>
+files.</h1>
+<h1><a class="anchor" id="autotoc_md1480"></a>
+The default value is: YES.</h1>
+<h1><a class="anchor" id="autotoc_md1481"></a>
+This tag requires that the tag HAVE_DOT is set to YES.</h1>
+<p>INCLUDE_GRAPH = YES</p>
+<h1><a class="anchor" id="autotoc_md1482"></a>
+If the INCLUDED_BY_GRAPH, ENABLE_PREPROCESSING and SEARCH_INCLUDES tags are</h1>
+<h1><a class="anchor" id="autotoc_md1483"></a>
+set to YES then doxygen will generate a graph for each documented file showing</h1>
+<h1><a class="anchor" id="autotoc_md1484"></a>
+the direct and indirect include dependencies of the file with other documented</h1>
+<h1><a class="anchor" id="autotoc_md1485"></a>
+files.</h1>
+<h1><a class="anchor" id="autotoc_md1486"></a>
+The default value is: YES.</h1>
+<h1><a class="anchor" id="autotoc_md1487"></a>
+This tag requires that the tag HAVE_DOT is set to YES.</h1>
+<p>INCLUDED_BY_GRAPH = YES</p>
+<h1><a class="anchor" id="autotoc_md1488"></a>
+If the CALL_GRAPH tag is set to YES then doxygen will generate a call</h1>
+<h1><a class="anchor" id="autotoc_md1489"></a>
+dependency graph for every global function or class method.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md1490"></a>
+Note that enabling this option will significantly increase the time of a run.</h1>
+<h1><a class="anchor" id="autotoc_md1491"></a>
+So in most cases it will be better to enable call graphs for selected</h1>
+<h1><a class="anchor" id="autotoc_md1492"></a>
+functions only using the \callgraph command. Disabling a call graph can be</h1>
+<h1><a class="anchor" id="autotoc_md1493"></a>
+accomplished by means of the command \hidecallgraph.</h1>
+<h1><a class="anchor" id="autotoc_md1494"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md1495"></a>
+This tag requires that the tag HAVE_DOT is set to YES.</h1>
+<p>CALL_GRAPH = NO</p>
+<h1><a class="anchor" id="autotoc_md1496"></a>
+If the CALLER_GRAPH tag is set to YES then doxygen will generate a caller</h1>
+<h1><a class="anchor" id="autotoc_md1497"></a>
+dependency graph for every global function or class method.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md1498"></a>
+Note that enabling this option will significantly increase the time of a run.</h1>
+<h1><a class="anchor" id="autotoc_md1499"></a>
+So in most cases it will be better to enable caller graphs for selected</h1>
+<h1><a class="anchor" id="autotoc_md1500"></a>
+functions only using the \callergraph command. Disabling a caller graph can be</h1>
+<h1><a class="anchor" id="autotoc_md1501"></a>
+accomplished by means of the command \hidecallergraph.</h1>
+<h1><a class="anchor" id="autotoc_md1502"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md1503"></a>
+This tag requires that the tag HAVE_DOT is set to YES.</h1>
+<p>CALLER_GRAPH = NO</p>
+<h1><a class="anchor" id="autotoc_md1504"></a>
+If the GRAPHICAL_HIERARCHY tag is set to YES then doxygen will graphical</h1>
+<h1><a class="anchor" id="autotoc_md1505"></a>
+hierarchy of all classes instead of a textual one.</h1>
+<h1><a class="anchor" id="autotoc_md1506"></a>
+The default value is: YES.</h1>
+<h1><a class="anchor" id="autotoc_md1507"></a>
+This tag requires that the tag HAVE_DOT is set to YES.</h1>
+<p>GRAPHICAL_HIERARCHY = YES</p>
+<h1><a class="anchor" id="autotoc_md1508"></a>
+If the DIRECTORY_GRAPH tag is set to YES then doxygen will show the</h1>
+<h1><a class="anchor" id="autotoc_md1509"></a>
+dependencies a directory has on other directories in a graphical way. The</h1>
+<h1><a class="anchor" id="autotoc_md1510"></a>
+dependency relations are determined by the #include relations between the</h1>
+<h1><a class="anchor" id="autotoc_md1511"></a>
+files in the directories.</h1>
+<h1><a class="anchor" id="autotoc_md1512"></a>
+The default value is: YES.</h1>
+<h1><a class="anchor" id="autotoc_md1513"></a>
+This tag requires that the tag HAVE_DOT is set to YES.</h1>
+<p>DIRECTORY_GRAPH = YES</p>
+<h1><a class="anchor" id="autotoc_md1514"></a>
+The DOT_IMAGE_FORMAT tag can be used to set the image format of the images</h1>
+<h1><a class="anchor" id="autotoc_md1515"></a>
+generated by dot. For an explanation of the image formats see the section</h1>
+<h1><a class="anchor" id="autotoc_md1516"></a>
+output formats in the documentation of the dot tool (Graphviz (see:</h1>
+<h1><a class="anchor" id="autotoc_md1517"></a>
+http://www.graphviz.org/)).</h1>
+<h1><a class="anchor" id="autotoc_md1518"></a>
+Note: If you choose svg you need to set HTML_FILE_EXTENSION to xhtml in order</h1>
+<h1><a class="anchor" id="autotoc_md1519"></a>
+to make the SVG files visible in IE 9+ (other browsers do not have this</h1>
+<h1><a class="anchor" id="autotoc_md1520"></a>
+requirement).</h1>
+<h1><a class="anchor" id="autotoc_md1521"></a>
+Possible values are: png, jpg, gif, svg, png:gd, png:gd:gd, png:cairo,</h1>
+<h1><a class="anchor" id="autotoc_md1522"></a>
+png:cairo:gd, png:cairo:cairo, png:cairo:gdiplus, png:gdiplus and</h1>
+<h1><a class="anchor" id="autotoc_md1523"></a>
+png:gdiplus:gdiplus.</h1>
+<h1><a class="anchor" id="autotoc_md1524"></a>
+The default value is: png.</h1>
+<h1><a class="anchor" id="autotoc_md1525"></a>
+This tag requires that the tag HAVE_DOT is set to YES.</h1>
+<p>DOT_IMAGE_FORMAT = png</p>
+<h1><a class="anchor" id="autotoc_md1526"></a>
+If DOT_IMAGE_FORMAT is set to svg, then this option can be set to YES to</h1>
+<h1><a class="anchor" id="autotoc_md1527"></a>
+enable generation of interactive SVG images that allow zooming and panning.</h1>
+<p># </p>
+<h1><a class="anchor" id="autotoc_md1528"></a>
+Note that this requires a modern browser other than Internet Explorer. Tested</h1>
+<h1><a class="anchor" id="autotoc_md1529"></a>
+and working are Firefox, Chrome, Safari, and Opera.</h1>
+<h1><a class="anchor" id="autotoc_md1530"></a>
+Note: For IE 9+ you need to set HTML_FILE_EXTENSION to xhtml in order to make</h1>
+<h1><a class="anchor" id="autotoc_md1531"></a>
+the SVG files visible. Older versions of IE do not have SVG support.</h1>
+<h1><a class="anchor" id="autotoc_md1532"></a>
+The default value is: NO.</h1>
+<h1><a class="anchor" id="autotoc_md1533"></a>
+This tag requires that the tag HAVE_DOT is set to YES.</h1>
+<p>INTERACTIVE_SVG = NO</p>
+<h1><a class="anchor" id="autotoc_md1534"></a>
+The DOT_PATH tag can be used to specify the path where the dot tool can be</h1>
+<h1><a class="anchor" id="autotoc_md1535"></a>
+found. If left blank, it is assumed the dot tool can be found in the path.</h1>
+<h1><a class="anchor" id="autotoc_md1536"></a>
+This tag requires that the tag HAVE_DOT is set to YES.</h1>
+<p>DOT_PATH =</p>
+<h1><a class="anchor" id="autotoc_md1537"></a>
+The DOTFILE_DIRS tag can be used to specify one or more directories that</h1>
+<h1><a class="anchor" id="autotoc_md1538"></a>
+contain dot files that are included in the documentation (see the \dotfile</h1>
+<h1><a class="anchor" id="autotoc_md1539"></a>
+command).</h1>
+<h1><a class="anchor" id="autotoc_md1540"></a>
+This tag requires that the tag HAVE_DOT is set to YES.</h1>
+<p>DOTFILE_DIRS =</p>
+<h1><a class="anchor" id="autotoc_md1541"></a>
+The MSCFILE_DIRS tag can be used to specify one or more directories that</h1>
+<h1><a class="anchor" id="autotoc_md1542"></a>
+contain msc files that are included in the documentation (see the \mscfile</h1>
+<h1><a class="anchor" id="autotoc_md1543"></a>
+command).</h1>
+<p>MSCFILE_DIRS =</p>
+<h1><a class="anchor" id="autotoc_md1544"></a>
+The DIAFILE_DIRS tag can be used to specify one or more directories that</h1>
+<h1><a class="anchor" id="autotoc_md1545"></a>
+contain dia files that are included in the documentation (see the \diafile</h1>
+<h1><a class="anchor" id="autotoc_md1546"></a>
+command).</h1>
+<p>DIAFILE_DIRS =</p>
+<h1><a class="anchor" id="autotoc_md1547"></a>
+When using plantuml, the PLANTUML_JAR_PATH tag should be used to specify the</h1>
+<h1><a class="anchor" id="autotoc_md1548"></a>
+path where java can find the plantuml.jar file. If left blank, it is assumed</h1>
+<h1><a class="anchor" id="autotoc_md1549"></a>
+PlantUML is not used or called during a preprocessing step. Doxygen will</h1>
+<h1><a class="anchor" id="autotoc_md1550"></a>
+generate a warning when it encounters a \startuml command in this case and</h1>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->

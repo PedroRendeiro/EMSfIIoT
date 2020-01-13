@@ -8,7 +8,38 @@ import GenericSensor as GenericSensor
 import classImageClassification
 
 class MQTT():
+    """
+    MQTT Class
+
+    Configures and starts MQTT communication
+
+    Attributes:
+     	tenantId: ID necessary for Bosch IoT Suite MQTT communication
+        hub_adapter_host: MQTT broker URL
+        certificatePath: MQTT TLS certificate path
+        deviceId: Device ID for user and MQTT payload
+        authId: Auth ID for user and MQTT payload
+        device_password: Password for MQTT authentication
+        ditto_topic: MQTT topic to publish
+        clientId: Client ID for MQTT communication
+        username: username for MQTT communication
+        readDone: Check if current read is done
+        ImageClassification: ImageClassification Class
+        infomodel: InformationModel Class
+        ser: Serializer Class
+        next_call: Time to next MQTT message
+        timePeriod: Time between MQTT messages
+        publishTopic: MQTT topic to publish in
+        client: MQTT Client
+    """
+
     def __init__(self):
+        """
+        Class constructor
+
+        Reads configuration file and sets variables.
+        Starts MQTT loop.
+        """
         config = configparser.ConfigParser()
         config.read("./config/config.ini")
 
@@ -64,6 +95,12 @@ class MQTT():
 
     # The callback for when the client receives a CONNACK response from the server.
     def on_connect(self, client, userdata, flags, rc):
+        """
+        Function to run on when connection is established to MQTT broker
+
+        Subscribes command topic
+        Sets periodic publication
+        """
         if rc != 0:
             print("Connection to MQTT broker failed: " + str(rc))
             return        
@@ -83,25 +120,40 @@ class MQTT():
 
     # The callback for when a PUBLISH message is received from the server.
     def on_message(self, client, userdata, msg):
-        
-        ### BEGIN SAMPLE CODE
-        
-        print(msg.topic + " " + str(msg.payload))
+        """
+        Function to run on when message is received
+    
+        Args:
+            client: MQTT client
+            userdata: User who published the message on broker
+            msg: MQTT message payload
 
-        ### END SAMPLE CODE
+        """
+        print(msg.topic + " " + str(msg.payload))
 
     # The functions to publish the functionblocks data
     def publishGenericsensor(self):
+        """
+        Function to publish data to MQTT broker
+
+        Generates payload from data in infomodel
+        """
         payload = self.ser.serialize_functionblock("genericsensor", self.infomodel, self.ditto_topic, self.deviceId)
         print("Publish Payload: ", payload, " to Topic: ", self.publishTopic)
         self.client.publish(self.publishTopic, payload)
     
     # The function that will be executed periodically once the connection to the MQTT broker was established
     def periodicAction(self):
+        """
+
+        Function to run periodicaly
+
+        Calls ImageClassification and sets current date and time.
+        Publish to topic.
+        Schedule next call.
+        """
 
         self.readDone = False
-        
-        ### BEGIN READING SENSOR DATA
 
         print("Reading data...")
 
@@ -114,8 +166,6 @@ class MQTT():
 
         print("Read done!")
 
-        ### END READING SENSOR DATA
-
         # Publish payload
         self.publishGenericsensor()
 
@@ -126,6 +176,9 @@ class MQTT():
         threading.Timer(self.timePeriod, self.periodicAction).start()
 
 def main():
+    """
+    Main function to test class
+    """
     try:
         mqtt = MQTT()
         while (not(mqtt.readDone)):
