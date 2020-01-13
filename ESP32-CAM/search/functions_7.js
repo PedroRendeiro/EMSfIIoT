@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['setgain_39',['setGain',['../class_t_s_l2591.html#a9b2adc38e84bdaf9360ce5623af7b7aa',1,'TSL2591']]],
-  ['settiming_40',['setTiming',['../class_t_s_l2591.html#ae1cd7e19ba222c9aa586c1087cc19b06',1,'TSL2591']]],
-  ['startserver_41',['startServer',['../class_e_s_p32_c_a_m.html#a1bc0a2bbf0066e4e60b354282edc9239',1,'ESP32CAM']]]
+  ['readbyte_219',['readByte',['../class_t_s_l2591.html#a81e6e530200406915a344b57b62c1448',1,'TSL2591::readByte(unsigned char address)'],['../class_t_s_l2591.html#a81e6e530200406915a344b57b62c1448',1,'TSL2591::readByte(unsigned char address)']]],
+  ['readuint_220',['readUInt',['../class_t_s_l2591.html#a6224c6cb48fbe970669602d697939143',1,'TSL2591::readUInt(unsigned char address)'],['../class_t_s_l2591.html#a6224c6cb48fbe970669602d697939143',1,'TSL2591::readUInt(unsigned char address)']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['imageacquisition_77',['ImageAcquisition',['../classclass_image_acquisition_1_1_image_acquisition.html',1,'classImageAcquisition']]],
-  ['imageclassification_78',['ImageClassification',['../classclass_image_classification_1_1_image_classification.html',1,'classImageClassification']]]
+  ['tsl2591_6',['tsl2591',['../classtsl2591.html',1,'']]]
 ];

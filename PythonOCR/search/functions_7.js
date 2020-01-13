@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['periodicaction_107',['periodicAction',['../classclass_m_q_t_t_1_1_m_q_t_t.html#acd5df9f5c9c305be2b681a2174a7d528',1,'classMQTT::MQTT']]],
-  ['publishgenericsensor_108',['publishGenericsensor',['../classclass_m_q_t_t_1_1_m_q_t_t.html#a00d49f7aa3c119a6f2ebb1e1d3a13d92',1,'classMQTT::MQTT']]]
+  ['setgain_39',['setGain',['../class_t_s_l2591.html#a9b2adc38e84bdaf9360ce5623af7b7aa',1,'TSL2591']]],
+  ['settiming_40',['setTiming',['../class_t_s_l2591.html#ae1cd7e19ba222c9aa586c1087cc19b06',1,'TSL2591']]],
+  ['startserver_41',['startServer',['../class_e_s_p32_c_a_m.html#a1bc0a2bbf0066e4e60b354282edc9239',1,'ESP32CAM']]]
 ];

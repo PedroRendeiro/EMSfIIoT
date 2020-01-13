@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['next_5fcall_44',['next_call',['../classclass_m_q_t_t_1_1_m_q_t_t.html#a49718acc6ef81308ea35d54838630ecd',1,'classMQTT::MQTT']]]
+  ['writebyte_21',['writeByte',['../class_t_s_l2591.html#a37acac43d13a322b47043d0a56c53b6e',1,'TSL2591']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dittoserializer_75',['DittoSerializer',['../classclass_ditto_serializer_1_1_ditto_serializer.html',1,'classDittoSerializer']]]
+  ['esp32cam_22',['ESP32CAM',['../class_e_s_p32_c_a_m.html',1,'']]]
 ];

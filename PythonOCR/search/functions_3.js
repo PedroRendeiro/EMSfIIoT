@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['insertvalue_100',['insertValue',['../classclass_o_d_b_c_1_1_o_d_b_c.html#ae27395efe0981911257fd250035fe1bf',1,'classODBC::ODBC']]]
+  ['enable_30',['enable',['../class_t_s_l2591.html#a29748acf8ccdd29a23e2c5971a143e6e',1,'TSL2591']]]
 ];

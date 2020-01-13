@@ -1,19 +1,4 @@
 var searchData=
 [
-  ['certificatepath_2',['certificatePath',['../classclass_m_q_t_t_1_1_m_q_t_t.html#a6c686249c049735f32109a57445e6df9',1,'classMQTT::MQTT']]],
-  ['classdittoserializer_3',['classDittoSerializer',['../namespaceclass_ditto_serializer.html',1,'']]],
-  ['classdittoserializer_2epy_4',['classDittoSerializer.py',['../class_ditto_serializer_8py.html',1,'']]],
-  ['classimageacquisition_5',['classImageAcquisition',['../namespaceclass_image_acquisition.html',1,'']]],
-  ['classimageacquisition_2epy_6',['classImageAcquisition.py',['../class_image_acquisition_8py.html',1,'']]],
-  ['classimageclassification_7',['classImageClassification',['../namespaceclass_image_classification.html',1,'']]],
-  ['classimageclassification_2epy_8',['classImageClassification.py',['../class_image_classification_8py.html',1,'']]],
-  ['classmqtt_9',['classMQTT',['../namespaceclass_m_q_t_t.html',1,'']]],
-  ['classmqtt_2epy_10',['classMQTT.py',['../class_m_q_t_t_8py.html',1,'']]],
-  ['classodbc_11',['classODBC',['../namespaceclass_o_d_b_c.html',1,'']]],
-  ['classodbc_2epy_12',['classODBC.py',['../class_o_d_b_c_8py.html',1,'']]],
-  ['client_13',['client',['../classclass_m_q_t_t_1_1_m_q_t_t.html#a8c6e5323bcd645a975464477987d98d2',1,'classMQTT::MQTT']]],
-  ['clientid_14',['clientId',['../classclass_m_q_t_t_1_1_m_q_t_t.html#a35441925c39806eb748af1357c2ece4a',1,'classMQTT::MQTT']]],
-  ['cnxn_15',['cnxn',['../classclass_o_d_b_c_1_1_o_d_b_c.html#a9e05bc8a0777f1792e2b404539ac0e00',1,'classODBC::ODBC']]],
-  ['connect_16',['connect',['../classclass_o_d_b_c_1_1_o_d_b_c.html#aace8064fef9eba069606487dabf3cc01',1,'classODBC::ODBC']]],
-  ['cursor_17',['cursor',['../classclass_o_d_b_c_1_1_o_d_b_c.html#a83d5f6ae54ad39b142689ca5ff4af520',1,'classODBC::ODBC']]]
+  ['disable_5',['disable',['../class_t_s_l2591.html#ac69a58d3b72582e8dbb6a0bacb7fd5eb',1,'TSL2591']]]
 ];

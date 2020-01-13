@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['writebyte_226',['writeByte',['../class_t_s_l2591.html#a37acac43d13a322b47043d0a56c53b6e',1,'TSL2591::writeByte(unsigned char address, unsigned char value)'],['../class_t_s_l2591.html#a37acac43d13a322b47043d0a56c53b6e',1,'TSL2591::writeByte(unsigned char address, unsigned char value)']]]
+];
