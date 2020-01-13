@@ -1,4 +1,0 @@
-var searchData=
-[
-  ['init',['init',['../classESP32CAM.html#ae20aeaf03f38e88c6c87dc6da17746a4',1,'ESP32CAM']]]
-];
