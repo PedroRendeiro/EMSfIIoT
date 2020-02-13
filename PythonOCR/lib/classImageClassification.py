@@ -2,9 +2,16 @@ import configparser
 import argparse
 
 import numpy as np
-from imutils import contours
 import imutils
 import cv2
+from imutils import contours
+try:
+    from picamera import PiCamera
+    from time import sleep
+except:
+    pass
+
+import lib.classImageAcquisition as ImageAcquisition
 
 class ImageClassification:
     """
@@ -29,24 +36,39 @@ class ImageClassification:
         Processes and stores template image
         """
         config = configparser.ConfigParser()
-        config.read("./config/config.ini")
+        config.read("./config/config.ini")        
 
-        # construct the argument parse and parse the arguments
-        ap = argparse.ArgumentParser()
-        ap.add_argument("-i", "--image", required=True,
-            help="path to input image")
-        ap.add_argument("-r", "--reference", required=False,
-            help="path to reference OCR-A image")
-        args = vars(ap.parse_args())
+        if config.has_option('source', 'device'):
+            if config['source']['device'] == "ESP32_CAM":
+                url = config['source']['ip']
+                self.ImageAcquisition =  ImageAcquisition.ImageAcquisition()
+                self.ImageAcquisition.LoadImageFromURL(url, './images/test.png')
+            elif config['source']['device'] == "RaspiCam":
+                camera = PiCamera()
+                camera.start_preview()
+                sleep(2)
+                camera.capture('./images/test.png')
+                camera.stop_preview()
+            elif config['source']['device'] == "WebCam":
+                pass
+            self.image = cv2.imread('./images/test.png')
+        else:
+            # construct the argument parse and parse the arguments
+            ap = argparse.ArgumentParser()
+            ap.add_argument("-i", "--image", required=True,
+                help="path to input image")
+            ap.add_argument("-r", "--reference", required=False,
+                help="path to reference OCR-A image")
+            args = vars(ap.parse_args())
+
+            self.image = cv2.imread(args["image"])
 
         self.reference = config['reference']['path']
-
-        self.image = cv2.imread(args["image"])
 
         # initialize a rectangular (wider than it is tall) and square
         # structuring kernel
         self.rectKernel = cv2.getStructuringElement(cv2.MORPH_RECT, (9, 3))
-        self.sqKernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
+        self.sqKernel = cv2.getStructuringElement(cv2.MORPH_RECT, (2, 2))
         
         # load the reference OCR-A image from disk, convert it to grayscale,
         # and threshold it, such that the digits appear as *white* on a
@@ -84,16 +106,29 @@ class ImageClassification:
         """
         # resize the input image, and convert it to grayscale
         image = imutils.resize(self.image, width=300)
+        image = imutils.rotate(image, -90)
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-        # apply a tophat (whitehat) morphological operator to find light
-        # regions against a dark background (i.e., the credit card numbers)
+        if showResult:
+            cv2.imshow("Image", gray)
+            cv2.waitKey(0)
+            cv2.destroyAllWindows()
+
+        # apply a tophat (blackhat) morphological operator
         tophat = cv2.morphologyEx(gray, cv2.MORPH_BLACKHAT, self.rectKernel)
+        #tophat = cv2.equalizeHist(tophat)
+        tophat[tophat<40] = 0
+        rectKernel = cv2.getStructuringElement(cv2.MORPH_RECT, (18, 6))
+        tophat = cv2.morphologyEx(tophat, cv2.MORPH_CLOSE, rectKernel)
+
+        if showResult:
+            cv2.imshow("Image", tophat)
+            cv2.waitKey(0)
+            cv2.destroyAllWindows()
 
         # compute the Scharr gradient of the tophat image, then scale
         # the rest back into the range [0, 255]
-        gradX = cv2.Sobel(tophat, ddepth=cv2.CV_32F, dx=1, dy=0,
-            ksize=-1)
+        gradX = cv2.Sobel(tophat, ddepth=cv2.CV_32F, dx=1, dy=0, ksize=-1)
         gradX = np.absolute(gradX)
         (minVal, maxVal) = (np.min(gradX), np.max(gradX))
         gradX = (255 * ((gradX - minVal) / (maxVal - minVal)))
@@ -103,12 +138,28 @@ class ImageClassification:
         # cloes gaps in between credit card number digits, then apply
         # Otsu's thresholding method to binarize the image
         gradX = cv2.morphologyEx(tophat, cv2.MORPH_CLOSE, self.rectKernel)
+        
+        if showResult:
+            cv2.imshow("Image", gradX)
+            cv2.waitKey(0)
+            cv2.destroyAllWindows()        
+        
         thresh = cv2.threshold(gradX, 0, 255,
-            cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
+            cv2.THRESH_BINARY | cv2.THRESH_TRIANGLE)[1]
+
+        if showResult:
+            cv2.imshow("Image", thresh)
+            cv2.waitKey(0)
+            cv2.destroyAllWindows()    
 
         # apply a second closing operation to the binary image, again
         # to help close gaps between credit card number regions
-        thresh = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, self.sqKernel)        
+        thresh = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, self.sqKernel)
+
+        if showResult:
+            cv2.imshow("Image", thresh)
+            cv2.waitKey(0)
+            cv2.destroyAllWindows() 
 
         # find contours in the thresholded image, then initialize the
         # list of digit locations
@@ -127,7 +178,7 @@ class ImageClassification:
             # since credit cards used a fixed size fonts with 4 groups
             # of 4 digits, we can prune potential contours based on the
             # aspect ratio
-            if ar > 2.5 and ar < 4.0:
+            if ar > 2.5 and ar < 6.0:
                 # contours can further be pruned on minimum/maximum width
                 # and height
                 if (w > 40 and w < 255) and (h > 10 and h < 60):
@@ -151,6 +202,12 @@ class ImageClassification:
             group = gray[gY - 5:gY + gH + 5, gX - 5:gX + gW + 5]
             group = cv2.threshold(group, 0, 255,
                 cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
+            group = cv2.morphologyEx(group, cv2.MORPH_CLOSE, self.sqKernel)
+
+            if showResult:
+                cv2.imshow("Image", group)
+                cv2.waitKey(0)
+                cv2.destroyAllWindows()
 
             # detect the contours of each individual digit in the group,
             # then sort the digit contours from left to right
@@ -168,6 +225,14 @@ class ImageClassification:
                 (x, y, w, h) = cv2.boundingRect(c)                
                 roi = group[y:y + h, x:x + w]
                 roi = cv2.resize(roi, (57, 88))
+                
+                if (h < 10):
+                    continue
+
+                if showResult:
+                    cv2.imshow("Image", roi)
+                    cv2.waitKey(0)
+                    cv2.destroyAllWindows()
 
                 # initialize a list of template matching scores
                 scores = []
@@ -197,16 +262,16 @@ class ImageClassification:
         # display the output credit card information to the screen
         output = int(''.join(output))
         print(output)
-        if showResult:
-            cv2.imshow("Image", image)
-            cv2.waitKey(0)
-            cv2.destroyAllWindows()
+        #if showResult:
+        cv2.imshow("Image", image)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 
         return output
 
 def main():
     image = ImageClassification()
-    image.readImage(True)
+    image.readImage(False)
 
 if __name__ == '__main__':
     main()

@@ -162,9 +162,7 @@ esp_err_t ESP32CAM::jpg_httpd_handler(httpd_req_t *req) {
   Serial.print("Connecting to I2C Light Sensor\n...");
   uint32_t start = millis();
   while (!lightSensor.begin()) {
-    Serial.print(".");
-    delay(500);
-    if ((millis()-start)>5000) {
+    if ((millis()-start)>500) {
       //ESP.restart();
       break;
     }
@@ -198,6 +196,120 @@ esp_err_t ESP32CAM::jpg_httpd_handler(httpd_req_t *req) {
     Serial.println("Flash Off!");
     flashOn = false;
   }
+
+  Serial.println("Sending header");
+  // Send response header
+  res = httpd_resp_set_type(req, "image/jpeg");
+  if(res == ESP_OK){
+    res = httpd_resp_set_hdr(req, "Content-Disposition", "inline; filename=capture.jpg");
+  }
+  Serial.println("Sending frame");
+  // Send response content
+  if(res == ESP_OK){
+    fb_len = fb->len;
+    res = httpd_resp_send(req, (const char *)fb->buf, fb->len);
+  }
+  
+  // Return the frame buffer back to the driver for reuse
+  esp_camera_fb_return(fb);
+
+  // Log everything
+  int64_t fr_end = esp_timer_get_time();
+  ESP_LOGI(TAG, "JPG: %uKB %ums", (uint32_t)(fb_len/1024), (uint32_t)((fr_end - fr_start)/1000));
+  digitalWrite(CAM_PIN_LED, HIGH);
+
+  // Return
+  return res;
+}
+
+/**
+ * @brief Function to acquire and send picture over HTTP
+ * 
+ * Initializes and checks luminosity sensor
+ * If light too low -> Use flash
+ * 
+ * @param req 
+ * @return esp_err_t 
+ */
+esp_err_t ESP32CAM::jpg_httpd_handler_with_flash(httpd_req_t *req) {
+  digitalWrite(CAM_PIN_LED, LOW);
+  camera_fb_t * fb = NULL;
+  esp_err_t res = ESP_OK;
+  size_t fb_len = 0;
+  int64_t fr_start = esp_timer_get_time();
+  
+  // Light flash
+  digitalWrite(CAM_PIN_FLASH, HIGH);
+
+  Serial.print("Capturing frame\n...");
+  // Acquire a frame
+  fb = esp_camera_fb_get();
+  if (!fb) {
+    ESP_LOGE(TAG, "Camera capture failed");
+    httpd_resp_send_500(req);
+    digitalWrite(CAM_PIN_LED, HIGH);
+    return ESP_FAIL;
+  }
+  Serial.println("\nCapture done!");
+
+  // Turn off flash
+  delay(1000);
+  digitalWrite(CAM_PIN_FLASH, LOW);
+
+  Serial.println("Sending header");
+  // Send response header
+  res = httpd_resp_set_type(req, "image/jpeg");
+  if(res == ESP_OK){
+    res = httpd_resp_set_hdr(req, "Content-Disposition", "inline; filename=capture.jpg");
+  }
+  Serial.println("Sending frame");
+  // Send response content
+  if(res == ESP_OK){
+    fb_len = fb->len;
+    res = httpd_resp_send(req, (const char *)fb->buf, fb->len);
+  }
+  
+  // Return the frame buffer back to the driver for reuse
+  esp_camera_fb_return(fb);
+
+  // Log everything
+  int64_t fr_end = esp_timer_get_time();
+  ESP_LOGI(TAG, "JPG: %uKB %ums", (uint32_t)(fb_len/1024), (uint32_t)((fr_end - fr_start)/1000));
+  digitalWrite(CAM_PIN_LED, HIGH);
+
+  // Return
+  return res;
+}
+
+/**
+ * @brief Function to acquire and send picture over HTTP
+ * 
+ * Initializes and checks luminosity sensor
+ * If light too low -> Use flash
+ * 
+ * @param req 
+ * @return esp_err_t 
+ */
+esp_err_t ESP32CAM::jpg_httpd_handler_without_flash(httpd_req_t *req) {
+  digitalWrite(CAM_PIN_LED, LOW);
+  camera_fb_t * fb = NULL;
+  esp_err_t res = ESP_OK;
+  size_t fb_len = 0;
+  int64_t fr_start = esp_timer_get_time();
+
+  Serial.print("Capturing frame\n...");
+  // Acquire a frame
+  fb = esp_camera_fb_get();
+  if (!fb) {
+    ESP_LOGE(TAG, "Camera capture failed");
+    httpd_resp_send_500(req);
+    digitalWrite(CAM_PIN_LED, HIGH);
+    return ESP_FAIL;
+  }
+  Serial.println("\nCapture done!");
+
+  // Wait
+  delay(1000);
 
   Serial.println("Sending header");
   // Send response header
@@ -297,11 +409,27 @@ void ESP32CAM::startServer(void) {
     .handler   = jpg_httpd_handler,
     .user_ctx  = NULL
   };
+
+  httpd_uri_t capture_with_flash_uri = {
+    .uri       = "/capture_with_flash",
+    .method    = HTTP_GET,
+    .handler   = jpg_httpd_handler_with_flash,
+    .user_ctx  = NULL
+  };
+
+  httpd_uri_t capture_without_flash_uri = {
+    .uri       = "/capture_without_flash",
+    .method    = HTTP_GET,
+    .handler   = jpg_httpd_handler_without_flash,
+    .user_ctx  = NULL
+  };
   
   Serial.printf("Starting web server on port: '%d'\n", config.server_port);
   if (httpd_start(&_camera_httpd, &config) == ESP_OK) {
     httpd_register_uri_handler(_camera_httpd, &status_uri);
     httpd_register_uri_handler(_camera_httpd, &capture_uri);
+    httpd_register_uri_handler(_camera_httpd, &capture_with_flash_uri);
+    httpd_register_uri_handler(_camera_httpd, &capture_without_flash_uri);
   }
   Serial.print("Camera Ready! Use 'http://");
   Serial.print(WiFi.localIP());

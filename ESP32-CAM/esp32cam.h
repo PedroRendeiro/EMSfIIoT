@@ -21,8 +21,12 @@
 // WiFi definitions
 //#define SSID                      "AndroidAP6120"
 //#define PASSWORD                  "4f5cd3453ae3"
-#define SSID                      "DESKTOP-CSTFN6E"
-#define PASSWORD                  "r678Q,03"
+//#define SSID                      "DESKTOP-CSTFN6E"
+//#define PASSWORD                  "r678Q,03"
+#define SSID                        "sala"
+#define PASSWORD                    "wfgysf5657"
+#define SSID                        "TP-Link_BD6B"
+#define PASSWORD                    "31192996"
 
 // Pin definition for CAMERA_MODEL_AI_THINKER
 #define CAM_PIN_PWDN              32
@@ -58,6 +62,8 @@ class ESP32CAM {
     boolean connectWiFi(void);
   private:
     static esp_err_t jpg_httpd_handler(httpd_req_t *req);
+    static esp_err_t jpg_httpd_handler_with_flash(httpd_req_t *req);
+    static esp_err_t jpg_httpd_handler_without_flash(httpd_req_t *req);
     static esp_err_t status_handler(httpd_req_t *req);
 
     camera_config_t _camera_config;

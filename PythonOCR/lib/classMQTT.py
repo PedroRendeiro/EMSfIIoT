@@ -2,10 +2,10 @@ import paho.mqtt.client as mqtt
 
 import datetime, threading, time, sys, configparser
 
-import classDittoSerializer as DittoSerializer
-import GenericSensor as GenericSensor
+import lib.classDittoSerializer as DittoSerializer
+import lib.GenericSensor as GenericSensor
 
-import classImageClassification
+import lib.classImageClassification as ImageClassification
 
 class MQTT():
     """
@@ -56,7 +56,7 @@ class MQTT():
 
         self.readDone = False
 
-        self.ImageClassification = classImageClassification.ImageClassification()
+        self.ImageClassification = ImageClassification.ImageClassification()
 
         # Initialization of Information Model
         self.infomodel = GenericSensor.GenericSensor()

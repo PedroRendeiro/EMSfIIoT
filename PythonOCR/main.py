@@ -9,9 +9,6 @@ def main():
     Starts MQTT connection and sends read every 30secs
     """
     try:
-        #image = lib.classImageClassification.ImageClassification()
-        #image.readImage()
-
         lib.classMQTT.MQTT()
 
         while (1):

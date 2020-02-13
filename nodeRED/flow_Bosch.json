@@ -1,0 +1,672 @@
+[
+    {
+        "id": "5543b2ae.464f9c",
+        "type": "tab",
+        "label": "Bosch",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "1ae576f9.522ec9",
+        "type": "http request",
+        "z": "5543b2ae.464f9c",
+        "name": "GET Thing",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 510,
+        "y": 640,
+        "wires": [
+            [
+                "ccfc3430.76ebc8",
+                "20d13a8a.a4bad6",
+                "bf545d19.0213e",
+                "dc67c979.737c38",
+                "40b8fe96.32d3f"
+            ]
+        ]
+    },
+    {
+        "id": "d166dc50.ff988",
+        "type": "inject",
+        "z": "5543b2ae.464f9c",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 640,
+        "wires": [
+            [
+                "93d78bdf.389678"
+            ]
+        ]
+    },
+    {
+        "id": "ca5d7603.f31538",
+        "type": "inject",
+        "z": "5543b2ae.464f9c",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "3480",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 150,
+        "y": 300,
+        "wires": [
+            [
+                "e56734b7.b8f308"
+            ]
+        ]
+    },
+    {
+        "id": "e56734b7.b8f308",
+        "type": "oauth2",
+        "z": "5543b2ae.464f9c",
+        "name": "OAuth2",
+        "container": "payload",
+        "access_token_url": "https://access.bosch-iot-suite.com/token",
+        "grant_type": "client_credentials",
+        "username": "PedroRendeiro",
+        "password": "",
+        "client_id": "e3aea56f-348a-4f63-a979-a45800c8c05b",
+        "client_secret": "BB627786DA71D463C0E1E18DD3551364",
+        "scope": "service:iot-hub-prod:tf6a8585eac04459c9629347edff72e3b_hub/full-access service:iot-things-eu-1:f6a8585e-ac04-459c-9629-347edff72e3b_things/full-access",
+        "x": 340,
+        "y": 300,
+        "wires": [
+            [
+                "25875d11.d635e2"
+            ]
+        ]
+    },
+    {
+        "id": "99d6b610.f01e58",
+        "type": "change",
+        "z": "5543b2ae.464f9c",
+        "name": "Set Bearer",
+        "rules": [
+            {
+                "t": "set",
+                "p": "bearer",
+                "pt": "flow",
+                "to": "payload.oauth2Response.body.access_token",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
+            },
+            {
+                "t": "set",
+                "p": "reset",
+                "pt": "msg",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 690,
+        "y": 240,
+        "wires": [
+            [
+                "b5db4b0d.b7ef98",
+                "7978b561.81504c"
+            ]
+        ]
+    },
+    {
+        "id": "93d78bdf.389678",
+        "type": "function",
+        "z": "5543b2ae.464f9c",
+        "name": "Get Bearer",
+        "func": "msg.url = 'https://things.eu-1.bosch-iot-suite.com/api/2/things/EMSfIIoT.ESP32_CAM:Gateway1'\n\nmsg.headers = {\n    Authorization: \"Bearer \"+ flow.get('bearer')\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 310,
+        "y": 640,
+        "wires": [
+            [
+                "1ae576f9.522ec9"
+            ]
+        ]
+    },
+    {
+        "id": "40b8fe96.32d3f",
+        "type": "ui_gauge",
+        "z": "5543b2ae.464f9c",
+        "name": "",
+        "group": "d102fed1.746ee",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Last Read",
+        "label": "kWh",
+        "format": "{{payload.features.genericsensor.properties.status.sensorValue}}",
+        "min": 0,
+        "max": "500",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 960,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "73d54942.00d608",
+        "type": "ui_text",
+        "z": "5543b2ae.464f9c",
+        "group": "1c565c4.1f170a4",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Last Token Time",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 1120,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "b5db4b0d.b7ef98",
+        "type": "moment",
+        "z": "5543b2ae.464f9c",
+        "name": "",
+        "topic": "",
+        "input": "",
+        "inputType": "msg",
+        "inTz": "Europe/Lisbon",
+        "adjAmount": 0,
+        "adjType": "days",
+        "adjDir": "add",
+        "format": "DD-MMM HH:mm",
+        "locale": "pt_PT",
+        "output": "",
+        "outputType": "msg",
+        "outTz": "Europe/Lisbon",
+        "x": 1120,
+        "y": 240,
+        "wires": [
+            [
+                "73d54942.00d608"
+            ]
+        ]
+    },
+    {
+        "id": "6106e14e.aff97",
+        "type": "MSSQL",
+        "z": "5543b2ae.464f9c",
+        "mssqlCN": "4b9280a2.270ea",
+        "name": "EMSfIIoT",
+        "query": "",
+        "outField": "payload",
+        "x": 480,
+        "y": 780,
+        "wires": [
+            [
+                "8c1c505f.002dc"
+            ]
+        ]
+    },
+    {
+        "id": "ccfc3430.76ebc8",
+        "type": "function",
+        "z": "5543b2ae.464f9c",
+        "name": "SQL Query",
+        "func": "value = msg.payload.features.genericsensor.properties.status.sensorValue;\n\nmsg.payload = 'INSERT INTO [EMSfIIoT].[dbo].[EMSfIIoT] (Value) VALUES (' + value + ');';\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 190,
+        "y": 780,
+        "wires": [
+            [
+                "6106e14e.aff97"
+            ]
+        ]
+    },
+    {
+        "id": "25875d11.d635e2",
+        "type": "switch",
+        "z": "5543b2ae.464f9c",
+        "name": "",
+        "property": "payload.oauth2Response.body.access_token",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 510,
+        "y": 300,
+        "wires": [
+            [
+                "99d6b610.f01e58"
+            ],
+            [
+                "2a12b987.a93566"
+            ]
+        ]
+    },
+    {
+        "id": "2a12b987.a93566",
+        "type": "change",
+        "z": "5543b2ae.464f9c",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Error",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 320,
+        "wires": [
+            [
+                "73d54942.00d608"
+            ]
+        ]
+    },
+    {
+        "id": "8c1c505f.002dc",
+        "type": "switch",
+        "z": "5543b2ae.464f9c",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "undefined",
+                "vt": "undefined"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 690,
+        "y": 780,
+        "wires": [
+            [
+                "73e2da6e.fee134"
+            ],
+            [
+                "a19273d9.c4ba1"
+            ]
+        ]
+    },
+    {
+        "id": "1cc5640.bad209c",
+        "type": "ui_text",
+        "z": "5543b2ae.464f9c",
+        "group": "1c565c4.1f170a4",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Last DB INSERT",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 1350,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "73e2da6e.fee134",
+        "type": "change",
+        "z": "5543b2ae.464f9c",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 881,
+        "y": 740,
+        "wires": [
+            [
+                "9581c744.31a0e8"
+            ]
+        ]
+    },
+    {
+        "id": "9581c744.31a0e8",
+        "type": "moment",
+        "z": "5543b2ae.464f9c",
+        "name": "",
+        "topic": "",
+        "input": "",
+        "inputType": "msg",
+        "inTz": "Europe/Lisbon",
+        "adjAmount": 0,
+        "adjType": "days",
+        "adjDir": "add",
+        "format": "DD-MMM HH:mm",
+        "locale": "pt_PT",
+        "output": "",
+        "outputType": "msg",
+        "outTz": "Europe/Lisbon",
+        "x": 1100,
+        "y": 740,
+        "wires": [
+            [
+                "1cc5640.bad209c"
+            ]
+        ]
+    },
+    {
+        "id": "a19273d9.c4ba1",
+        "type": "change",
+        "z": "5543b2ae.464f9c",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Error",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 820,
+        "wires": [
+            [
+                "1cc5640.bad209c"
+            ]
+        ]
+    },
+    {
+        "id": "ed74d48c.1488b8",
+        "type": "ui_chart",
+        "z": "5543b2ae.464f9c",
+        "name": "",
+        "group": "2e488d1a.850072",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "1000",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "outputs": 1,
+        "x": 951,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7d96a5b4.e79dfc",
+        "type": "inject",
+        "z": "5543b2ae.464f9c",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 130,
+        "y": 920,
+        "wires": [
+            [
+                "bfab2f49.86dea"
+            ]
+        ]
+    },
+    {
+        "id": "bfab2f49.86dea",
+        "type": "change",
+        "z": "5543b2ae.464f9c",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "lastRead",
+                "pt": "flow",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "20d13a8a.a4bad6",
+        "type": "change",
+        "z": "5543b2ae.464f9c",
+        "name": "LastReadDateTime",
+        "rules": [
+            {
+                "t": "set",
+                "p": "lastReadDate",
+                "pt": "flow",
+                "to": "payload.features.genericsensor.properties.status.lastValueDate",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "lastReadTime",
+                "pt": "flow",
+                "to": "payload.features.genericsensor.properties.status.lastValueTime",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 990,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7978b561.81504c",
+        "type": "trigger",
+        "z": "5543b2ae.464f9c",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "-1",
+        "extend": true,
+        "units": "hr",
+        "reset": "",
+        "bytopic": "all",
+        "name": "",
+        "x": 910,
+        "y": 140,
+        "wires": [
+            [
+                "ff1cdd9f.01799"
+            ]
+        ]
+    },
+    {
+        "id": "ff1cdd9f.01799",
+        "type": "e-mail",
+        "z": "5543b2ae.464f9c",
+        "d": true,
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "secure": true,
+        "tls": true,
+        "name": "",
+        "dname": "",
+        "x": 1130,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "bf545d19.0213e",
+        "type": "debug",
+        "z": "5543b2ae.464f9c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 740,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "dc67c979.737c38",
+        "type": "function",
+        "z": "5543b2ae.464f9c",
+        "name": "",
+        "func": "read = msg.payload.features.genericsensor.properties.status.sensorValue;\n\nmsg.read = read;\nmsg.payload = read - flow.get('lastRead');\n\nflow.set('lastRead',msg.read)\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 750,
+        "y": 640,
+        "wires": [
+            [
+                "ed74d48c.1488b8"
+            ]
+        ]
+    },
+    {
+        "id": "d102fed1.746ee",
+        "type": "ui_group",
+        "z": "",
+        "name": "Counter Reads",
+        "tab": "1aeeb865.c64e48",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "1c565c4.1f170a4",
+        "type": "ui_group",
+        "z": "",
+        "name": "Information",
+        "tab": "1aeeb865.c64e48",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": true
+    },
+    {
+        "id": "4b9280a2.270ea",
+        "type": "MSSQL-CN",
+        "z": "",
+        "name": "EMSfIIoT",
+        "server": "emsfiiot.database.windows.net",
+        "encyption": true,
+        "database": "EMSfIIoT"
+    },
+    {
+        "id": "2e488d1a.850072",
+        "type": "ui_group",
+        "z": "",
+        "name": "Chart",
+        "tab": "1aeeb865.c64e48",
+        "order": 1,
+        "disp": true,
+        "width": "18",
+        "collapse": false
+    },
+    {
+        "id": "1aeeb865.c64e48",
+        "type": "ui_tab",
+        "z": "",
+        "name": "EMSfIIoT",
+        "icon": "dashboard",
+        "order": 4,
+        "disabled": false,
+        "hidden": false
+    }
+]
