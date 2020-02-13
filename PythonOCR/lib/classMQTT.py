@@ -67,7 +67,7 @@ class MQTT():
         # Timer variable for periodic function
         self.next_call = 0
         # Period for publishing data to the MQTT broker in seconds
-        self.timePeriod = 10
+        self.timePeriod = 25
 
         # Configuration of client ID and publish topic	
         self.publishTopic = "telemetry/" + self.tenantId + "/" + self.deviceId

@@ -11,7 +11,10 @@ try:
 except:
     pass
 
-import lib.classImageAcquisition as ImageAcquisition
+try:
+    import classImageAcquisition as ImageAcquisition
+except:
+    import lib.classImageAcquisition as ImageAcquisition
 
 class ImageClassification:
     """
@@ -35,35 +38,15 @@ class ImageClassification:
         Reads arguments from input command.
         Processes and stores template image
         """
-        config = configparser.ConfigParser()
-        config.read("./config/config.ini")        
+        self.config = configparser.ConfigParser()
+        self.config.read("./config/config.ini")
 
-        if config.has_option('source', 'device'):
-            if config['source']['device'] == "ESP32_CAM":
-                url = config['source']['ip']
+        if self.config.has_option('source', 'device'):
+            if self.config['source']['device'] == "ESP32_CAM":
+                self.url = self.config['source']['ip']
                 self.ImageAcquisition =  ImageAcquisition.ImageAcquisition()
-                self.ImageAcquisition.LoadImageFromURL(url, './images/test.png')
-            elif config['source']['device'] == "RaspiCam":
-                camera = PiCamera()
-                camera.start_preview()
-                sleep(2)
-                camera.capture('./images/test.png')
-                camera.stop_preview()
-            elif config['source']['device'] == "WebCam":
-                pass
-            self.image = cv2.imread('./images/test.png')
-        else:
-            # construct the argument parse and parse the arguments
-            ap = argparse.ArgumentParser()
-            ap.add_argument("-i", "--image", required=True,
-                help="path to input image")
-            ap.add_argument("-r", "--reference", required=False,
-                help="path to reference OCR-A image")
-            args = vars(ap.parse_args())
 
-            self.image = cv2.imread(args["image"])
-
-        self.reference = config['reference']['path']
+        self.reference = self.config['reference']['path']
 
         # initialize a rectangular (wider than it is tall) and square
         # structuring kernel
@@ -104,9 +87,38 @@ class ImageClassification:
         """
         Read digits from image function
         """
+
+        if self.config.has_option('source', 'device'):
+            if self.config['source']['device'] == "ESP32_CAM":
+                self.ImageAcquisition.LoadImageFromURL(self.url, './images/')
+            elif self.config['source']['device'] == "RaspiCam":
+                camera = PiCamera()
+                camera.start_preview()
+                sleep(2)
+                camera.capture('./images/')
+                camera.stop_preview()
+            elif self.config['source']['device'] == "WebCam":
+                pass
+            self.image = cv2.imread('./images/capture.jpg')
+        else:
+            
+            # construct the argument parser and parse the arguments
+            ap = argparse.ArgumentParser()
+            ap.add_argument("-i", "--image", required=True,
+                help="path to input image")
+            ap.add_argument("-r", "--reference", required=False,
+                help="path to reference OCR-A image")
+            args = vars(ap.parse_args())
+            self.image = cv2.imread(args["image"])
+
         # resize the input image, and convert it to grayscale
         image = imutils.resize(self.image, width=300)
-        image = imutils.rotate(image, -90)
+
+        angle = 0
+        if self.config.has_option('source', 'rotation'):
+            angle = self.config['source']['rotation']
+
+        image = imutils.rotate(image, 270)
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
         if showResult:
@@ -114,164 +126,223 @@ class ImageClassification:
             cv2.waitKey(0)
             cv2.destroyAllWindows()
 
-        # apply a tophat (blackhat) morphological operator
-        tophat = cv2.morphologyEx(gray, cv2.MORPH_BLACKHAT, self.rectKernel)
-        #tophat = cv2.equalizeHist(tophat)
-        tophat[tophat<40] = 0
-        rectKernel = cv2.getStructuringElement(cv2.MORPH_RECT, (18, 6))
-        tophat = cv2.morphologyEx(tophat, cv2.MORPH_CLOSE, rectKernel)
+        # # apply a tophat (blackhat) morphological operator
+        # tophat = cv2.morphologyEx(gray, cv2.MORPH_BLACKHAT, self.rectKernel)
+        # #tophat = cv2.equalizeHist(tophat)
+        # tophat[tophat<40] = 0
+        # rectKernel = cv2.getStructuringElement(cv2.MORPH_RECT, (18, 6))
+        # tophat = cv2.morphologyEx(tophat, cv2.MORPH_CLOSE, rectKernel)
+
+        # if showResult:
+        #     cv2.imshow("Image", tophat)
+        #     cv2.waitKey(0)
+        #     cv2.destroyAllWindows()
+
+        # # compute the Scharr gradient of the tophat image, then scale
+        # # the rest back into the range [0, 255]
+        # gradX = cv2.Sobel(tophat, ddepth=cv2.CV_32F, dx=1, dy=0, ksize=-1)
+        # gradX = np.absolute(gradX)
+        # (minVal, maxVal) = (np.min(gradX), np.max(gradX))
+        # gradX = (255 * ((gradX - minVal) / (maxVal - minVal)))
+        # gradX = gradX.astype("uint8")
+
+        # # apply a closing operation using the rectangular kernel to help
+        # # cloes gaps in between credit card number digits, then apply
+        # # Otsu's thresholding method to binarize the image
+        # gradX = cv2.morphologyEx(tophat, cv2.MORPH_CLOSE, self.rectKernel)
+        
+        # if showResult:
+        #     cv2.imshow("Image", gradX)
+        #     cv2.waitKey(0)
+        #     cv2.destroyAllWindows()        
+        
+        # thresh = cv2.threshold(gradX, 0, 255,
+        #     cv2.THRESH_BINARY | cv2.THRESH_TRIANGLE)[1]
+
+        # if showResult:
+        #     cv2.imshow("Image", thresh)
+        #     cv2.waitKey(0)
+        #     cv2.destroyAllWindows()    
+
+        # # apply a second closing operation to the binary image, again
+        # # to help close gaps between credit card number regions
+        # thresh = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, self.sqKernel)
+
+        # if showResult:
+        #     cv2.imshow("Image", thresh)
+        #     cv2.waitKey(0)
+        #     cv2.destroyAllWindows() 
+
+        # # find contours in the thresholded image, then initialize the
+        # # list of digit locations
+        # cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL,
+        #     cv2.CHAIN_APPROX_SIMPLE)
+        # cnts = imutils.grab_contours(cnts)
+        # locs = []
+
+        # # loop over the contours
+        # for (i, c) in enumerate(cnts):
+        #     # compute the bounding box of the contour, then use the
+        #     # bounding box coordinates to derive the aspect ratio
+        #     (x, y, w, h) = cv2.boundingRect(c)
+        #     ar = w / float(h)
+
+        #     # since credit cards used a fixed size fonts with 4 groups
+        #     # of 4 digits, we can prune potential contours based on the
+        #     # aspect ratio
+        #     if ar > 2.5 and ar < 6.0:
+        #         # contours can further be pruned on minimum/maximum width
+        #         # and height
+        #         if (w > 40 and w < 255) and (h > 10 and h < 60):
+        #             # append the bounding box region of the digits group
+        #             # to our locations list
+        #             locs.append((x, y, w, h))
+
+        # # sort the digit locations from left-to-right, then initialize the
+        # # list of classified digits
+        # locs = sorted(locs, key=lambda x:x[0])
+        # output = []
+
+        # # loop over the 4 groupings of 4 digits
+        # for (i, (gX, gY, gW, gH)) in enumerate(locs):
+        #     # initialize the list of group digits
+        #     groupOutput = []
+
+        #     # extract the group ROI of 4 digits from the grayscale image,
+        #     # then apply thresholding to segment the digits from the
+        #     # background of the credit card
+        #     group = gray[(37, 52), (263, 107)]
+        #     group = cv2.threshold(group, 0, 255,
+        #         cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
+        #     group = cv2.morphologyEx(group, cv2.MORPH_CLOSE, self.sqKernel)
+
+        #     if showResult:
+        #         cv2.imshow("Image", group)
+        #         cv2.waitKey(0)
+        #         cv2.destroyAllWindows()
+
+        #     # detect the contours of each individual digit in the group,
+        #     # then sort the digit contours from left to right
+        #     digitCnts = cv2.findContours(group.copy(), cv2.RETR_EXTERNAL,
+        #         cv2.CHAIN_APPROX_SIMPLE)
+        #     digitCnts = imutils.grab_contours(digitCnts)
+        #     digitCnts = contours.sort_contours(digitCnts,
+        #         method="left-to-right")[0]
+
+        #     # loop over the digit contours
+        #     for c in digitCnts:
+        #         # compute the bounding box of the individual digit, extract
+        #         # the digit, and resize it to have the same fixed size as
+        #         # the reference OCR-A images
+        #         (x, y, w, h) = cv2.boundingRect(c)                
+        #         roi = group[y:y + h, x:x + w]
+        #         roi = cv2.resize(roi, (57, 88))
+                
+        #         if (h < 10):
+        #             continue
+
+        #         if showResult:
+        #             cv2.imshow("Image", roi)
+        #             cv2.waitKey(0)
+        #             cv2.destroyAllWindows()
+
+        #         # initialize a list of template matching scores
+        #         scores = []
+
+        #         # loop over the reference digit name and digit ROI
+        #         for (digit, digitROI) in self.digits.items():
+        #             # apply correlation-based template matching, take the
+        #             # score, and update the scores list
+        #             result = cv2.matchTemplate(roi, digitROI,
+        #                 cv2.TM_CCOEFF)
+        #             (_, score, _, _) = cv2.minMaxLoc(result)
+        #             scores.append(score)
+
+        #         # the classification for the digit ROI will be the reference
+        #         # digit name with the *largest* template matching score
+        #         groupOutput.append(str(np.argmax(scores)))
+
+        # initialize the list of group digits
+        output = []
+
+        # extract the group ROI of 4 digits from the grayscale image,
+        # then apply thresholding to segment the digits from the
+        # background of the credit card
+        group = gray[52:107, 37:263]
+        
+        #group = cv2.threshold(group, 20, 255, cv2.THRESH_BINARY_INV)[1]
+        
+        group = cv2.adaptiveThreshold(group,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY_INV,11,2)    
+        
+        group = cv2.morphologyEx(group, cv2.MORPH_CLOSE, self.sqKernel)
 
         if showResult:
-            cv2.imshow("Image", tophat)
+            cv2.imshow("Image", group)
             cv2.waitKey(0)
             cv2.destroyAllWindows()
 
-        # compute the Scharr gradient of the tophat image, then scale
-        # the rest back into the range [0, 255]
-        gradX = cv2.Sobel(tophat, ddepth=cv2.CV_32F, dx=1, dy=0, ksize=-1)
-        gradX = np.absolute(gradX)
-        (minVal, maxVal) = (np.min(gradX), np.max(gradX))
-        gradX = (255 * ((gradX - minVal) / (maxVal - minVal)))
-        gradX = gradX.astype("uint8")
-
-        # apply a closing operation using the rectangular kernel to help
-        # cloes gaps in between credit card number digits, then apply
-        # Otsu's thresholding method to binarize the image
-        gradX = cv2.morphologyEx(tophat, cv2.MORPH_CLOSE, self.rectKernel)
-        
-        if showResult:
-            cv2.imshow("Image", gradX)
-            cv2.waitKey(0)
-            cv2.destroyAllWindows()        
-        
-        thresh = cv2.threshold(gradX, 0, 255,
-            cv2.THRESH_BINARY | cv2.THRESH_TRIANGLE)[1]
-
-        if showResult:
-            cv2.imshow("Image", thresh)
-            cv2.waitKey(0)
-            cv2.destroyAllWindows()    
-
-        # apply a second closing operation to the binary image, again
-        # to help close gaps between credit card number regions
-        thresh = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, self.sqKernel)
-
-        if showResult:
-            cv2.imshow("Image", thresh)
-            cv2.waitKey(0)
-            cv2.destroyAllWindows() 
-
-        # find contours in the thresholded image, then initialize the
-        # list of digit locations
-        cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL,
+        # detect the contours of each individual digit in the group,
+        # then sort the digit contours from left to right
+        digitCnts = cv2.findContours(group.copy(), cv2.RETR_EXTERNAL,
             cv2.CHAIN_APPROX_SIMPLE)
-        cnts = imutils.grab_contours(cnts)
-        locs = []
+        digitCnts = imutils.grab_contours(digitCnts)
+        digitCnts = contours.sort_contours(digitCnts,
+            method="left-to-right")[0]
 
-        # loop over the contours
-        for (i, c) in enumerate(cnts):
-            # compute the bounding box of the contour, then use the
-            # bounding box coordinates to derive the aspect ratio
-            (x, y, w, h) = cv2.boundingRect(c)
-            ar = w / float(h)
-
-            # since credit cards used a fixed size fonts with 4 groups
-            # of 4 digits, we can prune potential contours based on the
-            # aspect ratio
-            if ar > 2.5 and ar < 6.0:
-                # contours can further be pruned on minimum/maximum width
-                # and height
-                if (w > 40 and w < 255) and (h > 10 and h < 60):
-                    # append the bounding box region of the digits group
-                    # to our locations list
-                    locs.append((x, y, w, h))
-
-        # sort the digit locations from left-to-right, then initialize the
-        # list of classified digits
-        locs = sorted(locs, key=lambda x:x[0])
-        output = []
-
-        # loop over the 4 groupings of 4 digits
-        for (i, (gX, gY, gW, gH)) in enumerate(locs):
-            # initialize the list of group digits
-            groupOutput = []
-
-            # extract the group ROI of 4 digits from the grayscale image,
-            # then apply thresholding to segment the digits from the
-            # background of the credit card
-            group = gray[gY - 5:gY + gH + 5, gX - 5:gX + gW + 5]
-            group = cv2.threshold(group, 0, 255,
-                cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
-            group = cv2.morphologyEx(group, cv2.MORPH_CLOSE, self.sqKernel)
+        # loop over the digit contours
+        for c in digitCnts:
+            # compute the bounding box of the individual digit, extract
+            # the digit, and resize it to have the same fixed size as
+            # the reference OCR-A images
+            (x, y, w, h) = cv2.boundingRect(c)                
+            roi = group[y:y + h, x:x + w]
+            roi = cv2.resize(roi, (57, 88))
+            
+            if (h*w < 200):
+                continue
+            if ((h > 2*w)  | (h < 1.5*w)):
+                continue
 
             if showResult:
-                cv2.imshow("Image", group)
+                cv2.imshow("Image", roi)
                 cv2.waitKey(0)
                 cv2.destroyAllWindows()
 
-            # detect the contours of each individual digit in the group,
-            # then sort the digit contours from left to right
-            digitCnts = cv2.findContours(group.copy(), cv2.RETR_EXTERNAL,
-                cv2.CHAIN_APPROX_SIMPLE)
-            digitCnts = imutils.grab_contours(digitCnts)
-            digitCnts = contours.sort_contours(digitCnts,
-                method="left-to-right")[0]
+            # initialize a list of template matching scores
+            scores = []
 
-            # loop over the digit contours
-            for c in digitCnts:
-                # compute the bounding box of the individual digit, extract
-                # the digit, and resize it to have the same fixed size as
-                # the reference OCR-A images
-                (x, y, w, h) = cv2.boundingRect(c)                
-                roi = group[y:y + h, x:x + w]
-                roi = cv2.resize(roi, (57, 88))
-                
-                if (h < 10):
-                    continue
+            # loop over the reference digit name and digit ROI
+            for (digit, digitROI) in self.digits.items():
+                # apply correlation-based template matching, take the
+                # score, and update the scores list
+                result = cv2.matchTemplate(roi, digitROI,
+                    cv2.TM_CCOEFF)
+                (_, score, _, _) = cv2.minMaxLoc(result)
+                scores.append(score)
 
-                if showResult:
-                    cv2.imshow("Image", roi)
-                    cv2.waitKey(0)
-                    cv2.destroyAllWindows()
-
-                # initialize a list of template matching scores
-                scores = []
-
-                # loop over the reference digit name and digit ROI
-                for (digit, digitROI) in self.digits.items():
-                    # apply correlation-based template matching, take the
-                    # score, and update the scores list
-                    result = cv2.matchTemplate(roi, digitROI,
-                        cv2.TM_CCOEFF)
-                    (_, score, _, _) = cv2.minMaxLoc(result)
-                    scores.append(score)
-
-                # the classification for the digit ROI will be the reference
-                # digit name with the *largest* template matching score
-                groupOutput.append(str(np.argmax(scores)))
+            # the classification for the digit ROI will be the reference
+            # digit name with the *largest* template matching score
+            output.append(str(np.argmax(scores)))
 
             # draw the digit classifications around the group
-            cv2.rectangle(image, (gX - 5, gY - 5),
-                (gX + gW + 5, gY + gH + 5), (0, 0, 255), 2)
-            cv2.putText(image, "".join(groupOutput), (gX, gY - 15),
+            cv2.rectangle(image, (37, 52),
+                (263, 107), (0, 0, 255), 2)
+            cv2.putText(image, "".join(output), (round((37 + 263)/2), 52 - 15),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.65, (0, 0, 255), 2)
-
-            # update the output digits list
-            output.extend(groupOutput)
 
         # display the output credit card information to the screen
         output = int(''.join(output))
         print(output)
-        #if showResult:
-        cv2.imshow("Image", image)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+        if showResult:
+            cv2.imshow("Image", image)
+            cv2.waitKey(0)
+            cv2.destroyAllWindows()
 
         return output
 
 def main():
     image = ImageClassification()
-    image.readImage(False)
+    image.readImage(True)
 
 if __name__ == '__main__':
     main()

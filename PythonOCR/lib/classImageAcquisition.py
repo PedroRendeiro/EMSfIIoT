@@ -59,7 +59,7 @@ class ImageAcquisition:
         urllib.request.urlretrieve(url, target)
         event.set()
 
-    def LoadImageFromURL(self, url, target):
+    def LoadImageFromURL(self, url, folder):
         """
         Load Image from URL
 
@@ -72,6 +72,8 @@ class ImageAcquisition:
         If no url is set uses one from config file
         """
         self.lastImageSaved = ''
+        captureTime = time.strftime('%Y-%m-%d_%H-%M-%S', time.localtime())
+        target = folder + captureTime + '.jpg'
         if not url:
             url = self.URLImageSource
         event = Event()
@@ -83,6 +85,8 @@ class ImageAcquisition:
         logtime = time.strftime('%Y-%m-%d_%H-%M-%S', time.localtime())
         if event.is_set():
             if self.VerifyImage(target) == True:
+                from shutil import copyfile
+                copyfile(target, folder + 'capture.jpg')
                 result = ''
             else:
                 result = 'Error - Image file is corrupted'
