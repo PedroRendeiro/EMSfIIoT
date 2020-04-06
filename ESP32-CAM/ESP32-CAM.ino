@@ -10,5 +10,5 @@ void loop() {
   if (WiFi.status() != WL_CONNECTED) {
     camera.connectWiFi();
   }
-  delay(10000);
+  delay(1);
 }

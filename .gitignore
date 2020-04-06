@@ -4,3 +4,4 @@ Doxyfile
 build/
 html/
 latex/
+*.jpg

@@ -67,7 +67,7 @@ class MQTT():
         # Timer variable for periodic function
         self.next_call = 0
         # Period for publishing data to the MQTT broker in seconds
-        self.timePeriod = 25
+        self.timePeriod = 10
 
         # Configuration of client ID and publish topic	
         self.publishTopic = "telemetry/" + self.tenantId + "/" + self.deviceId
@@ -109,11 +109,12 @@ class MQTT():
         # reconnect then subscriptions will be renewed.
 
         # BEGIN SAMPLE CODE
-        self.client.subscribe("commands/" + self.tenantId + "/")
+        #self.client.subscribe("commands/" + self.tenantId + "/")
+        self.client.subscribe("control/+/+/req/#")
         # END SAMPLE CODE
 
         # Time stamp when the periodAction function shall be called again
-        self.next_call = time.time()
+        # self.next_call = time.time()
         
         # Start the periodic task for publishing MQTT messages
         self.periodicAction()
@@ -129,7 +130,41 @@ class MQTT():
             msg: MQTT message payload
 
         """
+        
+        print("Message received:")
         print(msg.topic + " " + str(msg.payload))
+
+        # parse Bosch IoT Hub's message ID for response
+        messageId = msg.topic[msg.topic.find("req/")+4:]
+        messageId = messageId[0:messageId.find("/")]
+
+        # if this is a 2-way command, respond
+        if (messageId != ""):
+            print("Sender expects reply, responding to message with ID: " + messageId)
+
+            # create MQTT response topic
+            resTopic = "control///res/" + messageId + "/200"
+
+            # parse Bosch IoT Things correlation ID for response
+            reqPayload = str(msg.payload)
+
+            # 17 is the length of 'correlation-id' and subsequent '":"'
+            correlationId = reqPayload[reqPayload.find("correlation-id")+17:reqPayload.find("correlation-id")+17+36]
+
+            print("Sender expects reply, responding to message with Correlation-Id: " + correlationId)
+
+            self.periodicAction()
+
+            # create Ditto compliant MQTT response payload
+            resPayload = "{\"topic\":\"" + self.ditto_topic + "/things/live/messages/switch\","
+            resPayload += "\"headers\":{\"correlation-id\":\"" + correlationId + "\","
+            resPayload += "\"version\":2,\"content-type\":\"text/plain\"},"
+            resPayload += "\"path\":\"/inbox/messages/switch\","
+            resPayload += "\"value\":\"" + str(self.infomodel.sensorValue) + "\","
+            resPayload += "\"status\": 200 }"
+
+            self.client.publish(resTopic, resPayload)
+            print("Response published!")
 
     # The functions to publish the functionblocks data
     def publishGenericsensor(self):
@@ -159,7 +194,8 @@ class MQTT():
 
         now = datetime.datetime.now()
         
-        self.infomodel.sensorValue = self.ImageClassification.readImage()
+        # self.infomodel.sensorValue = self.ImageClassification.readImage()
+        self.infomodel.sensorValue = "5000"
         self.infomodel.sensorUnits = "kWh"
         self.infomodel.lastValueDate = now.strftime("%d-%m-%Y")
         self.infomodel.lastValueTime = now.strftime("%H:%M:%S")

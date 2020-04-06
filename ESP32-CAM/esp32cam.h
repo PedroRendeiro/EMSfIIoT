@@ -6,9 +6,15 @@
 #include "esp_camera.h"
 #include "esp_http_server.h"
 #include "esp_timer.h"
+#include "esp_log.h"
+#include "driver/ledc.h"
+#include "sdkconfig.h"
 
 #include "soc/soc.h"            // Disable brownour problems
 #include "soc/rtc_cntl_reg.h"   // Disable brownour problems
+
+#include <esp_int_wdt.h>
+#include <esp_task_wdt.h>
 
 #include "tsl2591.h"
 #include "WiFi.h"
@@ -19,14 +25,16 @@
 #define I2C_ADDRESS               0x29
 
 // WiFi definitions
-//#define SSID                      "AndroidAP6120"
-//#define PASSWORD                  "4f5cd3453ae3"
 //#define SSID                      "DESKTOP-CSTFN6E"
 //#define PASSWORD                  "r678Q,03"
-#define SSID                        "sala"
-#define PASSWORD                    "wfgysf5657"
+//#define SSID                        "sala"
+//#define PASSWORD                    "wfgysf5657"
 #define SSID                        "TP-Link_BD6B"
 #define PASSWORD                    "31192996"
+//#define SSID                        "AndroidAP7715"
+//#define PASSWORD                    "56640025e24c"
+//#define SSID                        "BTIA_FRM2AV"
+//#define PASSWORD                    "jyyagp9sl1cn"
 
 // Pin definition for CAMERA_MODEL_AI_THINKER
 #define CAM_PIN_PWDN              32
@@ -61,10 +69,21 @@ class ESP32CAM {
 
     boolean connectWiFi(void);
   private:
+    static int _led_duty;
+
+    ledc_timer_config_t _ledc_timer;
+    ledc_channel_config_t _ledc_channel;
+
     static esp_err_t jpg_httpd_handler(httpd_req_t *req);
     static esp_err_t jpg_httpd_handler_with_flash(httpd_req_t *req);
     static esp_err_t jpg_httpd_handler_without_flash(httpd_req_t *req);
     static esp_err_t status_handler(httpd_req_t *req);
+    static esp_err_t restart_handler(httpd_req_t *req);
+    static esp_err_t cmd_handler(httpd_req_t *req);
+
+    static esp_err_t parse_get(httpd_req_t *req, char **obuf);
+
+    static void enable_led(boolean en);
 
     camera_config_t _camera_config;
     httpd_handle_t _camera_httpd;

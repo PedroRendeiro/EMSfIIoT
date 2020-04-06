@@ -95,10 +95,13 @@ class ImageClassification:
                 camera = PiCamera()
                 camera.start_preview()
                 sleep(2)
-                camera.capture('./images/')
+                camera.capture('./images/capture.jpg')
                 camera.stop_preview()
             elif self.config['source']['device'] == "WebCam":
-                pass
+                camera = int(self.config['source']['camera'])
+                cam = cv2.VideoCapture(camera)
+                ret, frame = cam.read()
+                cv2.imwrite('./images/capture.jpg',frame)
             self.image = cv2.imread('./images/capture.jpg')
         else:
             
@@ -116,9 +119,9 @@ class ImageClassification:
 
         angle = 0
         if self.config.has_option('source', 'rotation'):
-            angle = self.config['source']['rotation']
+            angle = int(self.config['source']['rotation'])
 
-        image = imutils.rotate(image, 270)
+        image = imutils.rotate(image, angle)
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
         if showResult:
@@ -268,7 +271,7 @@ class ImageClassification:
         # extract the group ROI of 4 digits from the grayscale image,
         # then apply thresholding to segment the digits from the
         # background of the credit card
-        group = gray[52:107, 37:263]
+        group = gray[32:87, 37:200]
         
         #group = cv2.threshold(group, 20, 255, cv2.THRESH_BINARY_INV)[1]
         
@@ -325,9 +328,9 @@ class ImageClassification:
             output.append(str(np.argmax(scores)))
 
             # draw the digit classifications around the group
-            cv2.rectangle(image, (37, 52),
-                (263, 107), (0, 0, 255), 2)
-            cv2.putText(image, "".join(output), (round((37 + 263)/2), 52 - 15),
+            cv2.rectangle(image, (37, 32),
+                (200, 87), (0, 0, 255), 2)
+            cv2.putText(image, "".join(output), (round((37 + 263)/2), 32 - 15),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.65, (0, 0, 255), 2)
 
         # display the output credit card information to the screen

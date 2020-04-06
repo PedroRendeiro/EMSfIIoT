@@ -1,0 +1,7 @@
+{
+    "board": "esp32:esp32:esp32cam",
+    "programmer": "AVRISP mkII",
+    "sketch": "ESP32-CAM.ino",
+    "output": "../build",
+    "port": "COM5"
+}

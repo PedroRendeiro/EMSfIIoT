@@ -1,5 +1,7 @@
 #include "esp32cam.h"
 
+int ESP32CAM::_led_duty = 16;
+
 /**
  * @brief Configuration function
  * 
@@ -17,14 +19,49 @@ camera_config_t ESP32CAM::config(void) {
   Serial.println();
 
   // Initialize Flash LED
-  pinMode(CAM_PIN_FLASH, OUTPUT);
-  digitalWrite(CAM_PIN_FLASH, LOW);
+  //pinMode(CAM_PIN_FLASH, OUTPUT);
+  //digitalWrite(CAM_PIN_FLASH, LOW);
+  
   // Initialize BuiltIn LED
   pinMode(CAM_PIN_LED, OUTPUT);
   digitalWrite(CAM_PIN_LED, HIGH);
 
   // Configure WiFi communication
-  connectWiFi();
+  while (!connectWiFi());
+
+  gpio_config_t conf;
+  conf.mode = GPIO_MODE_INPUT;
+  conf.pull_up_en = GPIO_PULLUP_ENABLE;
+  conf.pull_down_en = GPIO_PULLDOWN_DISABLE;
+  conf.intr_type = GPIO_INTR_DISABLE;
+  conf.pin_bit_mask = 1LL << 13;
+  gpio_config(&conf);
+  conf.pin_bit_mask = 1LL << 14;
+  gpio_config(&conf);
+
+  gpio_set_direction((gpio_num_t)CAM_PIN_FLASH, GPIO_MODE_OUTPUT);
+
+  _ledc_timer.duty_resolution = LEDC_TIMER_8_BIT;          // resolution of PWM duty       
+  _ledc_timer.freq_hz = 1000;                             // frequency of PWM signal
+  _ledc_timer.speed_mode = LEDC_LOW_SPEED_MODE;           // timer mode
+  _ledc_timer.timer_num = LEDC_TIMER_0;                   // timer index
+
+  _ledc_channel.channel = LEDC_CHANNEL_0;
+  _ledc_channel.duty = 0;
+  _ledc_channel.gpio_num = (gpio_num_t)CAM_PIN_FLASH;
+  _ledc_channel.speed_mode = LEDC_LOW_SPEED_MODE;
+  _ledc_channel.hpoint = 0;
+  _ledc_channel.timer_sel = LEDC_TIMER_0;
+
+  switch (ledc_timer_config(&_ledc_timer)) {
+      case ESP_ERR_INVALID_ARG: ESP_LOGE(TAG, "ledc_timer_config() parameter error"); break;
+      case ESP_FAIL: ESP_LOGE(TAG, "ledc_timer_config() Can not find a proper pre-divider number base on the given frequency and the current duty_resolution"); break;
+      case ESP_OK: if (ledc_channel_config(&_ledc_channel) == ESP_ERR_INVALID_ARG) {
+          ESP_LOGE(TAG, "ledc_channel_config() parameter error");
+        }
+        break;
+      default: break;
+  }
   
   // Camera configuration
   _camera_config.pin_pwdn  = CAM_PIN_PWDN;
@@ -53,18 +90,26 @@ camera_config_t ESP32CAM::config(void) {
 
   // Check if PSRAM is available
   if(psramFound()){
-    _camera_config.frame_size = FRAMESIZE_UXGA; // FRAMESIZE_ + QVGA|CIF|VGA|SVGA|XGA|SXGA|UXGA
-    _camera_config.jpeg_quality = 10;
+    _camera_config.frame_size = FRAMESIZE_CIF; // FRAMESIZE_ + QVGA|CIF|VGA|SVGA|XGA|SXGA|UXGA
+    _camera_config.jpeg_quality = 12;
     _camera_config.fb_count = 2;
     Serial.println("Camera with PSRAM detected!");
   } else {
-    _camera_config.frame_size = FRAMESIZE_SVGA;
+    _camera_config.frame_size = FRAMESIZE_CIF;
     _camera_config.jpeg_quality = 12;
     _camera_config.fb_count = 1;
   }
 
   // Return camera configuration struct
   return _camera_config;
+}
+
+void ESP32CAM::enable_led(boolean en) {
+  // Turn LED On or Off
+  int duty = en ? _led_duty : 0;
+  ledc_set_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_0, duty);
+  ledc_update_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_0);
+  ESP_LOGI(TAG, "Set LED intensity to %d", duty);
 }
 
 /**
@@ -86,7 +131,8 @@ boolean ESP32CAM::connectWiFi(void) {
     Serial.print(".");
     if ((millis()-start)>20000) {
       digitalWrite(CAM_PIN_LED, HIGH);
-      ESP.restart();
+      Serial.println("\n");
+      return false;
     }
   }
   Serial.println("\nWiFi connected");
@@ -163,18 +209,19 @@ esp_err_t ESP32CAM::jpg_httpd_handler(httpd_req_t *req) {
   uint32_t start = millis();
   while (!lightSensor.begin()) {
     if ((millis()-start)>500) {
-      //ESP.restart();
-      break;
+      return ESP_FAIL;
+      Serial.println("\nI2C Light Sensor not found!");
+      //break;
     }
   }
   Serial.println("\nI2C Light Sensor connected");
   
   // Check lux and light flash
   boolean flashOn = false;
-  if (lightSensor.getLuminosity(TSL2591_VISIBLE) < 100) {
+  if (lightSensor.getLuminosity(TSL2591_VISIBLE) < 200) {
     digitalWrite(CAM_PIN_FLASH, HIGH);
     Serial.println("Flash On!");
-    delay(1000);
+    delay(100);
     flashOn = true;
   }
   
@@ -189,13 +236,8 @@ esp_err_t ESP32CAM::jpg_httpd_handler(httpd_req_t *req) {
   }
   Serial.println("\nCapture done!");
 
-  // If flash was used, turn off
-  if (flashOn) {
-    delay(1000);
-    digitalWrite(CAM_PIN_FLASH, LOW);
-    Serial.println("Flash Off!");
-    flashOn = false;
-  }
+  // Wait
+  delay(500);
 
   Serial.println("Sending header");
   // Send response header
@@ -212,6 +254,13 @@ esp_err_t ESP32CAM::jpg_httpd_handler(httpd_req_t *req) {
   
   // Return the frame buffer back to the driver for reuse
   esp_camera_fb_return(fb);
+
+  // If flash was used, turn off
+  if (flashOn) {
+    digitalWrite(CAM_PIN_FLASH, LOW);
+    Serial.println("Flash Off!");
+    flashOn = false;
+  }
 
   // Log everything
   int64_t fr_end = esp_timer_get_time();
@@ -239,7 +288,11 @@ esp_err_t ESP32CAM::jpg_httpd_handler_with_flash(httpd_req_t *req) {
   int64_t fr_start = esp_timer_get_time();
   
   // Light flash
-  digitalWrite(CAM_PIN_FLASH, HIGH);
+  //digitalWrite(CAM_PIN_FLASH, HIGH);
+  //delay(250);
+
+  enable_led(true);
+  vTaskDelay(150 / portTICK_PERIOD_MS); // The LED needs to be turned on ~150ms before the call to esp_camera_fb_get()
 
   Serial.print("Capturing frame\n...");
   // Acquire a frame
@@ -252,9 +305,10 @@ esp_err_t ESP32CAM::jpg_httpd_handler_with_flash(httpd_req_t *req) {
   }
   Serial.println("\nCapture done!");
 
-  // Turn off flash
-  delay(1000);
-  digitalWrite(CAM_PIN_FLASH, LOW);
+  // Wait
+  //delay(500);
+
+  enable_led(false);
 
   Serial.println("Sending header");
   // Send response header
@@ -271,6 +325,9 @@ esp_err_t ESP32CAM::jpg_httpd_handler_with_flash(httpd_req_t *req) {
   
   // Return the frame buffer back to the driver for reuse
   esp_camera_fb_return(fb);
+
+  // Turn off flash
+  digitalWrite(CAM_PIN_FLASH, LOW);
 
   // Log everything
   int64_t fr_end = esp_timer_get_time();
@@ -309,7 +366,7 @@ esp_err_t ESP32CAM::jpg_httpd_handler_without_flash(httpd_req_t *req) {
   Serial.println("\nCapture done!");
 
   // Wait
-  delay(1000);
+  delay(500);
 
   Serial.println("Sending header");
   // Send response header
@@ -373,12 +430,148 @@ esp_err_t ESP32CAM::status_handler(httpd_req_t *req) {
   p+=sprintf(p, "\"vflip\":%u,", s->status.vflip);
   p+=sprintf(p, "\"hmirror\":%u,", s->status.hmirror);
   p+=sprintf(p, "\"dcw\":%u,", s->status.dcw);
-  p+=sprintf(p, "\"colorbar\":%u,", s->status.colorbar);
+  p+=sprintf(p, "\"colorbar\":%u", s->status.colorbar);
+  p+=sprintf(p, ",\"led_intensity\":%d", _led_duty);
   *p++ = '}';
   *p++ = 0;
   httpd_resp_set_type(req, "application/json");
   httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");
   return httpd_resp_send(req, json_response, strlen(json_response));
+}
+
+/**
+ * @brief Function to restart Camera over HTTP
+ * 
+ * @param req 
+ * @return esp_err_t 
+ */
+esp_err_t ESP32CAM::restart_handler(httpd_req_t *req) {
+
+  const char json_response[] = "{\"restart\": \"OK\"}";
+
+  httpd_resp_set_type(req, "application/json");
+  httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");
+  httpd_resp_send(req, json_response, strlen(json_response));
+
+  delay(1000);
+
+  //Force restart
+  esp_task_wdt_init(1, true);
+  esp_task_wdt_add(NULL);
+  while(1);
+}
+
+esp_err_t ESP32CAM::parse_get(httpd_req_t *req, char **obuf)
+{
+    char *buf = NULL;
+    size_t buf_len = 0;
+
+    buf_len = httpd_req_get_url_query_len(req) + 1;
+    if (buf_len > 1) {
+        buf = (char *)malloc(buf_len);
+        if (!buf) {
+            httpd_resp_send_500(req);
+            return ESP_FAIL;
+        }
+        if (httpd_req_get_url_query_str(req, buf, buf_len) == ESP_OK) {
+            *obuf = buf;
+            return ESP_OK;
+        }
+        free(buf);
+    }
+    httpd_resp_send_404(req);
+    return ESP_FAIL;
+}
+
+/**
+ * @brief 
+ * 
+ * @param req 
+ * @return esp_err_t 
+ */
+esp_err_t ESP32CAM::cmd_handler(httpd_req_t *req) {
+    char *buf = NULL;
+    char variable[32];
+    char value[32];
+
+    if (parse_get(req, &buf) != ESP_OK ||
+        httpd_query_key_value(buf, "var", variable, sizeof(variable)) != ESP_OK ||
+        httpd_query_key_value(buf, "val", value, sizeof(value)) != ESP_OK) {
+        free(buf);
+        httpd_resp_send_404(req);
+        return ESP_FAIL;
+    }
+    free(buf);
+
+    int val = atoi(value);
+    ESP_LOGI(TAG, "%s = %d", variable, val);
+    Serial.printf("%s = %d\n", variable, val);
+    sensor_t *s = esp_camera_sensor_get();
+    int res = 0;
+
+    if (!strcmp(variable, "framesize")) {
+        if (s->pixformat == PIXFORMAT_JPEG) {
+            res = s->set_framesize(s, (framesize_t)val);
+        }
+    }
+    else if (!strcmp(variable, "quality"))
+        res = s->set_quality(s, val);
+    else if (!strcmp(variable, "contrast"))
+        res = s->set_contrast(s, val);
+    else if (!strcmp(variable, "brightness"))
+        res = s->set_brightness(s, val);
+    else if (!strcmp(variable, "saturation"))
+        res = s->set_saturation(s, val);
+    else if (!strcmp(variable, "gainceiling"))
+        res = s->set_gainceiling(s, (gainceiling_t)val);
+    else if (!strcmp(variable, "colorbar"))
+        res = s->set_colorbar(s, val);
+    else if (!strcmp(variable, "awb"))
+        res = s->set_whitebal(s, val);
+    else if (!strcmp(variable, "agc"))
+        res = s->set_gain_ctrl(s, val);
+    else if (!strcmp(variable, "aec"))
+        res = s->set_exposure_ctrl(s, val);
+    else if (!strcmp(variable, "hmirror"))
+        res = s->set_hmirror(s, val);
+    else if (!strcmp(variable, "vflip"))
+        res = s->set_vflip(s, val);
+    else if (!strcmp(variable, "awb_gain"))
+        res = s->set_awb_gain(s, val);
+    else if (!strcmp(variable, "agc_gain"))
+        res = s->set_agc_gain(s, val);
+    else if (!strcmp(variable, "aec_value"))
+        res = s->set_aec_value(s, val);
+    else if (!strcmp(variable, "aec2"))
+        res = s->set_aec2(s, val);
+    else if (!strcmp(variable, "dcw"))
+        res = s->set_dcw(s, val);
+    else if (!strcmp(variable, "bpc"))
+        res = s->set_bpc(s, val);
+    else if (!strcmp(variable, "wpc"))
+        res = s->set_wpc(s, val);
+    else if (!strcmp(variable, "raw_gma"))
+        res = s->set_raw_gma(s, val);
+    else if (!strcmp(variable, "lenc"))
+        res = s->set_lenc(s, val);
+    else if (!strcmp(variable, "special_effect"))
+        res = s->set_special_effect(s, val);
+    else if (!strcmp(variable, "wb_mode"))
+        res = s->set_wb_mode(s, val);
+    else if (!strcmp(variable, "ae_level"))
+        res = s->set_ae_level(s, val);
+    else if (!strcmp(variable, "led_intensity")) {
+        _led_duty = val;
+    } else {
+        res = -1;
+    }
+
+    if (res) {
+        return httpd_resp_send_500(req);
+    }
+
+    httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");
+    return httpd_resp_send(req, NULL, 0);
 }
 
 /**
@@ -400,6 +593,20 @@ void ESP32CAM::startServer(void) {
     .uri       = "/status",
     .method    = HTTP_GET,
     .handler   = status_handler,
+    .user_ctx  = NULL
+  };
+
+  httpd_uri_t cmd_uri = {
+    .uri       = "/control",
+    .method    = HTTP_GET,
+    .handler   = cmd_handler,
+    .user_ctx  = NULL
+  };
+
+  httpd_uri_t restart_uri = {
+    .uri       = "/restart",
+    .method    = HTTP_GET,
+    .handler   = restart_handler,
     .user_ctx  = NULL
   };
 
@@ -427,6 +634,8 @@ void ESP32CAM::startServer(void) {
   Serial.printf("Starting web server on port: '%d'\n", config.server_port);
   if (httpd_start(&_camera_httpd, &config) == ESP_OK) {
     httpd_register_uri_handler(_camera_httpd, &status_uri);
+    httpd_register_uri_handler(_camera_httpd, &cmd_uri);
+    httpd_register_uri_handler(_camera_httpd, &restart_uri);
     httpd_register_uri_handler(_camera_httpd, &capture_uri);
     httpd_register_uri_handler(_camera_httpd, &capture_with_flash_uri);
     httpd_register_uri_handler(_camera_httpd, &capture_without_flash_uri);
