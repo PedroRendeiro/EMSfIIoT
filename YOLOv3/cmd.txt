@@ -1,0 +1,11 @@
+cd "C:\Users\pedro\OneDrive - Universidade de Aveiro\5º ano\DPE\Software\EMSfIIoT\YOLOv3"
+
+py train.py --model_type=yolo3_mobilenet --anchors_path=configs/yolo3_anchors.txt --annotation_file=data/EMSfIIoT/train.txt --classes_path=configs/emsfiiot_classes.txt --log_dir=logs\emsfiiot_3\ --batch_size=1 --transfer_epoch=250 --weights_path=logs/emsfiiot_2/ep068-loss14.955-val_loss13.859.h5
+
+tensorboard --logdir logs/emsfiiot_1 --host 0.0.0.0
+
+py yolo.py --model_type=yolo3_mobilenet --weights_path=logs/emsfiiot_2/ep068-loss14.955-val_loss13.859.h5 --anchors_path=configs/yolo3_anchors.txt --classes_path=configs/emsfiiot_classes.txt --dump_model --output_model_file=weights/emsfiiot.h5
+
+py eval.py --model_path=weights/emsfiiot.h5 --anchors_path=configs/yolo3_anchors.txt --classes_path=configs/emsfiiot_classes.txt --eval_type=VOC --iou_threshold=0.5 --conf_threshold=0.25 --annotation_file=data/EMSfIIoT/train.txt --save_result
+
+py yolo.py --model_type=yolo3_mobilenet --weights_path=weights/emsfiiot.h5 --anchors_path=configs/yolo3_anchors.txt --classes_path=configs/emsfiiot_classes.txt --input=http://192.168.1.2:81/stream
