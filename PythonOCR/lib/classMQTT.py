@@ -109,8 +109,8 @@ class MQTT():
         # reconnect then subscriptions will be renewed.
 
         # BEGIN SAMPLE CODE
-        #self.client.subscribe("commands/" + self.tenantId + "/")
-        self.client.subscribe("control/+/+/req/#")
+        self.client.subscribe("commands/" + self.tenantId + "/")
+        #self.client.subscribe("control/+/+/req/#")
         # END SAMPLE CODE
 
         # Time stamp when the periodAction function shall be called again

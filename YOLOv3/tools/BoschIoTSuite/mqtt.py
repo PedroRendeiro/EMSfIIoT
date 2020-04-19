@@ -74,7 +74,7 @@ class MQTT():
         # Timer variable for periodic function
         self.next_call = 0
         # Period for publishing data to the MQTT broker in seconds
-        self.timePeriod = 10
+        self.timePeriod = int(config['mqtt']['timePeriod'])
         #
         self.thread = None
 
