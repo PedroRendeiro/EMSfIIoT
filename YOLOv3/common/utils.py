@@ -137,11 +137,6 @@ def draw_boxes(image, boxes, classes, scores, class_names, colors, show_score=Tr
 
     n = range(len(classes))
 
-    order = boxes[:,0].argsort()
-    boxes = boxes[order]
-    classes = classes[order]
-    scores = scores[order]
-
     for box, cls, score, idx in zip(boxes, classes, scores, n):
         xmin, ymin, xmax, ymax = box
 

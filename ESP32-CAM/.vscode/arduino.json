@@ -3,5 +3,5 @@
     "programmer": "AVRISP mkII",
     "sketch": "ESP32-CAM.ino",
     "output": "../build",
-    "port": "COM5"
+    "port": "COM8"
 }

@@ -10,6 +10,7 @@ import cv2
 import time
 from timeit import default_timer as timer
 
+#os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import tensorflow as tf
 
@@ -30,17 +31,16 @@ from yolo2.postprocess_np import yolo2_postprocess_np
 from common.data_utils import preprocess_image
 from common.utils import get_classes, get_anchors, get_colors, draw_boxes
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 from tensorflow.keras.utils import multi_gpu_model
 
 #tf.enable_eager_execution()
 
 default_config = {
-        "model_type": 'tiny_yolo3_darknet',
-        "weights_path": 'weights/yolov3-tiny.h5',
+        "model_type": 'yolo3_mobilenet',
+        "weights_path": 'weights/emsfiiot.h5',
         "pruning_model": False,
-        "anchors_path": 'configs/tiny_yolo3_anchors.txt',
-        "classes_path": 'configs/coco_classes.txt',
+        "anchors_path": 'configs/yolo3_anchors.txt',
+        "classes_path": 'configs/emsfiiot_classes.txt',
         "score" : 0.1,
         "iou" : 0.15,
         "model_image_size" : (416, 416),
@@ -117,10 +117,37 @@ class YOLO_np(object):
         end = time.time()
         print("Inference time: {:.8f}s".format(end - start))
 
+        if out_classes is None or len(out_classes) == 0:
+            return image_data, None
+
+        order = out_boxes[:,0].argsort()
+        out_boxes = out_boxes[order]
+        out_classes = out_classes[order]
+        out_scores = out_scores[order]
+
+        yref_top = min(out_boxes[:,1])
+        yref_top_idx = np.argmin(out_boxes[:,1])
+
+        r_number, r_screen = ([] for i in range(2))
+
+        for idx, box in enumerate(out_boxes):
+            _, ymin, _, ymax = box
+
+            if ymin < 195:
+                r_screen.append(out_classes[idx])
+            else:
+                r_number.append(out_classes[idx])
+        
+        if len(r_number) < 1 or len(r_screen) < 1:
+            r_number, r_screen = (0 for i in range(2))
+        else:
+            r_number = int("".join("{0}".format(n) for n in r_number))
+            r_screen = "".join(str(n) for n in r_screen)
+
         #draw result on input image
         image_array = np.array(image, dtype='uint8')
         image_array = draw_boxes(image_array, out_boxes, out_classes, out_scores, self.class_names, self.colors)
-        return Image.fromarray(image_array)
+        return Image.fromarray(image_array), r_number, r_screen
 
 
     def predict(self, image_data, image_shape):
@@ -298,7 +325,7 @@ def detect_video(yolo, video_path, output_path=""):
         try:            
             return_value, frame = vid.read()
             image = Image.fromarray(frame)
-            image = yolo.detect_image(image)
+            image, _, _ = yolo.detect_image(image)
             result = np.asarray(image)
             curr_time = timer()
             exec_time = curr_time - prev_time
@@ -343,8 +370,14 @@ def detect_img(yolo):
             print('Open Error! Try again!')
             continue
         else:
-            r_image = yolo.detect_image(image)
+            r_image, _, _ = yolo.detect_image(image)
             r_image.show()
+
+def process_img(yolo, img):
+    image = Image.open(img)
+    r_image, r_number, r_screen = yolo.detect_image(image)
+    
+    return r_number, r_screen
 
 
 if __name__ == '__main__':

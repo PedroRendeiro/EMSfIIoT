@@ -1,5 +1,7 @@
 __pycache__/
+.vscode/
 config.ini
+emsfiiot.cfg
 Doxyfile
 build/
 html/

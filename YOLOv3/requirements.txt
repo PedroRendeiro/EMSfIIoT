@@ -1,8 +1,9 @@
+Cython
 numpy
 scipy
 opencv-python
 opencv-contrib-python
-tensorflow-gpu
+tensorflow==2.1.0
 tensorflow-model-optimization
 matplotlib
 tqdm

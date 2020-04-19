@@ -4,18 +4,10 @@ clc
 
 global next
 
-files = [dir('../data/EMSfIIoT/new')];
+files = [dir('../data/EMSfIIoT')];
 [m,~] = size(files);
 idx = randperm(m);
 files(idx,1) = files(:,1);
-
-result = cell2table(cell(0,6));
-result.Properties.VariableNames{'Var1'}='fileDir';
-result.Properties.VariableNames{'Var2'}='label';
-result.Properties.VariableNames{'Var3'}='left';
-result.Properties.VariableNames{'Var4'}='top';
-result.Properties.VariableNames{'Var5'}='width';
-result.Properties.VariableNames{'Var6'}='height';
 
 f = figure;
 f.WindowState = 'maximized';
