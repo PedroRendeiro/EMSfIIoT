@@ -6,7 +6,7 @@ from .DittoSerializer import DittoSerializer
 from .GenericSensor import GenericSensor
 from ..image_acquisition import ImageAcquisition
 
-import yolo
+import lite
 
 class MQTT():
     """
@@ -62,9 +62,9 @@ class MQTT():
 
         self.readDone = False
 
-        self.YoloModel = yolo.YOLO_np()
+        self.YoloModel = lite.YOLO_lite()
         self.ImageAcquisition = ImageAcquisition()
-        yolo.process_img(self.YoloModel, self.ImageAcquisition.ReadFromURL(self.cameraURL))
+        self.YoloModel.detect_image(self.ImageAcquisition.ReadFromURL(self.cameraURL))
 
         # Initialization of Information Model
         self.infomodel = GenericSensor()
@@ -223,7 +223,7 @@ class MQTT():
         while (screen not in L):
             try:
                 image = self.ImageAcquisition.ReadFromURL(self.cameraURL)
-                self.infomodel.sensorValue, screen = yolo.process_img(self.YoloModel, image)
+                _, self.infomodel.sensorValue, screen = self.YoloModel.detect_image(image)
                 print(self.infomodel.sensorValue, screen)
             except:
                 continue
