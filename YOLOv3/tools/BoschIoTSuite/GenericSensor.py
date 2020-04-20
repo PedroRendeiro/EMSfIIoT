@@ -6,6 +6,8 @@ class GenericSensor(object):
         self.sensorUnits = 0.0
         self.lastValueDate = 0.0
         self.lastValueTime = 0.0
+        self.measureTypeID = 0.0
+        self.locationID = 0.0
 
     ### Status property sensorValue
     @property
@@ -41,7 +43,25 @@ class GenericSensor(object):
     
     @lastValueTime.setter
     def lastValueTime(self, value):
-        self.__lastValueTime = (value, True)    
+        self.__lastValueTime = (value, True)   
+
+    ### Status property measureTypeID
+    @property
+    def measureTypeID(self):
+        return self.__measureTypeID[0]
+    
+    @measureTypeID.setter
+    def measureTypeID(self, value):
+        self.__measureTypeID = (value, True)
+
+    ### Status property locationID
+    @property
+    def locationID(self):
+        return self.__locationID[0]
+    
+    @locationID.setter
+    def locationID(self, value):
+        self.__locationID = (value, True)  
     
     def serializeStatus(self, serializer):
         serializer.first_prop = True
@@ -57,6 +77,12 @@ class GenericSensor(object):
         if self.__lastValueTime[1]:
                serializer.serialize_property("lastValueTime", self.__lastValueTime[0])
                self.__lastValueTime = (self.__lastValueTime[0], False)
+        if self.__measureTypeID[1]:
+               serializer.serialize_property("measureTypeID", self.__measureTypeID[0])
+               self.__measureTypeID = (self.__measureTypeID[0], False)
+        if self.__locationID[1]:
+               serializer.serialize_property("locationID", self.__locationID[0])
+               self.__locationID = (self.__locationID[0], False)
     def serializeConfiguration(self, serializer):
         pass
         #serializer.first_prop = True

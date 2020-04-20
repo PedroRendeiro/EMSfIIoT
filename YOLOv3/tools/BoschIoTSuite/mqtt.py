@@ -219,24 +219,28 @@ class MQTT():
         print("Reading data...")
         
         screen = ""
-        L = ["181"]
-        while (screen not in L):
-            try:
-                image = self.ImageAcquisition.ReadFromURL(self.cameraURL)
-                _, self.infomodel.sensorValue, screen = self.YoloModel.detect_image(image)
-                print(self.infomodel.sensorValue, screen)
-            except:
-                continue
-        self.infomodel.sensorUnits = "kWh"
+        L = ["181", "182", "183"]
+        for l in L:
+            while (screen not in [l]):
+                try:
+                    image = self.ImageAcquisition.ReadFromURL(self.cameraURL)
+                    _, self.infomodel.sensorValue, screen = self.YoloModel.detect_image(image)
+                    print(self.infomodel.sensorValue, screen)
+                except:
+                    continue
+            self.infomodel.sensorUnits = "kWh"
+            self.infomodel.measureTypeID = int(screen[-1])
+            self.infomodel.locationID = 1
 
-        now = datetime.datetime.now()
-        self.infomodel.lastValueDate = now.strftime("%d-%m-%Y")
-        self.infomodel.lastValueTime = now.strftime("%H:%M:%S")
+            now = datetime.datetime.now()
+            self.infomodel.lastValueDate = now.strftime("%d-%m-%Y")
+            self.infomodel.lastValueTime = now.strftime("%H:%M:%S")
+
+            # Publish payload
+            self.publishGenericsensor()
+            time.sleep(30)
 
         print("Read done!")
-
-        # Publish payload
-        self.publishGenericsensor()
 
         self.readDone = True
 
