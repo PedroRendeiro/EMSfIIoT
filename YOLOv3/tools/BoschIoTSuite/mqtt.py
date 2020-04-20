@@ -64,6 +64,7 @@ class MQTT():
 
         self.YoloModel = yolo.YOLO_np()
         self.ImageAcquisition = ImageAcquisition()
+        yolo.process_img(self.YoloModel, self.ImageAcquisition.ReadFromURL(self.cameraURL))
 
         # Initialization of Information Model
         self.infomodel = GenericSensor()
@@ -71,8 +72,6 @@ class MQTT():
         # Create a serializer for the MQTT payload from the Information Model
         self.ser = DittoSerializer()
 
-        # Timer variable for periodic function
-        self.next_call = 0
         # Period for publishing data to the MQTT broker in seconds
         self.timePeriod = int(config['mqtt']['timePeriod'])
         #
@@ -106,6 +105,9 @@ class MQTT():
         # Other loop*() functions are available that give a threaded interface and a
         # manual interface.
         self.client.loop_start()
+
+        # Start the periodic task for publishing MQTT messages
+        self.periodicAction()
     
     def stop(self):
         self.client.disconnect()
@@ -128,12 +130,6 @@ class MQTT():
 
         #self.client.subscribe("commands/" + self.tenantId + "/")
         self.client.subscribe("control/+/+/req/#")
-
-        # Time stamp when the periodAction function shall be called again
-        self.next_call = time.time()
-        
-        # Start the periodic task for publishing MQTT messages
-        self.periodicAction()
 
     def on_disconnect(self, client, userdata, rc):
         if rc != 0:
@@ -221,8 +217,6 @@ class MQTT():
         self.readDone = False
 
         print("Reading data...")
-
-        now = datetime.datetime.now()
         
         screen = ""
         L = ["181"]
@@ -232,9 +226,9 @@ class MQTT():
                 print(self.infomodel.sensorValue, screen)
             except:
                 continue
-        
-        #self.infomodel.sensorValue = 5000
         self.infomodel.sensorUnits = "kWh"
+
+        now = datetime.datetime.now()
         self.infomodel.lastValueDate = now.strftime("%d-%m-%Y")
         self.infomodel.lastValueTime = now.strftime("%H:%M:%S")
 
@@ -246,7 +240,6 @@ class MQTT():
         self.readDone = True
 
         # Schedule next call
-        self.next_call = self.next_call + self.timePeriod
         threading.Timer(self.timePeriod, self.periodicAction).start()
 
 def main():
