@@ -222,7 +222,8 @@ class MQTT():
         L = ["181"]
         while (screen not in L):
             try:
-                self.infomodel.sensorValue, screen = yolo.process_img(self.YoloModel, self.ImageAcquisition.ReadFromURL(self.cameraURL))
+                image = self.ImageAcquisition.ReadFromURL(self.cameraURL)
+                self.infomodel.sensorValue, screen = yolo.process_img(self.YoloModel, image)
                 print(self.infomodel.sensorValue, screen)
             except:
                 continue
