@@ -1,5 +1,5 @@
 import tools.BoschIoTSuite.mqtt as MQTT
-import sys
+import sys, time
 
 def main():
     """
@@ -17,10 +17,11 @@ def main():
         mqtt.stop()
         print("Exiting...")
         sys.exit(0)
+        time.sleep(2)
     else:
         sys.exit(1)
     finally:
-        pass
+        sys.exit(0)
         
 
 # Main body

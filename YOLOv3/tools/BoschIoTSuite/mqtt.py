@@ -221,8 +221,9 @@ class MQTT():
         screen = ""
         L = ["181", "182", "183"]
         for l in L:
-            while (screen not in [l]):
+            while (screen not in [l] or len(str(self.infomodel.sensorValue)) != 4):
                 try:
+                    self.infomodel.sensorValue = []
                     image = self.ImageAcquisition.ReadFromURL(self.cameraURL)
                     _, self.infomodel.sensorValue, screen = self.YoloModel.detect_image(image)
                     print(self.infomodel.sensorValue, screen)
