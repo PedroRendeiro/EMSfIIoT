@@ -201,7 +201,7 @@ class MQTT():
         """
         payload = self.ser.serialize_functionblock("ESP32_CAM", self.infomodel, self.ditto_topic, self.deviceId)
         print("Publish Payload: ", payload, " to Topic: ", self.publishTopic)
-        logging.info("Publish Payload: ", payload, " to Topic: ", self.publishTopic)
+        logging.info("Publish Payload: " + payload + " to Topic: " + self.publishTopic)
         self.client.publish(self.publishTopic, payload)
     
     # The function that will be executed periodically once the connection to the MQTT broker was established
