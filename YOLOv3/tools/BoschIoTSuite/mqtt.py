@@ -3,7 +3,7 @@ import paho.mqtt.client as mqtt
 import datetime, threading, time, sys, configparser, logging
 
 from .DittoSerializer import DittoSerializer
-from .GenericSensor import GenericSensor
+from .EMSfIIoT_Gateway import EMSfIIoT_Gateway
 from ..image_acquisition import ImageAcquisition
 
 import lite
@@ -67,7 +67,7 @@ class MQTT():
         self.YoloModel.detect_image(self.ImageAcquisition.ReadFromURL(self.cameraURL))
 
         # Initialization of Information Model
-        self.infomodel = GenericSensor()
+        self.infomodel = EMSfIIoT_Gateway()
 
         # Create a serializer for the MQTT payload from the Information Model
         self.ser = DittoSerializer()
@@ -129,7 +129,7 @@ class MQTT():
         # reconnect then subscriptions will be renewed.
 
         #self.client.subscribe("commands/" + self.tenantId + "/")
-        self.client.subscribe("control/+/+/req/#")
+        #self.client.subscribe("control/+/+/req/#")
 
     def on_disconnect(self, client, userdata, rc):
         if rc != 0:
@@ -199,8 +199,9 @@ class MQTT():
 
         Generates payload from data in infomodel
         """
-        payload = self.ser.serialize_functionblock("genericsensor", self.infomodel, self.ditto_topic, self.deviceId)
+        payload = self.ser.serialize_functionblock("ESP32_CAM", self.infomodel, self.ditto_topic, self.deviceId)
         print("Publish Payload: ", payload, " to Topic: ", self.publishTopic)
+        logging.info("Publish Payload: ", payload, " to Topic: ", self.publishTopic)
         self.client.publish(self.publishTopic, payload)
     
     # The function that will be executed periodically once the connection to the MQTT broker was established
@@ -221,21 +222,20 @@ class MQTT():
         screen = ""
         L = ["181", "182", "183"]
         for l in L:
-            while (screen not in [l] or len(str(self.infomodel.sensorValue)) != 4):
+            while (screen not in [l] or len(str(self.infomodel.value)) != 4):
                 try:
-                    self.infomodel.sensorValue = []
+                    self.infomodel.value = []
                     image = self.ImageAcquisition.ReadFromURL(self.cameraURL)
-                    _, self.infomodel.sensorValue, screen = self.YoloModel.detect_image(image)
-                    print(self.infomodel.sensorValue, screen)
+                    _, self.infomodel.value, screen = self.YoloModel.detect_image(image)
+                    print(self.infomodel.value, screen)
                 except:
                     continue
-            self.infomodel.sensorUnits = "kWh"
+            self.infomodel.unit = "kWh"
             self.infomodel.measureTypeID = int(screen[-1])
             self.infomodel.locationID = 1
 
             now = datetime.datetime.now()
-            self.infomodel.lastValueDate = now.strftime("%d-%m-%Y")
-            self.infomodel.lastValueTime = now.strftime("%H:%M:%S")
+            self.infomodel.timeStamp = now.strftime("%d-%m-%Y") + "T" + now.strftime("%H:%M:%S")
 
             # Publish payload
             self.publishGenericsensor()
