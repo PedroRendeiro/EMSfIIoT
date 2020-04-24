@@ -1,4 +1,4 @@
-import tools.BoschIoTSuite.mqtt as MQTT
+import tools.BoschIoTSuite.MQTT as MQTT
 import sys, time
 
 def main():

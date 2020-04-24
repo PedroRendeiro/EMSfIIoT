@@ -9,3 +9,5 @@ py yolo.py --model_type=yolo3_mobilenet --weights_path=logs/emsfiiot_2/ep068-los
 py eval.py --model_path=weights/emsfiiot.h5 --anchors_path=configs/yolo3_anchors.txt --classes_path=configs/emsfiiot_classes.txt --eval_type=VOC --iou_threshold=0.5 --conf_threshold=0.25 --annotation_file=data/EMSfIIoT/train.txt --save_result
 
 py yolo.py --model_type=yolo3_mobilenet --weights_path=weights/emsfiiot.h5 --anchors_path=configs/yolo3_anchors.txt --classes_path=configs/emsfiiot_classes.txt --input=http://192.168.1.2:81/stream
+
+py tools/custom_tflite_convert.py --keras_model_file=weights/emsfiiot.h5 --output_file=weights/emsfiiot_lite.h5

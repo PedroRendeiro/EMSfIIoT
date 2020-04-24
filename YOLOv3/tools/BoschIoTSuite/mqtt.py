@@ -239,7 +239,6 @@ class MQTT():
 
             # Publish payload
             self.publishGenericsensor()
-            time.sleep(30)
 
         print("Read done!")
 

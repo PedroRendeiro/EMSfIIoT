@@ -8,7 +8,8 @@ class ImageAcquisition():
         pass
 
     def ReadFromURL(self, url):
-        response = requests.get(url)
+        headers = {'Authorization': 'Basic Tm9kZVJlZDpUPkg8QmRKKE0ocjhDdXNi'}
+        response = requests.get(url, headers=headers)
 
         if response.status_code == 200:
             print('Capture Done')

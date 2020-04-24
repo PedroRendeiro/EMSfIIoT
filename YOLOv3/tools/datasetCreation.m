@@ -4,7 +4,7 @@ clc
 
 global next
 
-files = [dir('../data/EMSfIIoT')];
+files = [dir('../data/EMSfIIoT/new')];
 [m,~] = size(files);
 idx = randperm(m);
 files(idx,1) = files(:,1);
@@ -16,7 +16,7 @@ c.String = 'Go Back';
 c.Callback = @plotButtonPushed;
 
 k = 1;
-fileID = fopen('../data/EMSfIIoT/new/textfile.txt', 'a');
+fileID = fopen('../data/EMSfIIoT/new/train.txt', 'a');
 while k <= m
     next = true;
     fileDir = strcat(files(k).folder, '\', files(k).name);

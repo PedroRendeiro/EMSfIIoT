@@ -4,13 +4,16 @@
 Run a YOLOv3/YOLOv2 style detection model on test images.
 """
 
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
+
 import colorsys
 import os, sys, argparse
 import cv2
 import time
 from timeit import default_timer as timer
 
-#os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import tensorflow as tf
 
@@ -118,7 +121,7 @@ class YOLO_np(object):
         print("Inference time: {:.8f}s".format(end - start))
 
         if out_classes is None or len(out_classes) == 0:
-            return image_data, None
+            return Image.fromarray(np.squeeze(np.array(image_data, dtype='uint8'))), None, None
 
         order = out_boxes[:,0].argsort()
         out_boxes = out_boxes[order]

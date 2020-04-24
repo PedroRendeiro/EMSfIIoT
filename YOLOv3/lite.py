@@ -90,7 +90,7 @@ if __name__ == '__main__':
 
     yolo = YOLO_lite()
 
-    image = Image.open("data/EMSfIIoT/20200331013237_192.168.1.2.jpg")
+    image = "data/EMSfIIoT/20200331013237_192.168.1.2.jpg"
     
     r_image, r_number, r_screen = yolo.detect_image(image)
 
