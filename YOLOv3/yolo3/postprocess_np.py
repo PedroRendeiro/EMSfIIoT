@@ -136,6 +136,13 @@ def filter_boxes(boxes, classes, scores, max_boxes):
     nclasses = nclasses[:max_boxes]
     nscores = nscores[:max_boxes]
 
+    idx = np.invert(box_iou(nboxes)>0.4)
+    idx = np.insert(idx, 0, True)
+
+    nboxes = nboxes[idx,]
+    nclasses = nclasses[idx]
+    nscores = nscores[idx]
+
     return nboxes, nclasses, nscores
 
 
