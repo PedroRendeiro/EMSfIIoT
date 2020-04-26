@@ -49,7 +49,7 @@ class YOLO_lite:
         start = time.time()
         self.interpreter.invoke()
         output_data = [self.interpreter.get_tensor(self.output_details[2]['index']), self.interpreter.get_tensor(self.output_details[0]['index']), self.interpreter.get_tensor(self.output_details[1]['index'])]
-        out_boxes, out_classes, out_scores = yolo3_postprocess_np(output_data, image_shape, self.anchors, len(self.class_names), self.model_image_size, max_boxes=20, confidence=0.5)
+        out_boxes, out_classes, out_scores = yolo3_postprocess_np(output_data, image_shape, self.anchors, len(self.class_names), self.model_image_size, max_boxes=20, confidence=0.25)
         print('Found {} boxes for {}'.format(len(out_boxes), 'img'))
         end = time.time()
         print("Inference time: {:.8f}s".format(end - start))
@@ -76,7 +76,7 @@ class YOLO_lite:
                 r_number.append(out_classes[idx])
         
         if len(r_number) < 1 or len(r_screen) < 1:
-            r_number, r_screen = (0 for i in range(2))
+            r_number, r_screen = ("" for i in range(2))
         else:
             #r_number = int("".join("{0}".format(n) for n in r_number))
             r_number = "".join(str(n) for n in r_number)
