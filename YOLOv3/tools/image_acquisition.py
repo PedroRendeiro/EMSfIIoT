@@ -12,7 +12,7 @@ class ImageAcquisition():
         response = requests.get(url, headers=headers)
 
         if response.status_code == 200:
-            print('Capture Done')
+            print('Capture Done, URL: ' + url)
         else:
             print('Web site does not exist')
             return
@@ -30,5 +30,3 @@ class ImageAcquisition():
             return True
         except OSError:
             return False
-
-response = requests.get("http://loja:drogaria321@loja.drogariasantoantonio.pt/ISAPI/Streaming/channels/301/Picture")

@@ -55,7 +55,7 @@ class YOLO_lite:
         print("Inference time: {:.8f}s".format(end - start))
 
         if out_classes is None or len(out_classes) == 0:
-            return image_data, None
+            return image_data, None, None
 
         order = out_boxes[:,0].argsort()
         out_boxes = out_boxes[order]
@@ -78,7 +78,8 @@ class YOLO_lite:
         if len(r_number) < 1 or len(r_screen) < 1:
             r_number, r_screen = (0 for i in range(2))
         else:
-            r_number = int("".join("{0}".format(n) for n in r_number))
+            #r_number = int("".join("{0}".format(n) for n in r_number))
+            r_number = "".join(str(n) for n in r_number)
             r_screen = "".join(str(n) for n in r_screen)
 
         #draw result on input image
@@ -90,8 +91,10 @@ if __name__ == '__main__':
 
     yolo = YOLO_lite()
 
-    image = "data/EMSfIIoT/20200331013237_192.168.1.2.jpg"
+    image = "capture.jpg"
     
     r_image, r_number, r_screen = yolo.detect_image(image)
+
+    print(r_number, r_screen)
 
     r_image.show()

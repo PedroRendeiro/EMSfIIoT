@@ -219,26 +219,41 @@ class MQTT():
 
         print("Reading data...")
         
-        screen = ""
         L = ["181", "182", "183"]
-        for l in L:
-            while (screen not in [l] or len(str(self.infomodel.value)) != 4):
-                try:
-                    self.infomodel.value = []
-                    image = self.ImageAcquisition.ReadFromURL(self.cameraURL)
-                    _, self.infomodel.value, screen = self.YoloModel.detect_image(image)
-                    print(self.infomodel.value, screen)
-                except:
-                    continue
-            self.infomodel.unit = "kWh"
-            self.infomodel.measureTypeID = int(screen[-1])
-            self.infomodel.locationID = 1
+        cameras = [self.cameraURL, "http://loja.drogariasantoantonio.pt:8443/capture_with_flash"]
+        for idx, camera in enumerate(cameras):
+            for l in L:
+                screen = None
+                value = None
+                while (screen not in [l] or len(str(value)) != 6):
+                    try:
+                        image = self.ImageAcquisition.ReadFromURL(camera)
+                        if idx == 0:
+                            _, value, screen = self.YoloModel.detect_image(image)
+                        else:
+                            _, screen, value = self.YoloModel.detect_image(image)
+                            screen = screen[::-1]
+                            value = value[::-1]
+                        print("Screen: " + screen + " | Value: " + value)
+                        logging.info("Screen: " + screen + " | Value: " + value)
+                    except KeyboardInterrupt:
+                        print("Exiting...")
+                        sys.exit(0)
+                    except Exception as e:
+                        print(e)
+                        logging.error(e)
+                        continue
 
-            now = datetime.datetime.now()
-            self.infomodel.timeStamp = now.strftime("%d-%m-%Y") + "T" + now.strftime("%H:%M:%S")
+                self.infomodel.value = int(value)
+                self.infomodel.unit = "kWh"
+                self.infomodel.measureTypeID = int(screen[-1])
+                self.infomodel.locationID = idx+1
 
-            # Publish payload
-            self.publishGenericsensor()
+                now = datetime.datetime.now()
+                self.infomodel.timeStamp = now.strftime("%d-%m-%Y") + "T" + now.strftime("%H:%M:%S")
+
+                # Publish payload
+                self.publishGenericsensor()
 
         print("Read done!")
 

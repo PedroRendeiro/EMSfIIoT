@@ -22,7 +22,7 @@ import argparse
 import os
 import sys
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+#os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
 from tensorflow.lite.python import lite
 from tensorflow.lite.python import lite_constants

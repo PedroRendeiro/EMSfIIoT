@@ -90,7 +90,7 @@ camera_config_t ESP32CAM::config(void) {
 
   // Check if PSRAM is available
   if(psramFound()){
-    _camera_config.frame_size = FRAMESIZE_CIF; // FRAMESIZE_ + QVGA|CIF|VGA|SVGA|XGA|SXGA|UXGA
+    _camera_config.frame_size = FRAMESIZE_XGA; // FRAMESIZE_ + QVGA|CIF|VGA|SVGA|XGA|SXGA|UXGA
     _camera_config.jpeg_quality = 12;
     _camera_config.fb_count = 2;
     Serial.println("Camera with PSRAM detected!");
@@ -586,6 +586,11 @@ void ESP32CAM::startServer(void) {
 
   config();
   init();
+
+  sensor_t *s = esp_camera_sensor_get();
+  if (s->pixformat == PIXFORMAT_JPEG) {
+    s->set_framesize(s, (framesize_t)FRAMESIZE_CIF);
+  }
 
   httpd_config_t config = HTTPD_DEFAULT_CONFIG();
 
