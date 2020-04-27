@@ -12,8 +12,6 @@ class DittoSerializer(object):
         self.payload += "\"headers\": {\"response-required\": false},"
         self.payload += "\"path\": \"/features/"+name+"/properties\",\"value\" : {\"status\" : {"
         object.serializeStatus(self)
-        self.payload += "}, \"configuration\" : {"
-        object.serializeConfiguration(self)
         self.payload += "} } }"
         returnPayload = self.payload
         # RESET

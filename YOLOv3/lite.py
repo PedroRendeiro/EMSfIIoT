@@ -4,7 +4,7 @@ try:
 except:
     import tensorflow as tf
 from PIL import Image
-import time
+import time, logging
 
 from yolo3.postprocess_np import yolo3_postprocess_np
 from common.utils import get_classes, get_anchors, get_colors, draw_boxes
@@ -12,6 +12,9 @@ from common.data_utils import preprocess_image
 
 class YOLO_lite:
     def __init__(self):
+
+        self.log = logging.getLogger('EMSfIIoT')
+
         # Load TFLite model and allocate tensors.
         try:
             self.interpreter = tflite.Interpreter(model_path="weights/emsfiiot_lite.h5")
@@ -50,11 +53,12 @@ class YOLO_lite:
         self.interpreter.invoke()
         output_data = [self.interpreter.get_tensor(self.output_details[2]['index']), self.interpreter.get_tensor(self.output_details[0]['index']), self.interpreter.get_tensor(self.output_details[1]['index'])]
         out_boxes, out_classes, out_scores = yolo3_postprocess_np(output_data, image_shape, self.anchors, len(self.class_names), self.model_image_size, max_boxes=20, confidence=0.35)
-        print('Found {} boxes for {}'.format(len(out_boxes), 'img'))
+        self.log.info('Found {} boxes for {}'.format(len(out_boxes), 'img'))
         end = time.time()
-        print("Inference time: {:.8f}s".format(end - start))
+        self.log.info("Inference time: {:.8f}s".format(end - start))
 
         if out_classes is None or len(out_classes) == 0:
+            self.log.warning("No boxes found!")
             return image_data, None, None
 
         order = out_boxes[:,0].argsort()
@@ -75,12 +79,10 @@ class YOLO_lite:
             else:
                 r_number.append(out_classes[idx])
         
-        if len(r_number) < 1 or len(r_screen) < 1:
-            r_number, r_screen = ("" for i in range(2))
-        else:
-            #r_number = int("".join("{0}".format(n) for n in r_number))
-            r_number = "".join(str(n) for n in r_number)
-            r_screen = "".join(str(n) for n in r_screen)
+
+        #r_number = int("".join("{0}".format(n) for n in r_number))
+        r_number = "".join(str(n) for n in r_number)
+        r_screen = "".join(str(n) for n in r_screen)
 
         #draw result on input image
         image_array = np.array(image, dtype='uint8')

@@ -1,20 +1,20 @@
 from PIL import Image
-import os, time, requests
+import os, time, requests, logging
 from io import BytesIO
 
 class ImageAcquisition():
 
     def __init__(self):
-        pass
+        self.log = logging.getLogger('EMSfIIoT')
 
     def ReadFromURL(self, url):
         headers = {'Authorization': 'Basic Tm9kZVJlZDpUPkg8QmRKKE0ocjhDdXNi'}
         response = requests.get(url, headers=headers)
 
         if response.status_code == 200:
-            print('Capture Done, URL: ' + url)
+            self.log.info('Capture Done, URL: ' + url)
         else:
-            print('Web site does not exist')
+            self.log.error("Status Code: " + response.status_code + " | Body: " + response.content.decode('utf-8'))
             return
 
         img_bytes = BytesIO(response.content)

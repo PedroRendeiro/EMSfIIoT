@@ -8,7 +8,7 @@ from ..image_acquisition import ImageAcquisition
 
 import lite
 
-class MQTT():
+class Hub():
     """
     MQTT Class
 
@@ -18,7 +18,7 @@ class MQTT():
      	tenantId: ID necessary for Bosch IoT Suite MQTT communication
         hub_adapter_host: MQTT broker URL
         certificatePath: MQTT TLS certificate path
-        deviceId: Device ID for user and MQTT payload
+        thingId: Thing ID for user and MQTT payload
         authId: Auth ID for user and MQTT payload
         device_password: Password for MQTT authentication
         ditto_topic: MQTT topic to publish
@@ -30,41 +30,38 @@ class MQTT():
         ser: Serializer Class
         next_call: Time to next MQTT message
         timePeriod: Time between MQTT messages
-        publishTopic: MQTT topic to publish in
+        telemetryTopic: MQTT telemetry topic to publish in
         client: MQTT Client
     """
 
-    def __init__(self):
+    def __init__(self, devices):
         """
         Class constructor
 
         Reads configuration file and sets variables.
         Starts MQTT loop.
         """
-        
-        logging.basicConfig(filename='logs/EMSfIIoT.log', level=logging.DEBUG, format='%(asctime)s %(message)s')
-        
+        self.log = logging.getLogger('EMSfIIoT')
+
         config = configparser.ConfigParser()
         config.read("cfg/emsfiiot.cfg")
 
         # DEVICE CONFIG GOES HERE
-        self.tenantId = config['mqtt']['tenantId']
-        self.hub_adapter_host = config['mqtt']['hub_adapter_host']
-        self.certificatePath = config['mqtt']['certificatePath']
-        self.deviceId = config['mqtt']['deviceId']
-        self.authId = config['mqtt']['authId']
-        self.device_password = config['mqtt']['device_password']
-        self.ditto_topic = config['mqtt']['ditto_topic']
-        self.clientId = self.deviceId
+        self.tenantId = config['hub']['tenantId']
+        self.hub_adapter_host = config['hub']['hub_adapter_host']
+        self.certificatePath = config['hub']['certificatePath']
+        self.thingId = config['hub']['thingId']
+        self.authId = config['hub']['authId']
+        self.device_password = config['hub']['device_password']
+        self.ditto_topic = config['hub']['ditto_topic']
+        self.clientId = self.thingId
         self.username = self.authId + "@" + self.tenantId
-
-        self.cameraURL = config['source']['ip']
 
         self.readDone = False
 
         self.YoloModel = lite.YOLO_lite()
         self.ImageAcquisition = ImageAcquisition()
-        self.YoloModel.detect_image(self.ImageAcquisition.ReadFromURL(self.cameraURL))
+        self.YoloModel.detect_image("example/capture.jpg")
 
         # Initialization of Information Model
         self.infomodel = EMSfIIoT_Gateway()
@@ -73,12 +70,10 @@ class MQTT():
         self.ser = DittoSerializer()
 
         # Period for publishing data to the MQTT broker in seconds
-        self.timePeriod = int(config['mqtt']['timePeriod'])
-        #
-        self.thread = None
+        self.timePeriod = int(config['hub']['timePeriod'])
 
         # Configuration of client ID and publish topic	
-        self.publishTopic = "telemetry/" + self.tenantId + "/" + self.deviceId
+        self.telemetryTopic = "telemetry/" + self.tenantId + "/" + self.thingId
 
         # Create the MQTT client
         self.client = mqtt.Client(self.clientId)
@@ -91,7 +86,7 @@ class MQTT():
 
         # Output relevant information for consumers of our information
         print("Connecting client:    ", self.clientId)
-        print("Publishing to topic:  ", self.publishTopic)
+        print("Publishing to topic:  ", self.telemetryTopic)
 
         self.client.username_pw_set(self.username, self.device_password)
         self.client.tls_set(self.certificatePath)
@@ -99,11 +94,11 @@ class MQTT():
         # Connect to the MQTT broker
         self.client.connect_async(self.hub_adapter_host, 8883, 60)
 
+        self.devices = devices
+
     def start(self):
-        # Blocking call that processes network traffic, dispatches callbacks and
+        # Non blocking call that processes network traffic, dispatches callbacks and
         # handles reconnecting.
-        # Other loop*() functions are available that give a threaded interface and a
-        # manual interface.
         self.client.loop_start()
 
         # Start the periodic task for publishing MQTT messages
@@ -112,6 +107,7 @@ class MQTT():
     def stop(self):
         self.client.disconnect()
         self.client.loop_stop()
+        self.timer.cancel()
     
     # The callback for when the client receives a CONNACK response from the server.
     def on_connect(self, client, userdata, flags, rc):
@@ -127,7 +123,6 @@ class MQTT():
 
         # Subscribing in on_connect() means that if we lose the connection and
         # reconnect then subscriptions will be renewed.
-
         #self.client.subscribe("commands/" + self.tenantId + "/")
         #self.client.subscribe("control/+/+/req/#")
 
@@ -184,13 +179,13 @@ class MQTT():
             print("Response published!")
 
     def on_publish(self, client, userdata, mid):
-        print("mid: "+str(mid))
+        pass
 
     def on_subscribe(self, client, userdata, mid, granted_qos):
         print("Subscribed: "+str(mid)+" "+str(granted_qos))
 
     def on_log(self, client, userdata, level, string):
-        logging.info(string)
+        self.log.info(string)
     
     # The functions to publish the functionblocks data
     def publishGenericsensor(self):
@@ -199,10 +194,10 @@ class MQTT():
 
         Generates payload from data in infomodel
         """
-        payload = self.ser.serialize_functionblock("ESP32_CAM", self.infomodel, self.ditto_topic, self.deviceId)
-        print("Publish Payload: ", payload, " to Topic: ", self.publishTopic)
-        logging.info("Publish Payload: " + payload + " to Topic: " + self.publishTopic)
-        self.client.publish(self.publishTopic, payload)
+        payload = self.ser.serialize_functionblock("ESP32_CAM", self.infomodel, self.ditto_topic, self.thingId)
+        #print("Publish Payload: ", payload, " to Topic: ", self.telemetryTopic)
+        self.client.publish(self.telemetryTopic, payload)
+        self.log.info("Publish Payload: " + payload + " to Topic: " + self.telemetryTopic)
     
     # The function that will be executed periodically once the connection to the MQTT broker was established
     def periodicAction(self):
@@ -214,40 +209,41 @@ class MQTT():
         Publish to topic.
         Schedule next call.
         """
-
+        
         self.readDone = False
 
         print("Reading data...")
         
         L = ["181", "182", "183"]
-        cameras = [self.cameraURL, "http://loja.drogariasantoantonio.pt:8443/capture_with_flash"]
-        for idx, camera in enumerate(cameras):
+        for device in self.devices:
+            device['url'] = device['url'] + "/capture_with_flash"
             for l in L:
-                screen = None
-                value = None
+                screen, value = None, None
                 while (screen not in [l] or len(str(value)) != 6):
                     try:
-                        image = self.ImageAcquisition.ReadFromURL(camera)
-                        if (idx == 0):
+                        image = self.ImageAcquisition.ReadFromURL(device['url'])
+
+                        if (device['locationId'] == 1):
                             _, value, screen = self.YoloModel.detect_image(image)
                         else:
                             _, screen, value = self.YoloModel.detect_image(image)
                             screen = screen[::-1]
                             value = value[::-1]
-                        print("Screen: " + screen + " | Value: " + value)
-                        logging.info("Screen: " + screen + " | Value: " + value)
+                        
+                        self.log.info("Screen: " + screen + " | Value: " + value)
+                    
                     except KeyboardInterrupt:
                         print("Exiting...")
                         sys.exit(0)
+                    
                     except Exception as e:
-                        print(e)
                         logging.error(e)
                         continue
 
                 self.infomodel.value = int(value)
                 self.infomodel.unit = "kWh"
                 self.infomodel.measureTypeID = int(screen[-1])
-                self.infomodel.locationID = idx+1
+                self.infomodel.locationID = device['locationId']
 
                 now = datetime.datetime.now()
                 self.infomodel.timeStamp = now.strftime("%d-%m-%Y") + "T" + now.strftime("%H:%M:%S")
@@ -260,7 +256,8 @@ class MQTT():
         self.readDone = True
 
         # Schedule next call
-        threading.Timer(self.timePeriod, self.periodicAction).start()
+        self.timer = threading.Timer(self.timePeriod, self.periodicAction)
+        self.timer.start()
 
 def main():
     """
