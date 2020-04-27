@@ -228,7 +228,7 @@ class MQTT():
                 while (screen not in [l] or len(str(value)) != 6):
                     try:
                         image = self.ImageAcquisition.ReadFromURL(camera)
-                        if idx == 0:
+                        if (idx == 0):
                             _, value, screen = self.YoloModel.detect_image(image)
                         else:
                             _, screen, value = self.YoloModel.detect_image(image)
