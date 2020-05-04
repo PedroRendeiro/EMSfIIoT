@@ -223,6 +223,9 @@ class Hub():
                     try:
                         image = self.ImageAcquisition.ReadFromURL(device['url'])
 
+                        if image == None:
+                            continue
+
                         if (device['locationId'] == 1):
                             _, value, screen = self.YoloModel.detect_image(image)
                         else:
