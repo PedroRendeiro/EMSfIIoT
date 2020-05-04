@@ -215,14 +215,13 @@ class Hub():
         print("Reading data...")
         
         L = ["181", "182", "183"]
-        device = []
         for device in self.devices:
-            device['url'] = device['url'] + "/capture_with_flash"
+            url = device['url'] + "/capture_with_flash"
             for l in L:
                 screen, value = None, None
                 while (screen not in [l] or len(str(value)) != 6):
                     try:
-                        image = self.ImageAcquisition.ReadFromURL(device['url'])
+                        image = self.ImageAcquisition.ReadFromURL(url)
 
                         if image == None:
                             continue
