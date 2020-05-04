@@ -74,6 +74,7 @@ class Hub():
 
         # Configuration of client ID and publish topic	
         self.telemetryTopic = "telemetry/" + self.tenantId + "/" + self.thingId
+        self.eventTopic = "event/" + self.tenantId + "/" + self.thingId
 
         # Create the MQTT client
         self.client = mqtt.Client(self.clientId)
@@ -102,7 +103,7 @@ class Hub():
         self.client.loop_start()
 
         # Start the periodic task for publishing MQTT messages
-        self.periodicAction()
+        #self.periodicAction()
     
     def stop(self):
         self.client.disconnect()
@@ -123,8 +124,7 @@ class Hub():
 
         # Subscribing in on_connect() means that if we lose the connection and
         # reconnect then subscriptions will be renewed.
-        #self.client.subscribe("commands/" + self.tenantId + "/")
-        #self.client.subscribe("control/+/+/req/#")
+        self.client.subscribe("command/+/+/req/#")
 
     def on_disconnect(self, client, userdata, rc):
         if rc != 0:
@@ -155,7 +155,7 @@ class Hub():
             print("Sender expects reply, responding to message with ID: " + messageId)
 
             # create MQTT response topic
-            resTopic = "control///res/" + messageId + "/200"
+            resTopic = "command///res/" + messageId + "/200"
 
             # parse Bosch IoT Things correlation ID for response
             reqPayload = str(msg.payload)
@@ -163,16 +163,16 @@ class Hub():
             # 17 is the length of 'correlation-id' and subsequent '":"'
             correlationId = reqPayload[reqPayload.find("correlation-id")+17:reqPayload.find("correlation-id")+17+36]
 
-            print("Sender expects reply, responding to message with Correlation-Id: " + correlationId)
+            print("Correlation-Id: " + correlationId)
 
-            self.periodicAction()
+            #self.periodicAction()
 
             # create Ditto compliant MQTT response payload
             resPayload = "{\"topic\":\"" + self.ditto_topic + "/things/live/messages/switch\","
             resPayload += "\"headers\":{\"correlation-id\":\"" + correlationId + "\","
             resPayload += "\"version\":2,\"content-type\":\"text/plain\"},"
             resPayload += "\"path\":\"/inbox/messages/switch\","
-            resPayload += "\"value\":\"" + str(self.infomodel.sensorValue) + "\","
+            resPayload += "\"value\":\"" + "100" + "\","
             resPayload += "\"status\": 200 }"
 
             self.client.publish(resTopic, resPayload)
