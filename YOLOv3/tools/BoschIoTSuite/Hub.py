@@ -103,7 +103,7 @@ class Hub():
         self.client.loop_start()
 
         # Start the periodic task for publishing MQTT messages
-        #self.periodicAction()
+        self.periodicAction()
     
     def stop(self):
         self.client.disconnect()
