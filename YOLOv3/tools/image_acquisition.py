@@ -14,7 +14,7 @@ class ImageAcquisition():
         if response.status_code == 200:
             self.log.info('Capture Done, URL: ' + url)
         else:
-            self.log.error("Status Code: " + response.status_code + " | Body: " + response.content.decode('utf-8'))
+            self.log.error("Status Code: " + str(response.status_code) + " | Body: " + response.content.decode('utf-8'))
             return
 
         img_bytes = BytesIO(response.content)
