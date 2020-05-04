@@ -77,7 +77,7 @@ class Hub():
         self.eventTopic = "event/" + self.tenantId + "/" + self.thingId
 
         # Create the MQTT client
-        self.client = mqtt.Client(self.clientId)
+        self.client = mqtt.Client(self.clientId, clean_session=True)
         self.client.on_connect = self.on_connect
         self.client.on_disconnect = self.on_disconnect
         self.client.on_message = self.on_message
@@ -215,6 +215,7 @@ class Hub():
         print("Reading data...")
         
         L = ["181", "182", "183"]
+        device = []
         for device in self.devices:
             device['url'] = device['url'] + "/capture_with_flash"
             for l in L:
