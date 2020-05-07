@@ -71,10 +71,9 @@ class Hub():
 
         # Configuration of client ID and publish topic	
         self.telemetryTopic = "telemetry/" + self.tenantId + "/" + self.thingId
-        self.eventTopic = "event/" + self.tenantId + "/" + self.thingId
 
         # Create the MQTT client
-        self.client = mqtt.Client(self.clientId, clean_session=True)
+        self.client = mqtt.Client(self.clientId)
         self.client.on_connect = self.on_connect
         self.client.on_disconnect = self.on_disconnect
         self.client.on_message = self.on_message
@@ -90,7 +89,7 @@ class Hub():
         self.client.tls_set(self.certificatePath)
 
         # Connect to the MQTT broker
-        self.client.connect_async(self.hub_adapter_host, 8883, 60)
+        self.client.connect(self.hub_adapter_host, 8883, keepalive=30)
 
         self.devices = devices
 
@@ -129,7 +128,6 @@ class Hub():
             print("Unexpected MQTT disconnection. Will auto-reconnect")
             self.client.reconnect()
 
-    # The callback for when a PUBLISH message is received from the server.
     def on_message(self, client, userdata, msg):
         """
         Function to run on when message is received
@@ -141,8 +139,7 @@ class Hub():
 
         """
         
-        print("Message received:")
-        print(msg.topic + " " + str(msg.payload))
+        self.log.info("Message received! Payload: " + str(msg.payload) + " from Topic: " + msg.topic)
 
         msgTopic = msg.topic[msg.topic.rfind("/")+1:]
 
@@ -176,14 +173,16 @@ class Hub():
             resPayload += "\"status\": 200 }"
 
             self.client.publish(resTopic, resPayload)
-            print("Response published!")
+            self.log.info("Response published! Payload: " + str(resPayload) + " to Topic: " + resTopic)
 
             if msgTopic == "start":
                 self.status = True
+                self.log.info("Loop start")
                 self.timer = threading.Timer(1, self.periodicAction)
                 self.timer.start()
             elif msgTopic == "stop":
                 self.status = False
+                self.log.info("Loop stop")
                 self.timer.cancel()
 
     def on_publish(self, client, userdata, mid):
@@ -203,7 +202,6 @@ class Hub():
         Generates payload from data in infomodel
         """
         payload = self.ser.serialize_functionblock("ESP32_CAM", self.infomodel, self.ditto_topic, self.thingId)
-        #print("Publish Payload: ", payload, " to Topic: ", self.telemetryTopic)
         self.client.publish(self.telemetryTopic, payload)
         self.log.info("Publish Payload: " + payload + " to Topic: " + self.telemetryTopic)
     
