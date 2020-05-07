@@ -24,7 +24,6 @@ class Hub():
         ditto_topic: MQTT topic to publish
         clientId: Client ID for MQTT communication
         username: username for MQTT communication
-        readDone: Check if current read is done
         ImageClassification: ImageClassification Class
         infomodel: InformationModel Class
         ser: Serializer Class
@@ -56,8 +55,6 @@ class Hub():
         self.ditto_topic = config['hub']['ditto_topic']
         self.clientId = self.thingId
         self.username = self.authId + "@" + self.tenantId
-
-        self.readDone = False
 
         self.YoloModel = lite.YOLO_lite()
         self.ImageAcquisition = ImageAcquisition()
@@ -103,6 +100,7 @@ class Hub():
         self.client.loop_start()
 
         # Start the periodic task for publishing MQTT messages
+        self.status = True
         self.periodicAction()
     
     def stop(self):
@@ -146,6 +144,8 @@ class Hub():
         print("Message received:")
         print(msg.topic + " " + str(msg.payload))
 
+        msgTopic = msg.topic[msg.topic.rfind("/")+1:]
+
         # parse Bosch IoT Hub's message ID for response
         messageId = msg.topic[msg.topic.find("req/")+4:]
         messageId = messageId[0:messageId.find("/")]
@@ -168,15 +168,23 @@ class Hub():
             #self.periodicAction()
 
             # create Ditto compliant MQTT response payload
-            resPayload = "{\"topic\":\"" + self.ditto_topic + "/things/live/messages/switch\","
+            resPayload = "{\"topic\":\"" + self.ditto_topic + "/things/live/messages/" + msgTopic + "\","
             resPayload += "\"headers\":{\"correlation-id\":\"" + correlationId + "\","
             resPayload += "\"version\":2,\"content-type\":\"text/plain\"},"
-            resPayload += "\"path\":\"/inbox/messages/switch\","
-            resPayload += "\"value\":\"" + "100" + "\","
+            resPayload += "\"path\":\"/inbox/messages/" + msgTopic +"\","
+            resPayload += "\"value\":\"" + "Done" + "\","
             resPayload += "\"status\": 200 }"
 
             self.client.publish(resTopic, resPayload)
             print("Response published!")
+
+            if msgTopic == "start":
+                self.status = True
+                self.timer = threading.Timer(1, self.periodicAction)
+                self.timer.start()
+            elif msgTopic == "stop":
+                self.status = False
+                self.timer.cancel()
 
     def on_publish(self, client, userdata, mid):
         pass
@@ -209,8 +217,6 @@ class Hub():
         Publish to topic.
         Schedule next call.
         """
-        
-        self.readDone = False
 
         print("Reading data...")
         
@@ -256,11 +262,10 @@ class Hub():
 
         print("Read done!")
 
-        self.readDone = True
-
-        # Schedule next call
-        self.timer = threading.Timer(self.timePeriod, self.periodicAction)
-        self.timer.start()
+        if self.status:
+            # Schedule next call
+            self.timer = threading.Timer(self.timePeriod, self.periodicAction)
+            self.timer.start()
 
 def main():
     """
@@ -268,7 +273,7 @@ def main():
     """
     try:
         mqtt = MQTT()
-        while (not(mqtt.readDone)):
+        while (1):
             pass
     except KeyboardInterrupt:
         print("Exiting...")
