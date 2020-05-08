@@ -223,11 +223,16 @@ class Hub():
             url = device['url'] + "/capture_with_flash"
             for l in L:
                 screen, value = None, None
-                while (screen not in [l] or len(str(value)) != 6):
+                read = 1
+                n = 0
+                while (read == 1):
                     try:
                         image = self.ImageAcquisition.ReadFromURL(url)
 
                         if image == None:
+                            n = n + 1
+                            if (n > 10):
+                                read = 0
                             continue
 
                         if (device['locationId'] == 1):
@@ -238,6 +243,10 @@ class Hub():
                             value = value[::-1]
                         
                         self.log.info("Screen: " + screen + " | Value: " + value)
+
+                        if (screen in [l] and len(str(value)) == 6):
+                            read = 2
+                            continue
                     
                     except KeyboardInterrupt:
                         print("Exiting...")
@@ -247,16 +256,17 @@ class Hub():
                         logging.error(e)
                         continue
 
-                self.infomodel.value = int(value)
-                self.infomodel.unit = "kWh"
-                self.infomodel.measureTypeID = int(screen[-1])
-                self.infomodel.locationID = device['locationId']
+                if (read == 2):
+                    self.infomodel.value = int(value)
+                    self.infomodel.unit = "kWh"
+                    self.infomodel.measureTypeID = int(screen[-1])
+                    self.infomodel.locationID = device['locationId']
 
-                now = datetime.datetime.now()
-                self.infomodel.timeStamp = now.strftime("%d-%m-%Y") + "T" + now.strftime("%H:%M:%S")
+                    now = datetime.datetime.now()
+                    self.infomodel.timeStamp = now.strftime("%d-%m-%Y") + "T" + now.strftime("%H:%M:%S")
 
-                # Publish payload
-                self.publishGenericsensor()
+                    # Publish payload
+                    self.publishGenericsensor()
 
         print("Read done!")
 
