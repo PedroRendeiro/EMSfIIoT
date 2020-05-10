@@ -195,9 +195,8 @@ class Hub():
                 self.client.publish(resTopic, resPayload)
                 self.log.info("Response published! Payload: " + str(resPayload) + " to Topic: " + resTopic)
 
-                command = ['service', 'EMSfIIoT', 'restart']
-                self.log.info('Executing: %s' % command)
-                subprocess.call(command, shell=True)
+                self.log.info("Restarting...")
+                sys.exit(0)
             else:
                 resPayload += "\"value\":\"" + "Bad Request" + "\","
                 resPayload += "\"status\": 400 }"
