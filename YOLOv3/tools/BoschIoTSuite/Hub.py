@@ -169,25 +169,40 @@ class Hub():
             resPayload += "\"headers\":{\"correlation-id\":\"" + correlationId + "\","
             resPayload += "\"version\":2,\"content-type\":\"text/plain\"},"
             resPayload += "\"path\":\"/inbox/messages/" + msgTopic +"\","
-            resPayload += "\"value\":\"" + "Done" + "\","
-            resPayload += "\"status\": 200 }"
-
-            self.client.publish(resTopic, resPayload)
-            self.log.info("Response published! Payload: " + str(resPayload) + " to Topic: " + resTopic)
 
             if msgTopic == "start" and self.status == False:
+                resPayload += "\"value\":\"" + "Start done" + "\","
+                resPayload += "\"status\": 200 }"
+                self.client.publish(resTopic, resPayload)
+                self.log.info("Response published! Payload: " + str(resPayload) + " to Topic: " + resTopic)
+                
                 self.status = True
                 self.log.info("Loop start")
                 self.timer = threading.Timer(1, self.periodicAction)
                 self.timer.start()
             elif msgTopic == "stop" and self.status = True:
+                resPayload += "\"value\":\"" + "Stop done" + "\","
+                resPayload += "\"status\": 200 }"
+                self.client.publish(resTopic, resPayload)
+                self.log.info("Response published! Payload: " + str(resPayload) + " to Topic: " + resTopic)
+
                 self.status = False
                 self.log.info("Loop stop")
                 self.timer.cancel()
             elif msgTopic == "restart":
+                resPayload += "\"value\":\"" + "Restart done" + "\","
+                resPayload += "\"status\": 200 }"
+                self.client.publish(resTopic, resPayload)
+                self.log.info("Response published! Payload: " + str(resPayload) + " to Topic: " + resTopic)
+
                 command = ['service', 'EMSfIIoT', 'restart']
                 self.log.info('Executing: %s' % command)
                 subprocess.call(command, shell=True)
+            else:
+                resPayload += "\"value\":\"" + "Bad Request" + "\","
+                resPayload += "\"status\": 400 }"
+                self.client.publish(resTopic, resPayload)
+                self.log.info("Response published! Payload: " + str(resPayload) + " to Topic: " + resTopic)
 
     def on_publish(self, client, userdata, mid):
         pass
