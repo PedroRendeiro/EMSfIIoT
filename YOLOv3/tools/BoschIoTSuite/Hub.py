@@ -1,6 +1,6 @@
 import paho.mqtt.client as mqtt
 
-import datetime, threading, time, sys, configparser, logging
+import datetime, threading, time, sys, configparser, logging, subprocess
 
 from .DittoSerializer import DittoSerializer
 from .EMSfIIoT_Gateway import EMSfIIoT_Gateway
@@ -175,15 +175,19 @@ class Hub():
             self.client.publish(resTopic, resPayload)
             self.log.info("Response published! Payload: " + str(resPayload) + " to Topic: " + resTopic)
 
-            if msgTopic == "start":
+            if msgTopic == "start" and self.status == False:
                 self.status = True
                 self.log.info("Loop start")
                 self.timer = threading.Timer(1, self.periodicAction)
                 self.timer.start()
-            elif msgTopic == "stop":
+            elif msgTopic == "stop" and self.status = True:
                 self.status = False
                 self.log.info("Loop stop")
                 self.timer.cancel()
+            elif msgTopic == "restart":
+                command = ['service', 'EMSfIIoT', 'restart']
+                self.log.info('Executing: %s' % command)
+                subprocess.call(command, shell=True)
 
     def on_publish(self, client, userdata, mid):
         pass

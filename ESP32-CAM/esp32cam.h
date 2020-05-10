@@ -25,18 +25,18 @@
 #define I2C_ADDRESS               0x29
 
 // WiFi definitions
-//#define SSID                      "DESKTOP-CSTFN6E"
-//#define PASSWORD                  "r678Q,03"
+//#define SSID                        "DESKTOP-CSTFN6E"
+//#define PASSWORD                    "r678Q,03"
 //#define SSID                        "sala"
 //#define PASSWORD                    "wfgysf5657"
-//#define SSID                        "TP-Link_BD6B"
-//#define PASSWORD                    "31192996"
+#define SSID                        "TP-Link_BD6B"
+#define PASSWORD                    "31192996"
 //#define SSID                        "AndroidAP7715"
 //#define PASSWORD                    "56640025e24c"
 //#define SSID                        "BTIA_FRM2AV"
 //#define PASSWORD                    "jyyagp9sl1cn"
-#define SSID                        "Drogaria Santo Antonio"
-#define PASSWORD                    "dsaoaz2014"
+//#define SSID                        "Drogaria Santo Antonio"
+//#define PASSWORD                    "dsaoaz2014"
 
 // Pin definition for CAMERA_MODEL_AI_THINKER
 #define CAM_PIN_PWDN              32
