@@ -196,7 +196,7 @@ class Hub():
                 self.log.info("Response published! Payload: " + str(resPayload) + " to Topic: " + resTopic)
 
                 self.log.info("Restarting...")
-                sys.exit(1)
+                #ToDo
             else:
                 resPayload += "\"value\":\"" + "Bad Request" + "\","
                 resPayload += "\"status\": 400 }"
