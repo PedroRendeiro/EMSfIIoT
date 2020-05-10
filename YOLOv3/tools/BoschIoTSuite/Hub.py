@@ -180,7 +180,7 @@ class Hub():
                 self.log.info("Loop start")
                 self.timer = threading.Timer(1, self.periodicAction)
                 self.timer.start()
-            elif msgTopic == "stop" and self.status = True:
+            elif msgTopic == "stop" and self.status == True:
                 resPayload += "\"value\":\"" + "Stop done" + "\","
                 resPayload += "\"status\": 200 }"
                 self.client.publish(resTopic, resPayload)
