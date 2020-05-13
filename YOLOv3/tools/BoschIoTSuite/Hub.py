@@ -234,7 +234,7 @@ class Hub():
         Schedule next call.
         """
 
-        print("Reading data...")
+        self.log.info("Reading data...")
         
         L = ["181", "182", "183"]
         for device in self.devices:
@@ -286,7 +286,7 @@ class Hub():
                     # Publish payload
                     self.publishGenericsensor()
 
-        print("Read done!")
+        self.log.info("Read done!")
 
         if self.status:
             # Schedule next call
