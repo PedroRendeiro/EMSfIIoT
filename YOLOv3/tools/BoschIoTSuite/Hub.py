@@ -33,7 +33,7 @@ class Hub():
         client: MQTT Client
     """
 
-    def __init__(self, devices):
+    def __init__(self, configuration):
         """
         Class constructor
 
@@ -66,9 +66,6 @@ class Hub():
         # Create a serializer for the MQTT payload from the Information Model
         self.ser = DittoSerializer()
 
-        # Period for publishing data to the MQTT broker in seconds
-        self.timePeriod = int(config['hub']['timePeriod'])
-
         # Configuration of client ID and publish topic	
         self.telemetryTopic = "telemetry/" + self.tenantId + "/" + self.thingId
 
@@ -91,7 +88,10 @@ class Hub():
         # Connect to the MQTT broker
         self.client.connect(self.hub_adapter_host, 8883, keepalive=30)
 
-        self.devices = devices
+        self.devices = configuration["devices"]
+
+        # Period for publishing data to the MQTT broker in seconds
+        self.timePeriod = configuration["cadence"]
 
     def start(self):
         # Non blocking call that processes network traffic, dispatches callbacks and

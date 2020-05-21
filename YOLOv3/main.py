@@ -31,9 +31,9 @@ def main():
 
     try:
 
-        devices = Things().get()
+        configuration = Things().get()
 
-        hub = Hub(devices)
+        hub = Hub(configuration)
         hub.start()
 
         while (1):
