@@ -93,10 +93,12 @@ if __name__ == '__main__':
 
     yolo = YOLO_lite()
 
-    image = "capture.jpg"
+    image = "exemplo_esp32cam.jpg"
     
     r_image, r_number, r_screen = yolo.detect_image(image)
 
     print(r_number, r_screen)
 
     r_image.show()
+
+    r_image.save("exemplo_esp32cam_YOLO.jpg")

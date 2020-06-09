@@ -1,0 +1,155 @@
+﻿@page
+@model EMSfIIoT.Pages.Gateways.IndexModel
+
+@inject IHtmlLocalizer<IndexModel> modelLocalizer
+
+@{
+    ViewData["Title"] = @localizer.Get("Gateways");
+}
+
+<div class="row col-xl mb-3">
+    <h2 class="col">@localizer.Get("Gateways")</h2>
+</div>
+
+<input class="form-control mb-2 searchFilter" type="text" placeholder="@localizer.Get("Search")...">
+<div class="accordion" id="gateways">
+    @foreach (var gateway in Model.gateways.Select((value, i) => new { i, value }))
+    {
+        string gatewayHeading = "gatewayHeading" + gateway.i.ToString();
+        string gatewayCollapse = "gatewayCollapse" + gateway.i.ToString();
+        <div class="card">
+            <div class="card-header" id="@gatewayHeading">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#@gatewayCollapse" aria-expanded="true" aria-controls="@gatewayCollapse">
+                    @gateway.value.thingId
+                </button>
+                <div class="btn-group float-right" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#gatewayModal" data-operation="Start" data-gateway="@gateway.value.thingId">
+                        @localizer.Get("Start")
+                    </button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#gatewayModal" data-operation="Stop" data-gateway="@gateway.value.thingId">
+                        @localizer.Get("Stop")
+                    </button>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#gatewayModal" data-operation="Restart" data-gateway="@gateway.value.thingId">
+                        @localizer.Get("Restart")
+                    </button>
+                </div>
+            </div>
+
+            <div id="@gatewayCollapse" class="collapse" aria-labelledby="@gatewayHeading" data-parent="#gateways">
+                <div class="card-body">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th scope="row">@modelLocalizer["Policy ID"]</th>
+                                <td>@gateway.value.policyId</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@modelLocalizer["Definition"]</th>
+                                <td>@gateway.value.definition</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@modelLocalizer["Thing Name"]</th>
+                                <td>@gateway.value.attributes.thingName</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@modelLocalizer["Manufacturer"]</th>
+                                <td>@gateway.value.attributes.manufacturer</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@modelLocalizer["Model"]</th>
+                                <td>@gateway.value.attributes.model</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@modelLocalizer["Serial Number"]</th>
+                                <td>@gateway.value.attributes.serialNo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@modelLocalizer["Location"]</th>
+                                <td>@gateway.value.attributes.location</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="accordion" id="devices">
+                        @foreach (var device in gateway.value.attributes.configuration.devices.Select((value, i) => new { i, value }))
+                        {
+                            string deviceHeading = "deviceHeading" + device.i.ToString();
+                            string deviceCollapse = "deviceCollapse" + device.i.ToString();
+                            <div class="card">
+                                <div class="card-header" id="@deviceHeading">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#@deviceCollapse" aria-expanded="true" aria-controls="@deviceCollapse">
+                                            @device.value.deviceId
+                                        </button>
+                                    </h2>
+                                </div>
+
+                                <div id="@deviceCollapse" class="collapse" aria-labelledby="@deviceHeading" data-parent="#devices">
+                                    <div class="card-body">
+                                        <table class="table table-borderless">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">@modelLocalizer["URL"]</th>
+                                                    <td>@device.value.url</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">@modelLocalizer["Location ID"]</th>
+                                                    <td>@device.value.locationId</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<nav aria-label="Page navigation example" class="mt-2">
+    <ul class="pagination"></ul>
+</nav>
+
+<script src="~/js/pagination.js" data-pagination="#gateways .card"></script>
+
+<!-- Modal -->
+<div class="modal fade" id="gatewayModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="gatewayModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="gatewayModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="gatewayForm" method="post">
+                    <input type="hidden" name="gatewayId" id="gatewayId">
+                    <input type="hidden" name="operation" id="operation">
+                </form>
+                <div class="alert alert-danger" role="alert"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@localizer.Get("Close")</button>
+                <button type="submit" class="btn btn-primary" form="gatewayForm"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#gatewayModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var recipient = button.data('gateway');
+        var operation = button.data('operation');
+        var operationLang = button.html();
+
+        var modal = $(this);
+        modal.find('.modal-title').text(operationLang + ' ' + recipient);
+        modal.find('.modal-body #gatewayId').val(recipient);
+        modal.find('.modal-body #operation').val(operation);
+        modal.find('.modal-footer .btn-primary').html(operationLang);
+        modal.find('.modal-body .alert-danger').html('@modelLocalizer["Are you sure you want to"] ' + operationLang.toLowerCase() + ' @modelLocalizer["this gateway"]?');
+    });
+</script>

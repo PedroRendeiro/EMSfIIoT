@@ -1,0 +1,36 @@
+﻿@model CultureSwitcherModel
+
+<div class="language-switcher">
+    <form id="culture-switcher">
+        <div class="form-group">
+            <select name="culture" id="culture-options" class="form-control">
+                @foreach (var culture in Model.SupportedCultures)
+                {
+                    @if ((Model.CurrentUICulture.Name == culture.Name))
+                    {
+                        <option value="@culture.Name" selected="selected">@culture.NativeName</option>
+                    }
+                    else
+                    {
+                        <option value="@culture.Name">@culture.NativeName</option>
+                    }
+                }
+            </select>
+        </div>
+    </form>
+</div>
+
+
+<script>
+    var segments = location.pathname.split('/');
+    var el = document.getElementById("culture-options");
+    el.addEventListener("change", () => {
+        var culture = el.options[el.selectedIndex].value;
+        if (segments.length > 2) {
+            segments[1] = culture;
+            location.href = segments.join('/');
+        } else {
+            location.href = '/' + culture + location.pathname;
+        }
+    });
+</script>

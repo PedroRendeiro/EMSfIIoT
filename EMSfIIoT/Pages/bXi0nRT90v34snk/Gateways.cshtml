@@ -1,0 +1,488 @@
+﻿@page
+@model EMSfIIoT.Pages.Admin.GatewaysModel
+
+@inject IHtmlLocalizer<Gateways.IndexModel> modelLocalizer
+
+@{
+    ViewData["Title"] = "Gateways";
+}
+
+<div class="row col-xl mb-3">
+    <h2 class="col">Gateways</h2>
+    <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#gatewayModal">
+        @localizer.Get("Add")
+    </button>
+</div>
+
+<input class="form-control mb-2 searchFilter" type="text" placeholder="@localizer.Get("Search")...">
+<div class="accordion" id="gateways">
+    @foreach (var gateway in EMSfIIoT.Pages.Admin.GatewaysModel.gateways.Select((value, i) => new { i, value }))
+    {
+        string gatewayHeading = "gatewayHeading" + gateway.i.ToString();
+        string gatewayCollapse = "gatewayCollapse" + gateway.i.ToString();
+        <div class="card">
+            <div class="card-header" id="@gatewayHeading">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#@gatewayCollapse" aria-expanded="true" aria-controls="@gatewayCollapse">
+                    @gateway.value.thingId
+                </button>
+                <div class="btn-group float-right ml-sm-2" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gatewayModal" data-gateway="@gateway.value.thingId">
+                        @localizer.Get("Edit")
+                    </button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#gatewayDeleteModal" data-gateway="@gateway.value.thingId">
+                        @localizer.Get("Delete")
+                    </button>
+                </div>
+                <div class="btn-group float-right" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#gatewayMessageModal" data-operation="@localizer.Get("Start")" data-gateway="@gateway.value.thingId">
+                        @localizer.Get("Start")
+                    </button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#gatewayMessageModal" data-operation="@localizer.Get("Stop")" data-gateway="@gateway.value.thingId">
+                        @localizer.Get("Stop")
+                    </button>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#gatewayMessageModal" data-operation="@localizer.Get("Restart")" data-gateway="@gateway.value.thingId">
+                        @localizer.Get("Restart")
+                    </button>
+                </div>
+            </div>
+
+            <div id="@gatewayCollapse" class="collapse" aria-labelledby="@gatewayHeading" data-parent="#gateways">
+                <div class="card-body">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th scope="row">@modelLocalizer["Policy ID"]</th>
+                                <td>@gateway.value.policyId</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@modelLocalizer["Definition"]</th>
+                                <td>@gateway.value.definition</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@modelLocalizer["Thing Name"]</th>
+                                <td>@gateway.value.attributes.thingName</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@modelLocalizer["Manufacturer"]</th>
+                                <td>@gateway.value.attributes.manufacturer</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@modelLocalizer["Model"]</th>
+                                <td>@gateway.value.attributes.model</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@modelLocalizer["Serial Number"]</th>
+                                <td>@gateway.value.attributes.serialNo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@modelLocalizer["Location"]</th>
+                                <td>@gateway.value.attributes.location</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="accordion" id="devices">
+                        @foreach (var device in gateway.value.attributes.configuration.devices.Select((value, i) => new { i, value }))
+                        {
+                            string deviceHeading = "deviceHeading" + device.i.ToString();
+                            string deviceCollapse = "deviceCollapse" + device.i.ToString();
+                            <div class="card">
+                                <div class="card-header" id="@deviceHeading">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#@deviceCollapse" aria-expanded="true" aria-controls="@deviceCollapse">
+                                            @device.value.deviceId
+                                        </button>
+                                    </h2>
+                                </div>
+
+                                <div id="@deviceCollapse" class="collapse" aria-labelledby="@deviceHeading" data-parent="#devices">
+                                    <div class="card-body">
+                                        <table class="table table-borderless">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">@modelLocalizer["URL"]</th>
+                                                    <td>@device.value.url</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">@modelLocalizer["Location ID"]</th>
+                                                    <td>@device.value.locationId</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <hr />
+                    <div class="accordion" id="users">
+                        <div class="card">
+                            <div class="card-header" id="userHeading">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#userCollapse" aria-expanded="true" aria-controls="userCollapse">
+                                        @localizer.Get("Users")
+                                    </button>
+                                </h2>
+                            </div>
+
+                            <div id="userCollapse" class="collapse" aria-labelledby="userHeading" data-parent="#devices">
+                                <div class="card-body">
+                                    <table class="table table-borderless">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">@modelLocalizer["Display Name"]</th>
+                                                <th scope="col">@modelLocalizer["Email Address"]</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var user in gateway.value.attributes.configuration.users.Select((value, i) => new { i, value }))
+                                            {
+                                                <tr>
+                                                    <td>@user.value</td>
+                                                    <td>@GraphApiConnector.users.Where(item => item.Id.Equals(user.value)).FirstOrDefault().DisplayName</td>
+                                                    <td>@GraphApiConnector.users.Where(item => item.Id.Equals(user.value)).FirstOrDefault().Identities.Where(identity => identity.SignInType.Equals("emailAddress")).FirstOrDefault().IssuerAssignedId</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<nav aria-label="Page navigation example" class="mt-2">
+    <ul class="pagination"></ul>
+</nav>
+
+<script src="~/js/pagination.js" data-pagination="#gateways .card"></script>
+
+<!-- Create/Edit Modal -->
+<div class="modal fade" id="gatewayModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="gatewayModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="gatewayModalLabel">Create Gateway</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="gatewayForm" method="post" class="needs-validation" novalidate>
+                    <div class="form-group">
+                        <label for="thingId">@modelLocalizer["Thing ID"]</label>
+                        <input type="text" class="form-control" name="thingId" id="thingId" aria-describedby="thingIdHelp" required>
+                        <small id="thingIdHelp" class="form-text text-muted"></small>
+
+                        <label for="policyId">@modelLocalizer["Policy ID"]</label>
+                        <input type="text" class="form-control" name="policyId" id="policyId" aria-describedby="policyIdHelp" required>
+                        <small id="policyIdHelp" class="form-text text-muted"></small>
+
+                        <label for="definition">@modelLocalizer["Definition"]</label>
+                        <input type="text" class="form-control" name="definition" id="definition" aria-describedby="definitionHelp" required>
+                        <small id="definitionHelp" class="form-text text-muted"></small>
+                    </div>
+
+                    <hr />
+                    <div class="form-group">
+                        <h5>Attributes</h5>
+
+                        <label for="thingName">@modelLocalizer["Thing Name"]</label>
+                        <input type="text" class="form-control" name="thingName" id="thingName" aria-describedby="thingNameHelp">
+                        <small id="thingNameHelp" class="form-text text-muted"></small>
+
+                        <label for="manufacturer">@modelLocalizer["Manufacturer"]</label>
+                        <input type="text" class="form-control" name="manufacturer" id="manufacturer" aria-describedby="manufacturerHelp">
+                        <small id="manufacturerHelp" class="form-text text-muted"></small>
+
+                        <label for="model">@modelLocalizer["Model"]</label>
+                        <input type="text" class="form-control" name="model" id="model" aria-describedby="modelHelp">
+                        <small id="modelHelp" class="form-text text-muted"></small>
+
+                        <label for="serialNo">@modelLocalizer["Serial Number"]</label>
+                        <input type="text" class="form-control" name="serialNo" id="serialNo" aria-describedby="serialNoHelp">
+                        <small id="serialNoHelp" class="form-text text-muted"></small>
+
+                        <label for="location">@modelLocalizer["Location"]</label>
+                        <input type="text" class="form-control" name="location" id="location" aria-describedby="locationHelp">
+                        <small id="locationHelp" class="form-text text-muted"></small>
+                    </div>
+
+                    <hr />
+                    <div class="form-group" id="devicesGroup">
+                        <h5>@localizer.Get("Devices")</h5>
+                    </div>
+
+                    <hr />
+                    <div class="form-group" id="usersGroup">
+                        <h5>@localizer.Get("Users")</h5>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@localizer.Get("Close")</button>
+                <button type="submit" class="btn btn-primary" form="gatewayForm">@localizer.Get("Submit")</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+
+<div class="form-group d-none deviceTemplate">
+    <button class="btn btn-success addDevice float-right" type="button">
+        <i class="fas fa-plus"></i>
+    </button>
+    <label for="deviceId">@modelLocalizer["Device ID"]</label>
+    <input type="text" class="form-control" name="deviceId" id="deviceId" aria-describedby="deviceIdHelp">
+    <small id="deviceIdHelp" class="form-text text-muted"></small>
+
+    <label for="url">@modelLocalizer["URL"]</label>
+    <input type="url" class="form-control" name="url" id="url" aria-describedby="urlHelp">
+    <small id="urlHelp" class="form-text text-muted"></small>
+
+    <label for="locationId">@modelLocalizer["Location ID"]</label>
+    <input type="number" class="form-control" name="locationId" id="locationId" aria-describedby="locationIdHelp">
+    <small id="locationIdHelp" class="form-text text-muted"></small>
+</div>
+
+<div class="form-group d-none userTemplate">
+    <button class="btn btn-success addUser float-right" type="button">
+        <i class="fas fa-plus"></i>
+    </button>
+    <label for="userId">@modelLocalizer["User ID"]</label>
+    <input type="text" class="form-control" name="userId" id="userId" aria-describedby="userIdHelp">
+    <small id="userIdHelp" class="form-text text-muted"></small>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="gatewayDeleteModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="gatewayDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="gatewayDeleteModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="gatewayDeleteForm" method="post">
+                    <input type="hidden" name="gatewayDeleteId" id="gatewayDeleteId">
+                </form>
+                <div class="alert alert-danger" role="alert">
+                    @modelLocalizer["Are you sure you want to delete this gateway? This operation isn't reversible."]
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@localizer.Get("Close")</button>
+                <button type="submit" class="btn btn-primary" form="gatewayDeleteForm">@localizer.Get("Delete")</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="gatewayMessageModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="gatewayModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="gatewayModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="gatewayMessageForm" method="post">
+                    <input type="hidden" name="gatewayId" id="gatewayId">
+                    <input type="hidden" name="operation" id="operation">
+                </form>
+                <div class="alert alert-danger" role="alert"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@localizer.Get("Close")</button>
+                <button type="submit" class="btn btn-primary" form="gatewayMessageForm"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        var textedJson = JSON.parse("@Html.Raw(@ViewData["gateways"])");
+
+        $('#gatewayModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var recipient = button.data('gateway');
+
+            var gateway = $.grep(textedJson, function (obj) { return obj.thingId === recipient; })[0];
+
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this);
+
+            modal.find('#devicesGroup').html('<h6>@localizer.Get("Devices")</h6>');
+            modal.find('#usersGroup').html('<h6>@localizer.Get("Users")</h6>');
+
+            if (recipient != null) {
+                modal.find('.modal-title').text('@localizer.Get("Edit") ' + recipient);
+                modal.find('#thingId').val(gateway.thingId).attr("readonly", true);
+                modal.find('#policyId').val(gateway.policyId).attr("readonly", true);
+                modal.find('#definition').val(gateway.definition).attr("readonly", true);
+                modal.find('#thingName').val(gateway.attributes.thingName);
+                modal.find('#manufacturer').val(gateway.attributes.manufacturer);
+                modal.find('#model').val(gateway.attributes.model);
+                modal.find('#serialNo').val(gateway.attributes.serialNo);
+                modal.find('#location').val(gateway.attributes.location);
+
+                gateway.attributes.configuration.devices.forEach(function (device) {
+                    var clone = $(document).find('.deviceTemplate').clone();
+                    clone.removeClass('deviceTemplate d-none');
+
+                    clone.find('#deviceId').val(device.deviceId);
+                    clone.find('#deviceId').attr("name", "deviceId" + String(modal.find('#devicesGroup .form-group').length));
+                    clone.find('#deviceId').attr("id", "deviceId" + String(modal.find('#devicesGroup .form-group').length));
+
+                    clone.find('#url').val(device.url);
+                    clone.find('#url').attr("name", "url" + String(modal.find('#devicesGroup .form-group').length));
+                    clone.find('#url').attr("id", "url" + String(modal.find('#devicesGroup .form-group').length));
+
+                    clone.find('#locationId').val(device.locationId);
+                    clone.find('#locationId').attr("name", "locationId" + String(modal.find('#devicesGroup .form-group').length));
+                    clone.find('#locationId').attr("id", "locationId" + String(modal.find('#devicesGroup .form-group').length));
+
+                    clone.find('button')
+                        .removeClass('addDevice').addClass('removeDevice')
+                        .removeClass('btn-success').addClass('btn-danger')
+                        .html('<i class="fas fa-minus"></i>');
+
+                    modal.find('#devicesGroup').append(clone);
+                });
+
+                gateway.attributes.configuration.users.forEach(function (user) {
+                    var clone = $(document).find('.userTemplate').clone();
+                    clone.removeClass('userTemplate d-none');
+
+                    clone.find('#userId').val(user);
+                    clone.find('#userId').attr("name", "userId" + String(modal.find('#usersGroup .form-group').length));
+                    clone.find('#userId').attr("id", "userId" + String(modal.find('#usersGroup .form-group').length));
+
+                    clone.find('button')
+                        .removeClass('addDevice').addClass('removeDevice')
+                        .removeClass('btn-success').addClass('btn-danger')
+                        .html('<i class="fas fa-minus"></i>');
+
+                    modal.find('#usersGroup').append(clone);
+                });
+            } else {
+                modal.find('.modal-title').text('Create Gateway');
+                modal.find('#thingId').val('').attr("readonly", false);
+                modal.find('#policyId').val('').attr("readonly", false);
+                modal.find('#definition').val('').attr("readonly", false);
+                modal.find('#thingName').val('');
+                modal.find('#manufacturer').val('');
+                modal.find('#model').val('');
+                modal.find('#serialNo').val('');
+                modal.find('#location').val('');
+            }
+
+            var clone = $(document).find('.deviceTemplate').clone();
+            clone.removeClass('deviceTemplate d-none');
+            clone.find('#deviceId').attr("name", "deviceId" + String(modal.find('#devicesGroup .form-group').length));
+            clone.find('#deviceId').attr("id", "deviceId" + String(modal.find('#devicesGroup .form-group').length));
+            clone.find('#url').attr("name", "url" + String(modal.find('#devicesGroup .form-group').length));
+            clone.find('#url').attr("id", "url" + String(modal.find('#devicesGroup .form-group').length));
+            clone.find('#locationId').attr("name", "locationId" + String(modal.find('#devicesGroup .form-group').length));
+            clone.find('#locationId').attr("id", "locationId" + String(modal.find('#devicesGroup .form-group').length));
+            modal.find('#devicesGroup').append(clone);
+
+            var clone = $(document).find('.userTemplate').clone();
+            clone.removeClass('userTemplate d-none');
+            clone.find('#userId').attr("name", "userId" + String(modal.find('#usersGroup .form-group').length));
+            clone.find('#userId').attr("id", "userId" + String(modal.find('#usersGroup .form-group').length));
+            modal.find('#usersGroup').append(clone);
+        });
+
+        $(document).on('click', '.addDevice', function (e) {
+            e.preventDefault();
+
+            var controlForm = $('#devicesGroup'),
+                currentEntry = controlForm.find('.form-group:last'),
+                newEntry = $(currentEntry.clone()).appendTo(controlForm);
+
+            newEntry.find('input').val('');
+            controlForm.find('.form-group').not(':last').find('button')
+                .removeClass('addDevice').addClass('removeDevice')
+                .removeClass('btn-success').addClass('btn-danger')
+                .html('<i class="fas fa-minus"></i>');
+        }).on('click', '.removeDevice', function (e) {
+            e.preventDefault();
+
+            $(this).parents('#devicesGroup .form-group:first').remove();
+            return false;
+        });
+
+        $(document).on('click', '.addUser', function (e) {
+            e.preventDefault();
+
+            var controlForm = $('#usersGroup'),
+                currentEntry = controlForm.find('.form-group:last'),
+                newEntry = $(currentEntry.clone()).appendTo(controlForm);
+
+            newEntry.find('input').val('');
+            controlForm.find('.form-group').not(':last').find('button')
+                .removeClass('addUser').addClass('removeUser')
+                .removeClass('btn-success').addClass('btn-danger')
+                .html('<i class="fas fa-minus"></i>');
+        }).on('click', '.removeUser', function (e) {
+            e.preventDefault();
+
+            $(this).parents('#usersGroup .form-group:first').remove();
+            return false;
+        });
+
+        $('#gatewayDeleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = button.data('gateway') // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('.modal-title').text('@localizer.Get("Delete") ' + recipient)
+            modal.find('.modal-body #gatewayDeleteId').val(recipient)
+        });
+
+        $('#gatewayMessageModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var recipient = button.data('gateway');
+            var operation = button.data('operation');
+            var operationLang = button.html();
+
+            var modal = $(this);
+            modal.find('.modal-title').text(operationLang + ' ' + recipient);
+            modal.find('.modal-body #gatewayId').val(recipient);
+            modal.find('.modal-body #operation').val(operation);
+            modal.find('.modal-footer .btn-primary').html(operationLang);
+            modal.find('.modal-body .alert-danger').html('@modelLocalizer["Are you sure you want to"] ' + operationLang.toLowerCase() + ' @modelLocalizer["this gateway"]?');
+        });
+    </script>
+}

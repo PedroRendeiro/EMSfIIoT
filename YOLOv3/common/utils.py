@@ -154,10 +154,10 @@ def draw_boxes(image, boxes, classes, scores, class_names, colors, show_score=Tr
             color = colors[cls]
         cv2.rectangle(image, (xmin, ymin), (xmax, ymax), color, 1, cv2.LINE_AA)
         
-        if (idx % 2) == 0:
-            image = draw_label(image, label, color, (xmin, ymin), ymax)
-        else:
-            image = draw_label(image, label, color, (xmin, ymin))
+        #if (idx % 2) == 0:
+        #    image = draw_label(image, label, color, (xmin, ymin), ymax)
+        #else:
+        image = draw_label(image, label, color, (xmin, ymin))
 
     return image
 

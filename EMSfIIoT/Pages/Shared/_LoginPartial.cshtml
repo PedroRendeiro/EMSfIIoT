@@ -1,0 +1,29 @@
+@using Microsoft.AspNetCore.Authentication.AzureADB2C.UI
+@using Microsoft.Extensions.Options
+@inject IOptionsMonitor<AzureADB2COptions> AzureADB2COptions
+@inject CommonLocalizationService localizer
+
+@{
+    var options = AzureADB2COptions.Get(AzureADB2CDefaults.AuthenticationScheme);
+}
+
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a class="dropdown-item" asp-area="" asp-page="/User">
+                <span class="text-dark">@localizer.Get("Hello") @User.Identity.Name!</span>
+            </a>
+            <a class="dropdown-item" asp-controller="Account" asp-action="SignOut">
+                @localizer.Get("Sign Out")
+            </a>
+        }
+        else
+        {
+            <a class="dropdown-item" asp-controller="Account" asp-action="SignIn">
+                @localizer.Get("Sign In")
+            </a>
+            <a class="dropdown-item" asp-controller="Account" asp-action="SignUp">
+                @localizer.Get("Sign Up")
+            </a>
+        }
+    </div>

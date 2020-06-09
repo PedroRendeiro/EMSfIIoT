@@ -1,0 +1,36 @@
+﻿@page
+@model EMSfIIoT.Pages.UserModel
+@{
+    ViewData["Title"] = @localizer.Get("User");
+    var user = GraphApiConnector.users.Where(user => user.Id.Equals(HttpContext.User.Claims.Where(claim => claim.Type.Equals(ClaimTypes.NameIdentifier)).First().Value)).First();
+}
+
+<div class="row col-xl mb-3">
+    <h2 class="col">@localizer.Get("User")</h2>
+    <a class="btn btn-primary float-right" asp-controller="Account" asp-action="EditProfile" role="button">Edit Profile</a>
+    <a class="btn btn-primary mr-2 ml-2 float-right" asp-controller="Account" asp-action="LinkAccounts" role="button">Link Social Accounts</a>
+    @if (user.AdditionalData.ContainsKey("extension_257f2369f5054b62a0f21c2c82ad96fc_TelegramChatId"))
+    {
+        <i class="fab fa-telegram fa-3x" style="color: #0088cc"></i>
+    }
+    else
+    {
+        <i class="fab fa-telegram fa-3x" style="color: gray"></i>
+    }
+</div>
+
+<div class="container-fluid">
+    <table class="table table-responsive-xl table-striped">
+        <tbody>
+            @foreach (Claim claim in HttpContext.User.Claims)
+            {
+                <tr>
+                    @if (claim.Type.Equals("nonce"))
+                        continue;
+                    <th scope="row">@claim.Type.ToString()</th>
+                    <td>@claim.Value.ToString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

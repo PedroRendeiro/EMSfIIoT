@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-EMSfIIoT-FD65D146-D0A5-4821-8CEF-5FBB973C1F94</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Pages - Copy\**" />
+    <Content Remove="Pages - Copy\**" />
+    <EmbeddedResource Remove="Pages - Copy\**" />
+    <None Remove="Pages - Copy\**" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="FirebaseAdmin" Version="1.12.0" />
+    <PackageReference Include="Highsoft.Highcharts" Version="8.0.0.3" />
+    <PackageReference Include="Highsoft.Highstock" Version="8.0.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureADB2C.UI" Version="3.1.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.4" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="3.1.4" />
+    <PackageReference Include="Microsoft.Graph.Auth" Version="1.0.0-preview.4" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.14.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Clients.ActiveDirectory" Version="5.2.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
+    <PackageReference Include="Moment.js" Version="2.26.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\EMSfIIoT_API\EMSfIIoT_API.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
+</Project>

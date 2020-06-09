@@ -1,0 +1,195 @@
+﻿@page
+@model EMSfIIoT.Pages.Admin.UsersModel
+
+@inject IHtmlLocalizer<Admin.UsersModel> modelLocalizer
+
+@using EMSfIIoT_API.Entities
+@{
+    ViewData["Title"] = @localizer.Get("Users");
+}
+
+<div class="row col-xl mb-3">
+    <h2 class="col">@localizer.Get("Users")</h2>
+    <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#userModal">
+        @localizer.Get("Add")
+    </button>
+</div>
+
+<table class="table table-responsive-xl table-striped table-hover">
+    <thead>
+        <tr>
+            <th scope="col" colspan="5"><input class="form-control searchFilter" type="text" placeholder="@localizer.Get("Search")..."></th>
+        </tr>
+        <tr>
+            <th scope="col">ID <i class="fas fa-sort-alpha-down"></i> <i class="fas fa-sort-alpha-up"></i></th>
+            <th scope="col">@modelLocalizer["Display Name"] <i class="fas fa-sort-alpha-down"></i> <i class="fas fa-sort-alpha-up"></i></th>
+            <th scope="col">@modelLocalizer["Email Address"] <i class="fas fa-sort-alpha-down"></i> <i class="fas fa-sort-alpha-up"></i></th>
+            <th scope="col">@modelLocalizer["Admin"]</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (AppUser user in EMSfIIoT.Pages.Admin.UsersModel.users)
+        {
+            <tr>
+                <td>@user.Username</td>
+                <td>@user.DisplayName</td>
+
+                <td>
+                    @user.EmailAddress
+                </td>
+
+                <td>
+                    @if (EMSfIIoT.Pages.Admin.UsersModel.administrators.Contains(user.Username))
+                    {
+                        <i class="fas fa-user-check"></i>
+                    }
+                    else
+                    {
+                        <i class="fas fa-user-times"></i>
+                    }
+                </td>
+
+                <td>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userModal" data-user="@user.Username">
+                        @localizer.Get("Edit")
+                    </button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#userDeleteModal" data-user="@user.Username">
+                        @localizer.Get("Delete")
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<nav aria-label="Page navigation example" class="mt-2">
+    <ul class="pagination"></ul>
+</nav>
+
+<!-- Modal -->
+<div class="modal fade" id="userModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="userModalLabel"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="userForm" method="post" class="needs-validation" novalidate>
+                    <div class="form-group">
+                        <label for="userId">Id</label>
+                        <input type="text" class="form-control" name="userId" id="userId" aria-describedby="userIdHelp" readonly>
+                        <small id="userIdHelp" class="form-text text-muted"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="DisplayName">@modelLocalizer["Display Name"]</label>
+                        <input type="text" class="form-control" name="DisplayName" id="DisplayName" aria-describedby="DisplayNameHelp" required>
+                        <small id="DisplayNameHelp" class="form-text text-muted"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="EmailAddress">@modelLocalizer["Email Address"]</label>
+                        <input type="email" class="form-control" name="EmailAddress" id="EmailAddress" aria-describedby="EmailAddressHelp" required>
+                        <small id="EmailAddressHelp" class="form-text text-muted"></small>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" name="Administrator" id="Administrator">
+                        <label for="Administrator">@modelLocalizer["Administrator"]</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@localizer.Get("Close")</button>
+                <button type="submit" class="btn btn-primary" form="userForm">@localizer.Get("Submeter")</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="userDeleteModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="userDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userDeleteModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="userDeleteForm" method="post">
+                    <input type="hidden" name="userDeleteId" id="userDeleteId">
+                </form>
+                <div class="alert alert-danger" role="alert">
+                    Are you sure you want to delete this user? This operation isn't reversible.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@localizer.Get("Close")</button>
+                <button type="submit" class="btn btn-primary" form="userDeleteForm">@localizer.Get("Delete")</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        var usersJSON = JSON.parse("@Html.Raw(@ViewData["users"])");
+        var adminJSON = JSON.parse("@Html.Raw(@ViewData["administrators"])");
+
+        $('#userModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var recipient = button.data('user');
+
+            var user = $.grep(usersJSON, function (obj) { return obj.Username === recipient; })[0];
+
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this);
+
+            if (recipient != null) {
+                modal.find('.modal-title').text("@localizer.Get("Edit") " + recipient);
+                modal.find('#userId').val(user.Username);
+                modal.find('#DisplayName').val(user.DisplayName);
+                modal.find('#EmailAddress').val(user.EmailAddress);
+                modal.find('#Administrator').prop("checked", adminJSON.includes(user.Username));
+            } else {
+                modal.find('.modal-title').text('@localizer.Get("Create") @localizer.Get("User")');
+                modal.find('.form-group input').val('');
+                modal.find('#Administrator').prop("checked", false);
+            }
+        });
+
+        $('#userDeleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var recipient = button.data('user'); // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this);
+            modal.find('.modal-title').text('@localizer.Get("Delete") ' + recipient);
+            modal.find('.modal-body #userDeleteId').val(recipient);
+        });
+    </script>
+}
+
+<script src="~/js/pagination.js" data-pagination="tbody tr"></script>

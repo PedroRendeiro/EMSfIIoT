@@ -1,0 +1,14 @@
+﻿@page
+@model EMSfIIoT.Pages.Gateways.ChartsModel
+
+@{
+    ViewData["Title"] = @localizer.Get("Charts");
+}
+
+<h2>@localizer.Get("Charts")</h2>
+<div class="container-fluid">
+    @Html.Raw(ViewData["renderer"])
+</div>
+
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>

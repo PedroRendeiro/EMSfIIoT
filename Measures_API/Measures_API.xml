@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Measures_API</name>
+    </assembly>
+    <members>
+        <member name="M:Measures_API.Controllers.BoschIoTSuiteController.PostTelemetry(Measures_API.Models.BoschIoTSuiteTelmetry,System.String)">
+            <summary>Create a new database entry from Bosch IoT Suite POST</summary>
+            <param name="body">Entry data</param>
+            <param name="gatewayId">Entry data</param>
+            <response code="201">Entry created successfully</response>
+            <response code="400">Bad Request</response>
+        </member>
+        <member name="T:Measures_API.Controllers.MeasuresController">
+            <summary>Manage your measure database</summary>
+        </member>
+        <member name="M:Measures_API.Controllers.MeasuresController.GetMeasures(System.Nullable{System.Int64},System.Nullable{System.Int32},System.String,System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>Get all your database entries</summary>
+            <remarks>
+            Limited, with parameter <code>limit</code> to 255 entries at a time<br/><br/>
+            Ordered from newest to oldest
+            </remarks>
+            <param name="locationId" example="1"></param>
+            <param name="measureTypeID" example="1"></param>
+            <param name="unit" example="kwh"></param>
+            <param name="dateTime" example="2020-04-22T14:28:16"></param>
+            <param name="limit" example="0">Values to be retured</param>
+            <param name="skip" example="0">Number on entries to be skiped</param>
+            <response code="200">Successful query</response>
+            <response code="400">Invalid query values</response>
+        </member>
+        <member name="M:Measures_API.Controllers.MeasuresController.GetMeasure(System.Int64)">
+            <summary>Get a database entry with specified Id</summary>
+            <param name="id" example="5">The entry id to get</param>
+            <response code="200">Successful query</response>
+            <response code="400">Invalid query values</response>
+            <response code="404">Entry not found</response>
+        </member>
+        <member name="M:Measures_API.Controllers.MeasuresController.PutMeasure(System.Int64,Measures_API.Models.MeasureDTO)">
+            <summary>Update a database entry with specified Id</summary>
+            <param name="id" example="50">The entry id to update</param>
+            <param name="measureDTO" example="123">Entry data</param>
+            <response code="200">Successful query</response>
+            <response code="404">Entry not found</response>
+        </member>
+        <member name="M:Measures_API.Controllers.MeasuresController.PostMeasure(Measures_API.Models.MeasureDTO)">
+            <summary>Create a new database entry</summary>
+            <param name="measureDTO">Entry data</param>
+            <response code="201">Entry created successfully</response>
+            <response code="400">Bad Request</response>
+        </member>
+        <member name="M:Measures_API.Controllers.MeasuresController.DeleteMeasure(System.Int64)">
+            <summary>Delete a database entry with specified Id</summary>
+            <param name="id" example="50">The entry id to delete</param>
+            <response code="200">Successful query</response>
+            <response code="404">Entry not found</response>
+        </member>
+        <member name="P:Measures_API.Models.MeasureDTO.MeasureTypeID">
+            <summary>
+            Type of measure (Empty, Peak, Full)
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:Measures_API.Models.MeasureDTO.LocationID">
+            <summary>
+            Location where the measure was retrived
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:Measures_API.Models.MeasureDTO.Value">
+            <summary>
+            Value of the measure
+            </summary>
+            <example>4578</example>
+        </member>
+        <member name="P:Measures_API.Models.MeasureDTO.Unit">
+            <summary>
+            Unit of the measure
+            </summary>
+            <example>kWh</example>
+        </member>
+        <member name="P:Measures_API.Models.Measure.Id">
+            <summary>
+            Id of the database entry
+            </summary>
+            <example>5</example>
+        </member>
+        <member name="P:Measures_API.Models.Measure.TimeStamp">
+            <summary>
+            TimeStamp of the insertion or last update of the entry
+            </summary>
+            <example>2020-04-22T14:28:16.083</example>
+        </member>
+        <member name="P:Measures_API.Models.Measure.MeasureTypeID">
+            <summary>
+            Type of measure (Peak, Full, etc)
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:Measures_API.Models.Measure.LocationID">
+            <summary>
+            Location where the measure was retrived
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:Measures_API.Models.Measure.Value">
+            <summary>
+            Value of the measure
+            </summary>
+            <example>4578</example>
+        </member>
+        <member name="P:Measures_API.Models.Measure.Unit">
+            <summary>
+            Unit of the measure
+            </summary>
+            <example>kWh</example>
+        </member>
+    </members>
+</doc>

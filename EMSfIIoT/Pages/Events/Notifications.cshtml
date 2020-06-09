@@ -1,0 +1,108 @@
+﻿@page
+@model EMSfIIoT.Pages.Events.NotificationsModel
+
+@inject IHtmlLocalizer<NotificationsModel> modelLocalizer
+@using EMSfIIoT_API.Models
+
+@{
+    ViewData["Title"] = @localizer.Get("Notifications");
+}
+<div class="row col-xl mb-3">
+    <h2 class="col">@localizer.Get("Notifications")</h2>
+</div>
+<div class="container-fluid">
+    <form action="#" class="needs-validation" novalidate hidden>
+        <div class="form-group">
+            <label for="userInput">@localizer.Get("To")</label>
+            <input class="form-control" type="email" maxlength="254" id="userInput" aria-describedby="userInputHelp" required>
+            <small id="userInputHelp" class="form-text text-muted"></small>
+        </div>
+        <div class="form-group">
+            <label for="titleInput">@localizer.Get("Title")</label>
+            <input class="form-control" type="text" maxlength="128" id="titleInput" aria-describedby="titleInputHelp" required>
+            <small id="titleInputHelp" class="form-text text-muted"></small>
+        </div>
+        <div class="form-group">
+            <label for="messageInput">@localizer.Get("Message")</label>
+            <input class="form-control" type="text" maxlength="254" id="messageInput" aria-describedby="messageInputHelp" required>
+            <small id="messageInputHelp" class="form-text text-muted"></small>
+        </div>
+        <button type="submit" class="btn btn-primary" id="sendButton" disabled>@localizer.Get("Send Message")</button>
+    </form>
+
+    <div class="row mt-3">
+        <table id="notificationsTable" class="table table-responsive-xl table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" colspan="6"><input class="form-control searchFilter" type="text" placeholder="@localizer.Get("Search")..."></th>
+                </tr>
+                <tr>
+                    <th scope="col">@modelLocalizer["Created At"] <i class="fas fa-sort-alpha-down"></i> <i class="fas fa-sort-alpha-up"></i></th>
+                    <th scope="col">@modelLocalizer["Read At"] <i class="fas fa-sort-alpha-down"></i> <i class="fas fa-sort-alpha-up"></i></th>
+                    <th scope="col">@modelLocalizer["Type"] <i class="fas fa-sort-alpha-down"></i> <i class="fas fa-sort-alpha-up"></i></th>
+                    <th scope="col">@modelLocalizer["Title"] <i class="fas fa-sort-alpha-down"></i> <i class="fas fa-sort-alpha-up"></i></th>
+                    <th scope="col">@modelLocalizer["Description"] <i class="fas fa-sort-alpha-down"></i> <i class="fas fa-sort-alpha-up"></i></th>
+                    <th scope="col">@modelLocalizer["Origin"] <i class="fas fa-sort-alpha-down"></i> <i class="fas fa-sort-alpha-up"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Notification notification in Model.notifications)
+                {
+                <tr>
+                    <td data-utc-time="@notification.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss")"></td>
+                    @if (notification.ReadAt.HasValue)
+                    {
+                        <td data-utc-time="@notification.ReadAt.Value.ToString("dd/MM/yyyy HH:mm:ss")"></td>
+                    }
+                    else
+                    {
+                        <td data-utc-time=""></td>
+                    }
+                    <td>@notification.Type</td>
+                    <td>@notification.Title</td>
+                    <td>@notification.Description.Truncate(64)</td>
+                    <td>
+                        @if (notification.Origin != "API")
+                        {
+                            @GraphApiConnector.users.Where(user => user.Id.Equals(notification.Origin)).FirstOrDefault().DisplayName
+                        }
+                        else
+                        {
+                            @notification.Origin
+                        }
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example" class="mt-2">
+            <ul class="pagination"></ul>
+        </nav>
+    </div>
+</div>
+
+<script>
+    (function () {
+        'use strict';
+        $(document).ready(function () {
+            var forms = $(this).find(".needs-validation");
+            forms.each(function (index, element) {
+                $(this).find("button:submit").click(function (event) {
+                    event.preventDefault();
+                })
+                $(this).find("button:submit").on("mousedown", function (event) {
+                    if (element.checkValidity() !== false) {
+                        element.classList.add('was-validated');
+                    }
+                    event.preventDefault();
+                    event.stopPropagation();
+                });
+                $(this).on("keyup", function () {
+                    $(this).removeClass("was-validated");
+                });
+            })
+        });
+    })();
+</script>
+
+<script src="~/js/pagination.js" data-pagination="tbody tr"></script>

@@ -1,0 +1,242 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EMSfIIoT_API</name>
+    </assembly>
+    <members>
+        <member name="M:EMSfIIoT_API.Controllers.BoschIoTSuiteController.PostTelemetry(System.String)">
+            <summary>Notify the API that the specified thing generated an Bosch IoT Things Event</summary>
+            <param name="thingId">Bosch IoT Things ThingId</param>
+            <response code="200">Successfully updated</response>
+            <response code="400">Bad Request</response>
+        </member>
+        <member name="M:EMSfIIoT_API.Controllers.EventsController.GetEvent">
+            <summary>Get all your database entries</summary>
+            <remarks></remarks>
+            <response code="200">Successful query</response>
+        </member>
+        <member name="M:EMSfIIoT_API.Controllers.EventsController.GetEvent(System.Int64)">
+            <summary>Get a database entry with specified Id</summary>
+            <param name="id" example="5">The entry id to get</param>
+            <response code="200">Successful query</response>
+            <response code="404">Entry not found</response>
+        </member>
+        <member name="M:EMSfIIoT_API.Controllers.EventsController.PutEvent(System.Int64,EMSfIIoT_API.Models.EventDTO)">
+            <summary>Update a database entry with specified Id</summary>
+            <param name="id" example="5">The entry id to update</param>
+            <param name="eventDto" example="">Entry data</param>
+            <response code="204">Successful query</response>
+            <response code="400">Bad Request</response>
+            <response code="404">Entry not found</response>
+        </member>
+        <member name="M:EMSfIIoT_API.Controllers.EventsController.PostEvent(EMSfIIoT_API.Models.EventDTO)">
+            <summary>Create a new database entry</summary>
+            <param name="eventDto">Entry data</param>
+            <response code="201">Entry created successfully</response>
+            <response code="400">Bad Request</response>
+        </member>
+        <member name="M:EMSfIIoT_API.Controllers.EventsController.DeleteEvent(System.Int64)">
+            <summary>Delete a database entry with specified Id</summary>
+            <param name="id" example="50">The entry id to delete</param>
+            <response code="200">Successful query</response>
+            <response code="404">Entry not found</response>
+        </member>
+        <member name="M:EMSfIIoT_API.Controllers.EventsController.PutEventOnHold(System.Int64)">
+            <summary>Put specified event on hold</summary>
+            <param name="id" example="5">The entry id to update</param>
+            <response code="204">Successful query</response>
+            <response code="400">Bad Request</response>
+            <response code="404">Entry not found</response>
+        </member>
+        <member name="T:EMSfIIoT_API.Controllers.NotificationsController">
+            <summary>Manage your notifications</summary>
+        </member>
+        <member name="M:EMSfIIoT_API.Controllers.NotificationsController.GetNotifications(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>Get all your database entries</summary>
+            <remarks></remarks>
+            <param name="limit" example="0">Values to be retured</param>
+            <param name="skip" example="0">Number on entries to be skiped</param>
+            <param name="filter" example="">Filter the notification query results
+            <h4>Filter:</h4>
+            <code>read | unread</code>
+            </param>
+            <response code="200">Successful query</response>
+            <response code="400">Invalid query values</response>
+        </member>
+        <member name="M:EMSfIIoT_API.Controllers.NotificationsController.GetNotification(System.Int64)">
+            <summary>Get a database entry with specified Id</summary>
+            <param name="id" example="5">The entry id to get</param>
+            <response code="200">Successful query</response>
+            <response code="400">Invalid query values</response>
+            <response code="404">Entry not found</response>
+        </member>
+        <member name="M:EMSfIIoT_API.Controllers.NotificationsController.PutNotifications(System.Int64,EMSfIIoT_API.Models.NotificationDTO)">
+            <summary>Update a database entry with specified Id</summary>
+            <param name="id" example="50">The entry id to update</param>
+            <param name="notificationDto" example="">Entry data</param>
+            <response code="204">Successful query</response>
+            <response code="404">Entry not found</response>
+        </member>
+        <member name="M:EMSfIIoT_API.Controllers.NotificationsController.PostNotifications(EMSfIIoT_API.Models.NotificationDTO)">
+            <summary>Create a new database entry</summary>
+            <param name="notificationDTO">Entry data</param>
+            <response code="201">Entry created successfully</response>
+            <response code="400">Bad Request</response>
+        </member>
+        <member name="M:EMSfIIoT_API.Controllers.NotificationsController.DeleteNotifications(System.Int64)">
+            <summary>Delete a database entry with specified Id</summary>
+            <param name="id" example="50">The entry id to delete</param>
+            <response code="200">Successful query</response>
+            <response code="404">Entry not found</response>
+        </member>
+        <member name="M:EMSfIIoT_API.Controllers.NotificationsController.UserNotificationsMarkRead">
+            <summary>Mark your notifications as read</summary>
+            <response code="204">Successful query</response>
+        </member>
+        <member name="M:EMSfIIoT_API.Controllers.UsersController.CreateUser(EMSfIIoT_API.Entities.UserDTO)">
+            <summary>Create a new user</summary>
+        </member>
+        <member name="T:EMSfIIoT_API.Helpers.StringValueAttribute">
+            <summary>
+            This attribute is used to represent a string value
+            for a value in an enum.
+            </summary>
+        </member>
+        <member name="P:EMSfIIoT_API.Helpers.StringValueAttribute.StringValue">
+            <summary>
+            Holds the stringvalue for a value in an enum.
+            </summary>
+        </member>
+        <member name="M:EMSfIIoT_API.Helpers.StringValueAttribute.#ctor(System.String)">
+            <summary>
+            Constructor used to init a StringValue Attribute
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="T:EMSfIIoT_API.Helpers.CronValueAttribute">
+            <summary>
+            This attribute is used to represent a string value
+            for a value in an enum.
+            </summary>
+        </member>
+        <member name="P:EMSfIIoT_API.Helpers.CronValueAttribute.CronValue">
+            <summary>
+            Holds the stringvalue for a value in an enum.
+            </summary>
+        </member>
+        <member name="M:EMSfIIoT_API.Helpers.CronValueAttribute.#ctor(System.String)">
+            <summary>
+            Constructor used to init a StringValue Attribute
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:EMSfIIoT_API.Helpers.EnumExt.GetStringValue(System.Enum)">
+            <summary>
+            Will get the string value for a given enums value, this will
+            only work if you assign the StringValue attribute to
+            the items in your enum.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EMSfIIoT_API.Helpers.EnumExt.GetStringValues(System.Type)">
+            <summary>
+            Will get the string value for a given enums value, this will
+            only work if you assign the StringValue attribute to
+            the items in your enum.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EMSfIIoT_API.Helpers.EnumExt.GetCronValue(System.Enum)">
+            <summary>
+            Will get the string value for a given enums value, this will
+            only work if you assign the StringValue attribute to
+            the items in your enum.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EMSfIIoT_API.Helpers.EnumExt.GetCronValues(System.Type)">
+            <summary>
+            Will get the string value for a given enums value, this will
+            only work if you assign the StringValue attribute to
+            the items in your enum.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="P:EMSfIIoT_API.Models.EventDTO.Variable">
+            <summary>
+            DeviceId to track
+            </summary>
+            <example>Gateway1:ESP32_CAM1</example>
+        </member>
+        <member name="P:EMSfIIoT_API.Models.MeasureDTO.MeasureTypeID">
+            <summary>
+            Type of measure (Empty, Peak, Full)
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:EMSfIIoT_API.Models.MeasureDTO.LocationID">
+            <summary>
+            Location where the measure was retrived
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:EMSfIIoT_API.Models.MeasureDTO.Value">
+            <summary>
+            Value of the measure
+            </summary>
+            <example>4578</example>
+        </member>
+        <member name="P:EMSfIIoT_API.Models.MeasureDTO.Unit">
+            <summary>
+            Unit of the measure
+            </summary>
+            <example>kWh</example>
+        </member>
+        <member name="P:EMSfIIoT_API.Models.Measure.Id">
+            <summary>
+            Id of the database entry
+            </summary>
+            <example>5</example>
+        </member>
+        <member name="P:EMSfIIoT_API.Models.Measure.TimeStamp">
+            <summary>
+            TimeStamp of the insertion or last update of the entry
+            </summary>
+            <example>2020-04-22T14:28:16.083</example>
+        </member>
+        <member name="P:EMSfIIoT_API.Models.Measure.MeasureTypeID">
+            <summary>
+            Type of measure (Peak, Full, etc)
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:EMSfIIoT_API.Models.Measure.LocationID">
+            <summary>
+            Location where the measure was retrived
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:EMSfIIoT_API.Models.Measure.Value">
+            <summary>
+            Value of the measure
+            </summary>
+            <example>4578</example>
+        </member>
+        <member name="P:EMSfIIoT_API.Models.Measure.Unit">
+            <summary>
+            Unit of the measure
+            </summary>
+            <example>kWh</example>
+        </member>
+        <member name="T:EMSfIIoT_API.Models.MSALStaticCache">
+            <summary>
+            This implementation is just for demo purposes and does not scale. For better cache implementations see 
+            https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2/tree/master/2-WebApp-graph-user/2-1-Call-MSGraph
+            </summary>
+        </member>
+    </members>
+</doc>

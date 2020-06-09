@@ -1,0 +1,367 @@
+﻿@page
+@model EMSfIIoT.Pages.Events.IndexModel
+@inject IHtmlLocalizer<IndexModel> modelLocalizer
+@{
+    ViewData["Title"] = @localizer.Get("Events");
+    var user = GraphApiConnector.users.Where(user => user.Id.Equals(HttpContext.User.Claims.Where(claim => claim.Type.Equals(ClaimTypes.NameIdentifier)).First().Value)).First();
+}
+
+<div class="row col-xl mb-3">
+    <h2 class="col">@localizer.Get("Events")</h2>
+    <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#eventModal">
+        @localizer.Get("Add")
+    </button>
+</div>
+
+<input class="form-control mb-2 searchFilter" type="text" placeholder="@localizer.Get("Search")...">
+<div class="accordion" id="events">
+    @foreach (var e in Model.events.Select((value, i) => new { i, value }))
+    {
+        string eventHeading = "eventHeading" + e.i.ToString();
+        string eventCollapse = "eventCollapse" + e.i.ToString();
+        <div class="card">
+            <div class="card-header" id="@eventHeading">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#@eventCollapse" aria-expanded="true" aria-controls="@eventCollapse">
+                    @e.value.EventType
+                </button>
+                <div class="btn-group float-right" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventModal" data-event="@e.value.Id.ToString()">
+                        @localizer.Get("Edit")
+                    </button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#eventDeleteModal" data-event="@e.value.Id.ToString()">
+                        @localizer.Get("Delete")
+                    </button>
+                </div>
+            </div>
+
+            <div id="@eventCollapse" class="collapse" aria-labelledby="@eventHeading" data-parent="#events">
+                <div class="card-body">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th scope="row">@modelLocalizer["Variable"]</th>
+                                <td>@e.value.Variable</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@modelLocalizer["Value Type"]</th>
+                                <td>@e.value.EventValueType</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@modelLocalizer["Value"]</th>
+                                <td>@e.value.EventValue</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@modelLocalizer["Frequency"]</th>
+                                <td>@e.value.EventFrequency</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@modelLocalizer["Notification Type"]</th>
+                                <td>@e.value.NotificationType</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@modelLocalizer["On Hold"]</th>
+                                <td>@e.value.OnHold</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@modelLocalizer["Last Updated"]</th>
+                                <td data-utc-time="@e.value.LastUpdate"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<nav aria-label="Page navigation example" class="mt-2">
+    <ul class="pagination"></ul>
+</nav>
+
+<script src="~/js/pagination.js" data-pagination="#events .card"></script>
+
+<!-- Modal -->
+<div class="modal fade" id="eventModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eventModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="eventForm" method="post">
+                    <div class="form-group">
+                        <label for="EventType">@modelLocalizer["Type"]</label>
+                        <select class="custom-select" id="EventType" name="EventType" aria-describedby="EventTypeHelp" required>
+                            <option hidden>Open this select menu</option>
+                        </select>
+                        <small id="EventTypeHelp" class="form-text text-muted"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="Variable">@modelLocalizer["Variable"]</label>
+                        <input class="custom-select" type="text" list="Variable" name="Variable" placeholder="Please select an option" autocomplete="off" required />
+                        <datalist id="Variable" aria-describedby="VariableHelp">
+                        </datalist>
+                        <small id="VariableHelp" class="form-text text-muted"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="EventValueType">@modelLocalizer["Value Type"]</label>
+                        <select class="custom-select" id="EventValueType" name="EventValueType" aria-describedby="EventValueTypeHelp" required>
+                            <option hidden>Open this select menu</option>
+                        </select>
+                        <small id="EventValueTypeHelp" class="form-text text-muted"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="EventValue">@modelLocalizer["Value"]</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" name="EventValue" id="EventValue" aria-describedby="EventValueHelp" autocomplete="off" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text"> </span>
+                            </div>
+                        </div>
+                        <small id="EventValueHelp" class="form-text text-muted"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="EventFrequency">@modelLocalizer["Frequency"]</label>
+                        <select class="custom-select" id="EventFrequency" name="EventFrequency" aria-describedby="EventFrequencyHelp" required>
+                            <option hidden>Open this select menu</option>
+                        </select>
+                        <small id="EventFrequencyHelp" class="form-text text-muted"></small>
+                    </div>
+                    <div class="form-group checkbox required" id="NotificationType" aria-describedby="NotificationTypeHelp">
+                        <label for="NotificationType">@modelLocalizer["Notification Type"]</label>
+                        <br />
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="eventId" id="eventId">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@localizer.Get("Close")</button>
+                <button type="submit" class="btn btn-primary" form="eventForm"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="eventDeleteModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="eventDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eventDeleteModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="eventDeleteForm" method="post">
+                    <input type="hidden" name="eventDeleteId" id="eventDeleteId">
+                </form>
+                <div class="alert alert-danger" role="alert">
+                    @modelLocalizer["Are you sure you want to delete this event? This operation isn't reversible."]
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@localizer.Get("Close")</button>
+                <button type="submit" class="btn btn-primary" form="eventDeleteForm">@localizer.Get("Delete")</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var eventsJSON = JSON.parse("@Html.Raw(@ViewData["events"])");
+    var NotificationTypeJSON = JSON.parse("@Html.Raw(@ViewData["NotificationType"])");
+    var EventTypeJSON = JSON.parse("@Html.Raw(@ViewData["EventType"])");
+    var EventValueTypeJSON = JSON.parse("@Html.Raw(@ViewData["EventValueType"])");
+    var VariableJSON = JSON.parse("@Html.Raw(@ViewData["Variable"])");
+    var GatewaysJSON = JSON.parse("@Html.Raw(@ViewData["Gateways"])");
+    var EventFrequencyJSON = JSON.parse("@Html.Raw(@ViewData["EventFrequency"])");
+
+    $(document).ready(function () {
+        $("#eventForm").find("select, datalist").each(function () {
+            var selectId = $(this).attr('id');
+            var values = eval(selectId + "JSON");
+            if (Array.isArray(values)) {
+                $.each(values, function (index, value) {
+                    if (value === "Empty" | value === "Never" | index === "EveryMinute") {
+                        $("#" + selectId).append($("<option></option>")
+                            .attr("value", value)
+                            .attr("hidden", true)
+                            .text(value));
+                    } else {
+                        $("#" + selectId).append($("<option></option>")
+                            .attr("value", value)
+                            .text(value));
+                    }
+                });
+            } else {
+                $.each(values, function (index, value) {
+                    if (value === "Empty" | value === "Never" | index === "EveryMinute") {
+                        $("#" + selectId).append($("<option></option>")
+                            .attr("value", index)
+                            .attr("hidden", true)
+                            .text(value));
+                    } else {
+                        $("#" + selectId).append($("<option></option>")
+                            .attr("value", index)
+                            .text(value));
+                    }
+                });
+            }
+        });
+
+        $("#eventForm .checkbox").each(function () {
+            var checkboxId = $(this).attr('id');
+            $.each(eval(checkboxId + "JSON"), function (index, value) {
+                $("#" + checkboxId).append($("<div></div>")
+                    .addClass("custom-control custom-control-inline custom-checkbox")
+                    .append($("<input>")
+                        .attr("type", "checkbox")
+                        .attr("name", value)
+                        .attr("id", value)
+                        .addClass("custom-control-input"))
+                    .append($("<label>")
+                        .attr("for", value)
+                        .addClass("custom-control-label")
+                        .text(value))
+                );
+            });
+            $("#" + checkboxId).append($("<small></small>")
+                .addClass("form-text text-muted")
+                .attr("id", checkboxId + "Help"));
+        });
+
+        $("#EventType").change(function () {
+            eventSelect(this);
+        });
+    });
+
+    $('#eventModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var recipient = button.data('event');
+        var operation = button.html();
+
+        var event = $.grep(eventsJSON, function (obj) { return obj.Id === recipient; })[0];
+
+        var modal = $(this);
+
+        modal.find("#eventForm select").each(function () {
+            $(this).find("option").each(function (index) {
+                if (index === 0 & recipient === undefined) {
+                    $(this).attr("selected", true);
+                } else {
+                    $(this).attr("selected", false);
+                }
+            });
+        });
+
+        modal.find("#eventForm .checkbox").each(function () {
+            $(this).find("input:checkbox").each(function () {
+                $(this).attr("checked", false);
+            });
+        });
+
+        if (recipient != null) {
+
+            modal.find('.modal-title').text('@localizer.Get("Edit") @localizer.Get("Event").ToLower() ' + recipient);
+            modal.find('#Variable').siblings("input").val(event.Variable);
+            modal.find('#EventType').val(event.EventType);
+
+            eventSelect("#EventType");
+
+            modal.find('#EventValueType').val(event.EventValueType);
+            modal.find('#EventValue').val(event.EventValue);
+            modal.find('#EventFrequency').val(event.EventFrequency);
+            modal.find('#eventId').val(event.Id);
+            modal.find("#EventType").attr("disabled", true);
+            modal.find("#Variable").siblings("input").attr("disabled", true);
+
+            var notificationType = $.map(event.NotificationType.split(","), $.trim);
+            modal.find('#NotificationType').find("input").each(function () {
+                $(this).attr("checked", notificationType.includes($(this).attr("name")));
+            });
+        } else {
+            modal.find('.modal-title').text('Create event');
+            modal.find('.form-group input').val('');
+            $("#EventValueType, #EventFrequency, #Variable").parent().hide();
+            $("#EventValue").parents().eq(1).hide();
+            $("#EventFrequency").val($("#EventFrequency option:eq(0)").val());
+            $("#EventValueType").val($("#EventValueType option:eq(0)").val());
+            $("#NotificationType").hide();
+            modal.find("#EventType").attr("disabled", false);
+            modal.find("#Variable").siblings("input").attr("disabled", false);
+        }
+        modal.find('.modal-footer .btn-primary').html(operation);
+
+        @if (!user.AdditionalData.ContainsKey("extension_257f2369f5054b62a0f21c2c82ad96fc_TelegramChatId"))
+        {
+            @Html.Raw("$(\"#Telegram\").prop(\"disabled\", true);");
+        }
+    });
+
+    $('#eventDeleteModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var recipient = button.data('event'); // Extract info from data-* attributes
+
+        var modal = $(this);
+        modal.find('.modal-title').text('@localizer.Get("Event") ' + recipient);
+        modal.find('.modal-body #eventDeleteId').val(recipient);
+    });
+
+    $('#eventForm').submit(function () {
+        $("*").prop('disabled', false);
+    })
+
+    function eventSelect(object) {
+        $("#Variable option").remove();
+        switch ($(object).val()) {
+            case "Threshold":
+                $.each(VariableJSON, function (index, value) {
+                    $("#Variable").append($("<option></option>")
+                        .attr("value", value)
+                        .text(value));
+                });
+
+                $("#NotificationType").show();
+                $("#EventValueType").parent().show();
+                $("#EventFrequency").parent().hide();
+                $("#EventFrequency").val($("#EventFrequency option:eq(1)").val());
+                $("#EventValue").siblings(".input-group-append").find("span").html("@localizer.Get("kWh")");
+                break;
+            case "Inactive":
+                $.each(GatewaysJSON, function (index, value) {
+                    $("#Variable").append($("<option></option>")
+                        .attr("value", value)
+                        .text(value));
+                });
+
+                $("#NotificationType").show();
+                $("#EventValueType, #EventFrequency").parent().hide();
+                $("#EventFrequency").val($("#EventFrequency option:eq(2)").val());
+                $("#EventValueType").val($("#EventValueType option:eq(1)").val());
+                $("#EventValue").siblings(".input-group-append").find("span").html("@localizer.Get("minutes")");
+                break;
+            case "Algorithm":
+                $.each(VariableJSON, function (index, value) {
+                    $("#Variable").append($("<option></option>")
+                        .attr("value", value)
+                        .text(value));
+                });
+
+                $("#EventValue").val("");
+                $("#NotificationType").show();
+                $("#EventFrequency").parent().show();
+                $("#EventValueType").parent().hide();
+                $("#EventFrequency").val($("#EventFrequency option:eq(1)").val());
+                $("#EventValueType").val($("#EventValueType option:eq(1)").val());
+                $("#EventValue").siblings(".input-group-append").find("span").html("%");
+                break;
+        }
+        $("#EventValue").parents().eq(1).show();
+        $("#Variable").parent().show();
+    }
+</script>

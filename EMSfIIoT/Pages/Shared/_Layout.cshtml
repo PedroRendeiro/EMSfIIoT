@@ -1,0 +1,282 @@
+﻿@{ 
+    var requestCultureFeature = Context.Features.Get<IRequestCultureFeature>();
+    var requestCulture = requestCultureFeature.RequestCulture;
+
+    bool isAdmin = false;
+    IEnumerable<Notification> notifications = new List<Notification>();
+    IEnumerable<Notification> unReadNotifications = new List<Notification>();
+
+    if (Context.User.Identity.IsAuthenticated)
+    {
+        isAdmin = GraphApiConnector.administrators.Contains(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+        EMSfIIoTApiConnector.GetNotifications(Context, out _, out notifications);
+        unReadNotifications = notifications.Where(notification => !notification.ReadAt.HasValue).ToList();
+    }
+    else
+    {
+        Context.Response.Cookies.Delete("ADB2CToken");
+    }
+
+    string timeSince(DateTime date)
+    {
+
+        var seconds = Math.Floor(DateTime.Now.Subtract(date).TotalSeconds);
+
+        var interval = Math.Floor(seconds / 31536000);
+        if (interval == 1)
+        {
+            return interval.ToString() + " " + @localizer.Get("year") + " " + @localizer.Get("ago");
+        }
+        else if (interval > 1)
+        {
+            return interval.ToString() + " " + @localizer.Get("years") + " " + @localizer.Get("ago");
+        }
+
+        interval = Math.Floor(seconds / 2592000);
+        if (interval == 1)
+        {
+            return interval.ToString() + " " + @localizer.Get("month") + " " + @localizer.Get("ago");
+        }
+        else if (interval > 1)
+        {
+            return interval.ToString() + " " + @localizer.Get("months") + " " + @localizer.Get("ago");
+        }
+
+        interval = Math.Floor(seconds / 86400);
+        if (interval == 1)
+        {
+            return interval.ToString() + " " + @localizer.Get("day") + " " + @localizer.Get("ago");
+        }
+        else if (interval > 1)
+        {
+            return interval.ToString() + " " + @localizer.Get("days") + " " + @localizer.Get("ago");
+        }
+
+        interval = Math.Floor(seconds / 3600);
+        if (interval == 1)
+        {
+            return interval.ToString() + " " + @localizer.Get("hour") + " " + @localizer.Get("ago");
+        }
+        else if (interval > 1)
+        {
+            return interval.ToString() + " " + @localizer.Get("hours") + " " + @localizer.Get("ago");
+        }
+
+        interval = Math.Floor(seconds / 60);
+        if (interval == 1)
+        {
+            return interval.ToString() + " " + @localizer.Get("minute") + " " + @localizer.Get("ago");
+        }
+        else if (interval > 1)
+        {
+            return interval.ToString() + " " + @localizer.Get("minutes") + " " + @localizer.Get("ago");
+        }
+
+        if (seconds == 1)
+        {
+            return seconds.ToString() + " " + @localizer.Get("second") + " " + @localizer.Get("ago");
+        }
+        else
+        {
+            return seconds.ToString() + " " + @localizer.Get("seconds") + " " + @localizer.Get("ago");
+        }
+    }
+}
+
+<!DOCTYPE html>
+<html lang="@requestCulture.UICulture.Name">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" type="image/png" href="~/favicon.png" />
+
+    <title>@ViewData["Title"] - EMSfIIoT</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="~/lib/toastr.js/css/toastr.min.css" />
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <!-- Moment.js JS -->
+    <script src="~/lib/moment.js/min/moment.min.js"></script>
+    <!-- jQuery -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar" class="active">
+            <div class="sidebar-header">
+                <h3>Energy Management Solution for Industrial IoT</h3>
+                <strong>EMSfIIoT</strong>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li>
+                    <a asp-area="" asp-page="/Index">
+                        <i class="fas fa-home"></i>
+                        @localizer.Get("Home")
+                    </a>
+                </li>
+                <li>
+                    <a href="#gatewaySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fab fa-raspberry-pi"></i>
+                        @localizer.Get("Gateways")
+                    </a>
+                    <ul class="collapse list-unstyled" id="gatewaySubmenu">
+                        <li>
+                            <a asp-area="" asp-page="/Gateways/Index">@localizer.Get("Gateways")</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-page="/Gateways/Charts">@localizer.Get("Charts")</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#eventsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="far fa-calendar"></i>
+                        @localizer.Get("Events")
+                    </a>
+                    <ul class="collapse list-unstyled" id="eventsSubmenu">
+                        <li>
+                            <a asp-area="" asp-page="/Events/Index">@localizer.Get("Events")</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-page="/Events/Notifications">@localizer.Get("Notifications")</a>
+                        </li>
+                    </ul>
+                </li>
+                @if (isAdmin)
+                {
+                    <li>
+                        <a href="#admiSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-user-cog"></i>
+                            @localizer.Get("Admin")
+                        </a>
+                        <ul class="collapse list-unstyled" id="admiSubmenu">
+                            <li>
+                                <a asp-area="" asp-page="/bXi0nRT90v34snk/Users">@localizer.Get("Users")</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-page="/bXi0nRT90v34snk/Gateways">@localizer.Get("Gateways")</a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                <li>
+                    <a asp-area="" asp-page="/Contact">
+                        <i class="fas fa-paper-plane"></i>
+                        @localizer.Get("Contact")
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="list-unstyled CTAs">
+                @await Component.InvokeAsync("CultureSwitcher")
+                <li>
+                    <a href="https://emsfiiot-api.azurewebsites.net/" class="download" target="_blank">@localizer.Get("API Documentation")</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-page="/Privacy" class="article">@localizer.Get("Privacy")</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="mr-auto">
+                    <button type="button" id="sidebarCollapse" class="navbar-btn active">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <!--
+                    <a class="navbar-brand" href="#">
+                        <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                        EMSfIIoT
+                    </a>
+                    -->
+                </div>
+
+                <div class="my-2 my-lg-0">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="btn-group notifications-badge">
+                            <button type="button" class="btn btn-primary dropdown" id="dropdownNotifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @localizer.Get("Notifications") <span class="badge badge-light">@unReadNotifications.Count().ToString()</span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownNotifications">
+                                <div class="list-group">
+                                    @foreach (Notification notification in notifications.Take(3))
+                                    {
+                                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h6 class="mb-1">@notification.Title</h6>
+                                                <small>@timeSince(notification.CreatedAt)</small>
+                                            </div>
+                                            <p class="mb-1">
+                                                @{
+                                                    if (notification.Origin != "API")
+                                                    {
+                                                        var DisplayName = GraphApiConnector.users.Where(user => user.Id.Equals(notification.Origin)).FirstOrDefault().DisplayName;
+                                                        var emailAddress = GraphApiConnector.users.Where(user => user.Id.Equals(notification.Origin)).FirstOrDefault().Identities.Where(identity => identity.SignInType.Equals("emailAddress")).FirstOrDefault().IssuerAssignedId;
+                                                        var user = $"{DisplayName} ({emailAddress})";
+                                                        @user
+                                                    }
+                                                    else
+                                                    {
+                                                        @notification.Origin
+                                                    }
+                                                }
+                                            </p>
+                                            <small>@notification.Description.Truncate(64)</small>
+                                        </a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="btn-group user-badge">
+                        <button type="button" class="btn dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <i class="fas fa-user"></i>
+                            }
+                            else
+                            {
+                                <i class="far fa-user"></i>
+                            }
+                        </button>
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+            </nav>
+            @RenderBody()
+        </div>
+    </div>
+
+    <partial name="_CookieConsentPartial" />
+
+    <!-- Popper.JS -->
+    <script src="~/lib/popper.js/umd/popper.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Toastr JS -->
+    <script src="~/lib/toastr.js/js/toastr.min.js"></script>
+    <!-- SignalR JS -->
+    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
+    <!-- Site JS -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- Notifications JS -->
+    <script src="~/js/notifications.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
