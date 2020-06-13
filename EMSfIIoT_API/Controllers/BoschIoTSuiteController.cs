@@ -37,7 +37,7 @@ namespace EMSfIIoT_API.Controllers
         [ProducesResponseType(typeof(Measure), 201)]
         public async Task<ActionResult> PostTelemetry([FromRoute, BindRequired]string thingId)
         {
-            await Task.Delay(5000);
+            Task.Delay(20000).Wait();
 
             await _context.Event.AsQueryable().Where(@event => @event.Variable.EndsWith(":" + thingId) | @event.Variable.StartsWith(thingId + ":"))
             .ForEachAsync(async @event =>
