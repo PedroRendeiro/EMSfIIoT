@@ -3,7 +3,7 @@ numpy
 scipy
 opencv-python
 opencv-contrib-python
-tensorflow==2.1.0
+tensorflow==2.9.3
 tensorflow-model-optimization
 matplotlib
 tqdm
